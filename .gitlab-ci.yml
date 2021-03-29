@@ -14,4 +14,15 @@ before_script:
 build:
   stage: build
   script:
-    - echo "this is a test"
+    - echo "this is a build stage"
+
+
+test:
+  stage: test
+  script:
+    - echo "this is the test stage"
+
+deploy:
+  stage: deploy
+  script:
+    - echo "this is the deploy stage"
