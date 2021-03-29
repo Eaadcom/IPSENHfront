@@ -4,9 +4,6 @@ stages:
   - test
   - deploy
 
-before_script:
-  - npm install
-
 #cache:
 #  paths:
 #    - ./node_modules
@@ -14,7 +11,14 @@ before_script:
 build:
   stage: build
   script:
-    - echo "this is a build stage"
+    - npm install
+    - ng build --prod
+  only:
+    - master
+    - develop
+  cache:
+    paths:
+      - node_modules
 
 
 test:
