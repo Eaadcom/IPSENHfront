@@ -4,9 +4,9 @@ stages:
   - test
   - deploy
 
-#before_script:
-#  - npm install
-#
+before_script:
+  - npm install
+
 #cache:
 #  paths:
 #    - ./node_modules
@@ -15,4 +15,3 @@ build:
   stage: build
   script:
     - echo "this is a test"
-    - npm install
