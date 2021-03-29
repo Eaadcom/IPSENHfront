@@ -6,3 +6,4 @@ build:
   stage: test
   script:
     - echo "this is a test"
+    - echo "carlos noob"
