@@ -1,11 +1,18 @@
 image: node:latest
 stages:
   - build
+  - test
+  - deploy
 
-build_app:
+#before_script:
+#  - npm install
+#
+#cache:
+#  paths:
+#    - ./node_modules
+
+build:
   stage: build
-  tags:
-    - docker
   script:
     - echo "this is a test"
-    - node --version
+    - npm install
