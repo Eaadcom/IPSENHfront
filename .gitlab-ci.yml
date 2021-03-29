@@ -1,8 +1,11 @@
-image: alpine:latest
+image: node:latest
 stages:
-  - test
+  - build
 
-build:
-  stage: test
+build_app:
+  stage: build
+  tags:
+    - docker
   script:
     - echo "this is a test"
+    - node --version
