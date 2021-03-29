@@ -5,6 +5,3 @@ build:
   stage: test
   script:
     - echo "this is a test"
-  artifacts:
-    paths:
-      - builds/
