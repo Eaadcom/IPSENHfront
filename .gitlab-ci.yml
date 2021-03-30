@@ -9,6 +9,7 @@ cache:
 
 test_unit:
   stage: test
+  image: efgiese/efgiese-angular-chrome-headless
   before_script:
     - npm ci
   script:
