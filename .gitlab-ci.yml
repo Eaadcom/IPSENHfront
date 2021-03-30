@@ -1,40 +1,17 @@
 image: trion/ng-cli:11.2.6
 stages:
-  - install
   - test
-  - build
-  - deploy
 
 cache:
+  key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
   paths:
     - node_modules/
 
-install:
-  stage: install
-  script:
-    - npm install --silent
-    - ng test
-#    - ./node_modules/.bin/ng test
-  only:
-    - master
-    - develop
-
 test:
   stage: test
+  before_script:
+    - npm ci
+    # - npm install --silent
   script:
-#    - ng test
+    - npm run test-headless
     - ng lint ipsenh-frontend
-
-#build:
-#  stage: build
-#  script:
-#    - echo "test"
-##    - ng build --prod
-#  only:
-#    - master
-#    - develop
-#
-#deploy:
-#  stage: deploy
-#  script:
-#    - echo "this is the deploy stage"
