@@ -13,7 +13,7 @@ install:
   stage: install
   script:
     - npm install -g --cache --silent
-    - ./node_modules/.bin/ng test
+    - npx ng test
 #    - npm install -g @angular/cli
 #    - alias ng="~/node_modules/@angular/cli/bin/ng"
 #    - ng test
