@@ -12,7 +12,7 @@ cache:
 install:
   stage: install
   script:
-    - npm install -g --cache --silent
+    - npm install --silent
     - ng test
 #    - ./node_modules/.bin/ng test
   only:
