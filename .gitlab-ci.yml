@@ -1,5 +1,6 @@
-image: trion/ng-cli:11.2.6
+image: efgiese/efgiese-angular-chrome-headless
 stages:
+  - install
   - test
 
 cache:
@@ -7,11 +8,20 @@ cache:
   paths:
     - node_modules/
 
-test:
-  stage: test
-  before_script:
+install:
+  stage: install
+  script:
     - npm ci
-    # - npm install --silent
+  only:
+    - master
+    - develop
+
+test_unit:
+  stage: test
   script:
     - npm run test-headless
+
+test_lint:
+  stage: test
+  script:
     - ng lint ipsenh-frontend
