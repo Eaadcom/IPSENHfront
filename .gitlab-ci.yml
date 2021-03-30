@@ -13,7 +13,7 @@ install:
   stage: install
   script:
     - npm install -g --cache --silent
-    - npm link @angular/cli
+    - npm install -g @angular/cli
 
 test:
   stage: test
