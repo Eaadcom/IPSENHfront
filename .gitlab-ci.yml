@@ -24,16 +24,16 @@ test:
 #    - ng test
     - ng lint ipsenh-frontend
 
-build:
-  stage: build
-  script:
-    - echo "test"
-#    - ng build --prod
-  only:
-    - master
-    - develop
-
-deploy:
-  stage: deploy
-  script:
-    - echo "this is the deploy stage"
+#build:
+#  stage: build
+#  script:
+#    - echo "test"
+##    - ng build --prod
+#  only:
+#    - master
+#    - develop
+#
+#deploy:
+#  stage: deploy
+#  script:
+#    - echo "this is the deploy stage"
