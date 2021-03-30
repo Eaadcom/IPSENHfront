@@ -1,23 +1,62 @@
 image: trion/ng-cli:11.2.6
 stages:
-  - test
+  - preparation
+  - testing
+  - building
+  - deploying
 
 cache:
   key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
-  paths:
-    - node_modules/
 
-test_unit:
-  stage: test
-  image: efgiese/efgiese-angular-chrome-headless
-  before_script:
+npm:
+  stage: preparation
+  script:
+    - npm -v
     - npm ci
+  artifacts:
+    paths:
+      - node_modules/
+    expire_in: 1 days
+    when: always
+  cache:
+    paths:
+      - node_modules/
+
+unit_test:
+  stage: testing
+  dependencies:
+    - npm
+  image: efgiese/efgiese-angular-chrome-headless
   script:
     - npm run test-headless
 
-test_lint:
-  stage: test
-  before_script:
-    - npm ci
+lint:
+  stage: testing
+  dependencies:
+    - npm
   script:
     - ng lint ipsenh-frontend
+
+build:
+  stage: building
+  dependencies:
+    - unit_test
+    - lint
+  script:
+    - ng build --prod
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 days
+    when: always
+  cache:
+    paths:
+      - dist/
+
+deploy:
+  stage: deploying
+  dependencies:
+    - build
+  script:
+    - echo "deploy hoi"
+
