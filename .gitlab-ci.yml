@@ -1,31 +1,34 @@
 image: node:latest
 stages:
-  - build
+  - install
   - test
+  - build
   - deploy
 
 #cache:
 #  paths:
 #    - ./node_modules
 
-build:
-  stage: build
+install:
+  stage: install
   script:
-    - npm install
-    - npm link @angular/cli
-    - ng build --prod
-  only:
-    - master
-    - develop
-  cache:
-    paths:
-      - node_modules
-
+    - npm install -g --cache --silent
 
 test:
   stage: test
   script:
-    - echo "this is the test stage"
+    - ng test
+    - ng lint ipsenh-frontend
+
+build:
+  stage: build
+  script:
+    - echo "test"
+#    - npm link @angular/cli
+#    - ng build --prod
+  only:
+    - master
+    - develop
 
 deploy:
   stage: deploy
