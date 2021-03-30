@@ -13,8 +13,7 @@ install:
   stage: install
   script:
     - npm install -g --cache --silent
-    - npm install -g @angular/cli
-    - npm run test
+    - ng test
 #    - ./node_modules/.bin/ng test
   only:
     - master
