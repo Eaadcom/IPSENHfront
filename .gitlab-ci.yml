@@ -5,22 +5,23 @@ stages:
   - building
   - deploying
 
-cache:
-  key: $CI_COMMIT_REF_SLUG
-  paths:
-    - node_modules/
-
 npm:
   stage: preparation
   script:
     - npm -v
     - npm ci
+  cache:
+    key: npm_cache
+    paths:
+      - node_modules/
 
 unit_test:
   stage: testing
   dependencies:
     - npm
   image: efgiese/efgiese-angular-chrome-headless
+  cache:
+    key: npm_cache
   script:
     - npm run test-headless
 
@@ -28,6 +29,8 @@ lint:
   stage: testing
   dependencies:
     - npm
+  cache:
+    key: npm_cache
   script:
     - ng lint ipsenh-frontend
 
@@ -36,6 +39,8 @@ build:
   dependencies:
     - unit_test
     - lint
+  cache:
+    key: npm_cache
   script:
     - ng build --prod
   artifacts:
