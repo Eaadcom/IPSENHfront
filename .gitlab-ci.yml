@@ -13,13 +13,14 @@ install:
   stage: install
   script:
     - npm install -g --cache --silent
-    - npm install -g @angular/cli
+#    - npm install -g @angular/cli
     - alias ng="~/node_modules/@angular/cli/bin/ng"
+    - ng test
 
 test:
   stage: test
   script:
-    - ng test
+#    - ng test
     - ng lint ipsenh-frontend
 
 build:
