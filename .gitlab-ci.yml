@@ -13,6 +13,7 @@ install:
   stage: install
   script:
     - npm install -g --cache --silent
+    - npm link @angular/cli
 
 test:
   stage: test
@@ -24,7 +25,6 @@ build:
   stage: build
   script:
     - echo "test"
-#    - npm link @angular/cli
 #    - ng build --prod
   only:
     - master
