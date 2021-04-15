@@ -1,7 +1,7 @@
 image: trion/ng-cli:11.2.6
 stages:
   - preparation
-  - sleeping
+#  - sleeping
   - testing
   - building
   - deploying
