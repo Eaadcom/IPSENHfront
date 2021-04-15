@@ -14,7 +14,7 @@ npm:
   cache:
     key: npm_cache
     paths:
-      - .node_modules/
+      - node_modules/
 
 #https://gitlab.com/gitlab-org/gitlab/-/issues/21409
 await_cache:
