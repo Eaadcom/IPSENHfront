@@ -54,6 +54,8 @@ build:
     - lint
   cache:
     key: npm_cache
+    paths:
+      - node_modules/
   script:
     - ng build --prod
   artifacts:
