@@ -31,6 +31,8 @@ unit_test:
   image: efgiese/efgiese-angular-chrome-headless
   cache:
     key: npm_cache
+    paths:
+      - node_modules/
   script:
     - npm run test-headless
 
@@ -40,6 +42,8 @@ lint:
     - await_cache
   cache:
     key: npm_cache
+    paths:
+      - node_modules/
   script:
     - ng lint ipsenh-frontend
 
