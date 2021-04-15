@@ -1,39 +1,49 @@
 image: trion/ng-cli:11.2.6
 stages:
   - preparation
+  - sleeping
   - testing
   - building
   - deploying
-
-cache:
-  key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
 
 npm:
   stage: preparation
   script:
     - npm -v
     - npm ci
-  artifacts:
-    paths:
-      - node_modules/
-    expire_in: 1 days
-    when: always
   cache:
+    key: ${CI_COMMIT_REF_SLUG}npm_cache
     paths:
       - node_modules/
+
+#https://gitlab.com/gitlab-org/gitlab/-/issues/21409
+await_cache:
+  stage: sleeping
+  dependencies:
+    - npm
+  script:
+    - sleep 90
 
 unit_test:
   stage: testing
   dependencies:
-    - npm
+    - await_cache
   image: efgiese/efgiese-angular-chrome-headless
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}npm_cache
+    paths:
+      - node_modules/
   script:
     - npm run test-headless
 
 lint:
   stage: testing
   dependencies:
-    - npm
+    - await_cache
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}npm_cache
+    paths:
+      - node_modules/
   script:
     - ng lint ipsenh-frontend
 
@@ -42,6 +52,10 @@ build:
   dependencies:
     - unit_test
     - lint
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}npm_cache
+    paths:
+      - node_modules/
   script:
     - ng build --prod
   artifacts:
@@ -49,9 +63,6 @@ build:
       - dist/
     expire_in: 1 days
     when: always
-  cache:
-    paths:
-      - dist/
 
 deploy:
   stage: deploying
