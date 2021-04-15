@@ -10,6 +10,8 @@ npm:
   stage: preparation
   script:
     - npm -v
+    - npm config set user 0
+    - npm config set unsafe-perm true
     - npm ci
   cache:
     key: ${CI_COMMIT_REF_SLUG}npm_cache
