@@ -10,7 +10,7 @@ npm:
   stage: preparation
   script:
     - npm -v
-    - sudo npm ci
+    - npm ci
   cache:
     key: ${CI_COMMIT_REF_SLUG}npm_cache
     paths:
