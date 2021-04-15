@@ -17,17 +17,17 @@ npm:
       - node_modules/
 
 #https://gitlab.com/gitlab-org/gitlab/-/issues/21409
-await_cache:
-  stage: sleeping
-  dependencies:
-    - npm
-  script:
-    - sleep 90
+#await_cache:
+#  stage: sleeping
+#  dependencies:
+#    - npm
+#  script:
+#    - sleep 90
 
 unit_test:
   stage: testing
   dependencies:
-    - await_cache
+    - preparation
   image: efgiese/efgiese-angular-chrome-headless
   cache:
     key: npm_cache
@@ -37,7 +37,7 @@ unit_test:
 lint:
   stage: testing
   dependencies:
-    - await_cache
+    - preparation
   cache:
     key: npm_cache
   script:
