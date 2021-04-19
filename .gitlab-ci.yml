@@ -2,8 +2,8 @@ image: trion/ng-cli:11.2.6
 stages:
   - installing
   - building
-  - unit_testing
-  - linting
+#  - unit_testing
+#  - linting
   - deploying
 
 cache:
@@ -29,20 +29,37 @@ build:
     expire_in: 1 days
     when: always
 
-unit_test:
-  stage: unit_testing
-  image: efgiese/efgiese-angular-chrome-headless
-  script:
-    - npm -v
-    - npm run test-headless
+#unit_test:
+#  stage: unit_testing
+#  image: efgiese/efgiese-angular-chrome-headless
+#  script:
+#    - npm -v
+#    - npm run test-headless
+#
+#lint:
+#  stage: linting
+#  script:
+#    - ng version
+#    - ng lint ipsenh-frontend
 
-lint:
-  stage: linting
+deploy_development:
+  stage: deploying
+  image: docker:19.03.12
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
+  services:
+    - name: docker:19.03.0-dind
+      command: ["--insecure-registry","gitlab.groep-7.xyz:5050"]
   script:
-    - ng version
-    - ng lint ipsenh-frontend
+    - docker version
+    - docker login -u gitlab+deploy-token-1 -p LBePBpNrf42vzB8kdTQn gitlab.groep-7.xyz:5050
+    - docker build -t gitlab.groep-7.xyz:5050/ashnawiar/ipsenh-frontend:development .
+    - docker push gitlab.groep-7.xyz:5050/ashnawiar/ipsenh-frontend:development
+  only:
+    - development
 
-deploy:
+deploy_production:
   stage: deploying
   image: docker:19.03.12
   variables:
@@ -56,4 +73,5 @@ deploy:
     - docker login -u gitlab+deploy-token-1 -p LBePBpNrf42vzB8kdTQn gitlab.groep-7.xyz:5050
     - docker build -t gitlab.groep-7.xyz:5050/ashnawiar/ipsenh-frontend .
     - docker push gitlab.groep-7.xyz:5050/ashnawiar/ipsenh-frontend
-
+  only:
+    - master
