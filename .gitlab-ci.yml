@@ -30,26 +30,19 @@ build:
     expire_in: 1 days
     when: always
 
-unit_test:
+test:
   stage: testing
   dependencies:
     - build
   image: efgiese/efgiese-angular-chrome-headless
   script:
     - npm run test-headless
-
-lint:
-  stage: testing
-  dependencies:
-    - build
-  script:
     - ng lint ipsenh-frontend
 
 deploy:
   stage: deploying
   dependencies:
-    - unit_test
-    - lint
+    - test
   image: docker:19.03.12
   variables:
     DOCKER_HOST: tcp://docker:2375
