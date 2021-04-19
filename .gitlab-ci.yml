@@ -1,64 +1,20 @@
 image: trion/ng-cli:11.2.6
 stages:
-  - preparation
-  - sleeping
-  - testing
   - building
+  - testing
   - deploying
 
-# npm:
-#   stage: preparation
-#   script:
-#     - npm -v
-#     - npm ci
-#   cache:
-#     key: ${CI_COMMIT_REF_SLUG}
-#     paths:
-#       - node_modules/
+# cache:
+#   key: ${CI_COMMIT_REF_SLUG}
+#   paths:
+#     - node_modules/
 
-# #https://gitlab.com/gitlab-org/gitlab/-/issues/21409
-# await_cache:
-#   stage: sleeping
-#   dependencies:
-#     - npm
-#   script:
-#     - sleep 90
-
-# unit_test:
-#   stage: testing
-#   dependencies:
-#     - await_cache
-#   image: efgiese/efgiese-angular-chrome-headless
-#   cache:
-#     key: ${CI_COMMIT_REF_SLUG}
-#     paths:
-#       - node_modules/
-#   script:
-#     - npm run test-headless
-
-# lint:
-#   stage: testing
-#   dependencies:
-#     - await_cache
-#   cache:
-#     key: ${CI_COMMIT_REF_SLUG}
-#     paths:
-#       - node_modules/
-#   script:
-#     - npm ci
-#     - ng lint ipsenh-frontend
+before_script:
+  - npm ci
 
 build:
   stage: building
-  # dependencies:
-  #   - unit_test
-  #   - lint
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - node_modules/
   script:
-    - npm ci
     - ng build --prod
   artifacts:
     paths:
@@ -66,26 +22,36 @@ build:
     expire_in: 1 days
     when: always
 
-docker:
-  stage: building
-  image: docker:19.03.12
-  variables:
-    DOCKER_HOST: tcp://docker:2375
-    DOCKER_TLS_CERTDIR: ""
-  services:
-    - docker:19.03.12-dind
-      command:["--insecure-registry=registry.bucker.net"]
-  script:
-    - docker login -u gitlab+deploy-token-1 -p LBePBpNrf42vzB8kdTQn gitlab.groep-7.xyz:5000
-    - docker build -t ipsenh-groep7-frontend .
-    # - docker push ipsenh-groep7-frontend
-    
+# unit_test:
+#   stage: testing
+#   dependencies:
+#     - build
+#   image: efgiese/efgiese-angular-chrome-headless
+#   script:
+#     - npm run test-headless
 
-
-# deploy:
-#   stage: deploying
+# lint:
+#   stage: testing
 #   dependencies:
 #     - build
 #   script:
-#     - echo "deploy hoi"
+#     - ng lint ipsenh-frontend
+
+# docker:
+#   stage: deploying
+#   image: docker:19.03.12
+#   variables:
+#     DOCKER_HOST: tcp://docker:2375
+#     DOCKER_TLS_CERTDIR: ""
+#   services:
+#     - docker:19.03.12-dind
+#   script:
+#     - docker build -t ipsenh-groep7-frontend .
+    
+deploy:
+  stage: deploying
+  dependencies:
+    - build
+  script:
+    - echo ls
 
