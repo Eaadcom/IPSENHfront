@@ -10,7 +10,8 @@ npm:
   script:
     - npm -v
     - npm cache clean --force
-    - npm ci
+    - rm -rf node_modules
+    - npm install
   cache:
     untracked: true
     key: ${CI_COMMIT_REF_SLUG}
