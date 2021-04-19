@@ -5,16 +5,15 @@ stages:
   - testing
   - deploying
 
-cache:
-  untracked: true
-  key: ${CI_COMMIT_REF_SLUG}
-  paths:
-    - node_modules/
-
 npm:
   stage: installing
   script:
     - npm ci
+  cache:
+    untracked: true
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+    - node_modules/
 
 build:
   stage: building
