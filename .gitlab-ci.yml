@@ -6,59 +6,64 @@ stages:
   - building
   - deploying
 
-before_script:
-  - npm install
+# npm:
+#   stage: preparation
+#   script:
+#     - npm -v
+#     - npm ci
+#   cache:
+#     key: ${CI_COMMIT_REF_SLUG}
+#     paths:
+#       - node_modules/
 
-npm:
-  stage: preparation
-  script:
-    - npm -v
-    - npm ci
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - node_modules/
+# #https://gitlab.com/gitlab-org/gitlab/-/issues/21409
+# await_cache:
+#   stage: sleeping
+#   dependencies:
+#     - npm
+#   script:
+#     - sleep 90
 
-unit_test:
-  stage: testing
-  dependencies:
-    - npm
-  image: efgiese/efgiese-angular-chrome-headless
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - node_modules/
-  script:
-    - npm run test-headless
+# unit_test:
+#   stage: testing
+#   dependencies:
+#     - await_cache
+#   image: efgiese/efgiese-angular-chrome-headless
+#   cache:
+#     key: ${CI_COMMIT_REF_SLUG}
+#     paths:
+#       - node_modules/
+#   script:
+#     - npm run test-headless
 
-lint:
-  stage: testing
-  dependencies:
-    - npm
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - node_modules/
-  script:
-    - npm ci
-    - ng lint ipsenh-frontend
+# lint:
+#   stage: testing
+#   dependencies:
+#     - await_cache
+#   cache:
+#     key: ${CI_COMMIT_REF_SLUG}
+#     paths:
+#       - node_modules/
+#   script:
+#     - npm ci
+#     - ng lint ipsenh-frontend
 
-build:
-  stage: building
-  dependencies:
-    - unit_test
-    - lint
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - node_modules/
-  script:
-    - ng build --prod
-  artifacts:
-    paths:
-      - dist/
-    expire_in: 1 days
-    when: always
+# build:
+#   stage: building
+#   dependencies:
+#     - unit_test
+#     - lint
+#   cache:
+#     key: ${CI_COMMIT_REF_SLUG}
+#     paths:
+#       - node_modules/
+#   script:
+#     - ng build --prod
+#   artifacts:
+#     paths:
+#       - dist/
+#     expire_in: 1 days
+#     when: always
 
 docker:
   stage: building
@@ -69,7 +74,11 @@ docker:
   services:
     - docker:19.03.12-dind
   script:
+    - docker info
+    - docker login -u gitlab+deploy-token-1 -p LBePBpNrf42vzB8kdTQn registry.gitlab.com
     - docker build -t ipsenh-groep7-frontend .
+    - docker push ipsenh-groep7-frontend
+    
 
 
 # deploy:
