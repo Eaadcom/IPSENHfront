@@ -1,27 +1,14 @@
 image: trion/ng-cli:11.2.6
 stages:
-  - installing
   - building
-#  - unit_testing
-#  - linting
+  - testing
   - deploying
-
-cache:
-  untracked: true
-  key: ${CI_COMMIT_REF_SLUG}
-  paths:
-    - node_modules/
-
-npm:
-  stage: installing
-  script:
-    - npm -v
-    - npm ci
 
 build:
   stage: building
   script:
     - ng version
+    - npm ci
     - ng build --prod
   artifacts:
     paths:
@@ -29,18 +16,20 @@ build:
     expire_in: 1 days
     when: always
 
-#unit_test:
-#  stage: unit_testing
-#  image: efgiese/efgiese-angular-chrome-headless
-#  script:
-#    - npm -v
-#    - npm run test-headless
-#
-#lint:
-#  stage: linting
-#  script:
-#    - ng version
-#    - ng lint ipsenh-frontend
+unit_test:
+  stage: testing
+  image: efgiese/efgiese-angular-chrome-headless
+  script:
+    - npm -v
+    - npm install
+    - npm run test-headless
+
+lint:
+  stage: testing
+  script:
+    - ng version
+    - npm install
+    - ng lint ipsenh-frontend
 
 deploy_development:
   stage: deploying
@@ -58,6 +47,9 @@ deploy_development:
     - docker push gitlab.groep-7.xyz:5050/ashnawiar/ipsenh-frontend:development
   only:
     - development
+  environment:
+    name: staging
+    url: http://staging.groep-7.xyz
 
 deploy_production:
   stage: deploying
@@ -75,3 +67,7 @@ deploy_production:
     - docker push gitlab.groep-7.xyz:5050/ashnawiar/ipsenh-frontend
   only:
     - master
+  environment:
+    name: production
+    url: http://www.groep-7.xyz
+
