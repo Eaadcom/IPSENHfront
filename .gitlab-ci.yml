@@ -1,19 +1,27 @@
 image: trion/ng-cli:11.2.6
 stages:
+  - installing
   - building
   - testing
   - docker
   - deploying
 
-# cache:
-#   key: ${CI_COMMIT_REF_SLUG}
-#   paths:
-#     - node_modules/
+cache:
+  untracked: true
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+
+npm:
+  stage: installing
+  script:
+    - npm ci
 
 build:
   stage: building
+  dependencies:
+    - npm
   script:
-    - npm ci
     - ng build --prod
   artifacts:
     paths:
@@ -21,25 +29,26 @@ build:
     expire_in: 1 days
     when: always
 
-# unit_test:
-#   stage: testing
-#   dependencies:
-#     - build
-#   image: efgiese/efgiese-angular-chrome-headless
-#   script:
-#     - npm run test-headless
+unit_test:
+  stage: testing
+  dependencies:
+    - build
+  image: efgiese/efgiese-angular-chrome-headless
+  script:
+    - npm run test-headless
 
-# lint:
-#   stage: testing
-#   dependencies:
-#     - build
-#   script:
-#     - ng lint ipsenh-frontend
+lint:
+  stage: testing
+  dependencies:
+    - build
+  script:
+    - ng lint ipsenh-frontend
 
 docker:
   stage: docker
   dependencies:
-    - build
+    - unit_test
+    - lint
   image: docker:19.03.12
   variables:
     DOCKER_HOST: tcp://docker:2375
