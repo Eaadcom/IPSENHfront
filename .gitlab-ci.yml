@@ -75,7 +75,7 @@ docker:
     - docker:19.03.12-dind
   script:
     - docker info
-    - docker login -u gitlab+deploy-token-1 registry.gitlab.com --password-stdin < ~/LBePBpNrf42vzB8kdTQn
+    - docker login -u gitlab+deploy-token-1 -p LBePBpNrf42vzB8kdTQn gitlab.groep-7.xyz
     - docker build -t ipsenh-groep7-frontend .
     - docker push ipsenh-groep7-frontend
     
