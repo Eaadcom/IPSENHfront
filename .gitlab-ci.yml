@@ -12,7 +12,7 @@ npm:
     - npm -v
     - npm ci
   cache:
-    key: ${CI_COMMIT_REF_SLUG}npm_cache
+    key: ${CI_COMMIT_REF_SLUG}
     paths:
       - node_modules/
 
@@ -30,7 +30,7 @@ unit_test:
     - await_cache
   image: efgiese/efgiese-angular-chrome-headless
   cache:
-    key: ${CI_COMMIT_REF_SLUG}npm_cache
+    key: ${CI_COMMIT_REF_SLUG}
     paths:
       - node_modules/
   script:
@@ -41,7 +41,7 @@ lint:
   dependencies:
     - await_cache
   cache:
-    key: ${CI_COMMIT_REF_SLUG}npm_cache
+    key: ${CI_COMMIT_REF_SLUG}
     paths:
       - node_modules/
   script:
@@ -53,7 +53,7 @@ build:
     - unit_test
     - lint
   cache:
-    key: ${CI_COMMIT_REF_SLUG}npm_cache
+    key: ${CI_COMMIT_REF_SLUG}
     paths:
       - node_modules/
   script:
