@@ -2,15 +2,13 @@ image: trion/ng-cli:11.2.6
 stages:
   - building
   - testing
+  - docker
   - deploying
 
 # cache:
 #   key: ${CI_COMMIT_REF_SLUG}
 #   paths:
 #     - node_modules/
-
-# before_script:
-#   - npm ci
 
 build:
   stage: building
@@ -38,21 +36,23 @@ build:
 #   script:
 #     - ng lint ipsenh-frontend
 
-# docker:
-#   stage: deploying
-#   image: docker:19.03.12
-#   variables:
-#     DOCKER_HOST: tcp://docker:2375
-#     DOCKER_TLS_CERTDIR: ""
-#   services:
-#     - docker:19.03.12-dind
-#   script:
-#     - docker build -t ipsenh-groep7-frontend .
+docker:
+  stage: docker
+  dependencies:
+    - build
+  image: docker:19.03.12
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
+  services:
+    - docker:19.03.12-dind
+  script:
+    - docker build -t ipsenh-groep7-frontend .
     
 deploy:
   stage: deploying
   dependencies:
-    - build
+    - docker
   script:
     - ls
 
