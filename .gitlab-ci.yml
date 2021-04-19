@@ -67,12 +67,15 @@ stages:
 
 docker:
   stage: building
-  image: docker:latest
+  image: docker:19.03.12
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
   services:
-    - name: docker:dind
+    - docker:19.03.12-dind
   script:
     - docker info
-    - docker build -t ipsenh-groep7-frontend .
+    # - docker build -t ipsenh-groep7-frontend .
 
 
 # deploy:
