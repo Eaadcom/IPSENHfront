@@ -74,8 +74,8 @@ docker:
   services:
     - docker:19.03.12-dind
   script:
-    #- docker info
-     - docker build -t ipsenh-groep7-frontend .
+    - docker info
+    - docker build -t ipsenh-groep7-frontend .
 
 
 # deploy:
