@@ -31,9 +31,8 @@ unit_test:
   image: efgiese/efgiese-angular-chrome-headless
   cache:
     key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - node_modules/
   script:
+    - npm ci
     - npm run test-headless
 
 lint:
@@ -42,8 +41,6 @@ lint:
     - await_cache
   cache:
     key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - node_modules/
   script:
     - npm ci
     - ng lint ipsenh-frontend
@@ -55,9 +52,8 @@ build:
     - lint
   cache:
     key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - node_modules/
   script:
+    - npm ci
     - ng build --prod
   artifacts:
     paths:
