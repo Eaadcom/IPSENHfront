@@ -44,10 +44,13 @@ docker:
   variables:
     DOCKER_HOST: tcp://docker:2375
     DOCKER_TLS_CERTDIR: ""
-  services:
-    - docker:19.03.12-dind
+    services:
+    - name: docker:19.03.0-dind
+      command: ["--insecure-registry","gitlab.groep-7.xyz:5000"]
   script:
-    - docker build -t ipsenh-groep7-frontend .
+    - docker login -u gitlab+deploy-token-1 -p LBePBpNrf42vzB8kdTQn gitlab.groep-7.xyz:5000
+    - docker build -t gitlab.groep-7.xyz:5000/ipsenh-frontend .
+    - docker push gitlab.groep-7.xyz:5000/ipsenh-frontend
     
 deploy:
   stage: deploying
