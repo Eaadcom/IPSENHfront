@@ -44,7 +44,7 @@ docker:
   variables:
     DOCKER_HOST: tcp://docker:2375
     DOCKER_TLS_CERTDIR: ""
-    services:
+  services:
     - name: docker:19.03.0-dind
       command: ["--insecure-registry","gitlab.groep-7.xyz:5000"]
   script:
