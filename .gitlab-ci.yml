@@ -75,10 +75,10 @@ docker:
     - docker build -t ipsenh-groep7-frontend .
 
 
-deploy:
-  stage: deploying
-  dependencies:
-    - build
-  script:
-    - echo "deploy hoi"
+# deploy:
+#   stage: deploying
+#   dependencies:
+#     - build
+#   script:
+#     - echo "deploy hoi"
 
