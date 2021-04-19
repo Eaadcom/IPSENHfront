@@ -20,7 +20,7 @@ npm:
 build:
   stage: building
   script:
-    - ng -v
+    - ng version
     - ng build --prod
   artifacts:
     paths:
@@ -42,8 +42,7 @@ lint:
   variables:
     GIT_CLEAN_FLAGS: -ffd
   script:
-    - ng -v
-    - eslint -v
+    - ng version
     - ng lint ipsenh-frontend
 
 deploy:
