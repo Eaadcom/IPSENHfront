@@ -48,22 +48,23 @@ stages:
 #     - npm ci
 #     - ng lint ipsenh-frontend
 
-# build:
-#   stage: building
-#   dependencies:
-#     - unit_test
-#     - lint
-#   cache:
-#     key: ${CI_COMMIT_REF_SLUG}
-#     paths:
-#       - node_modules/
-#   script:
-#     - ng build --prod
-#   artifacts:
-#     paths:
-#       - dist/
-#     expire_in: 1 days
-#     when: always
+build:
+  stage: building
+  # dependencies:
+  #   - unit_test
+  #   - lint
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - node_modules/
+  script:
+    - npm ci
+    - ng build --prod
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 days
+    when: always
 
 docker:
   stage: building
@@ -74,10 +75,9 @@ docker:
   services:
     - docker:19.03.12-dind
   script:
-    - docker info
-    - docker login -u gitlab+deploy-token-1 -p LBePBpNrf42vzB8kdTQn gitlab.groep-7.xyz:5000
+    # - docker login -u gitlab+deploy-token-1 -p LBePBpNrf42vzB8kdTQn gitlab.groep-7.xyz:5000
     - docker build -t ipsenh-groep7-frontend .
-    - docker push ipsenh-groep7-frontend
+    # - docker push ipsenh-groep7-frontend
     
 
 
