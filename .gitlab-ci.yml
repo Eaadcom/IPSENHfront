@@ -9,12 +9,13 @@ stages:
 #   paths:
 #     - node_modules/
 
-before_script:
-  - npm ci
+# before_script:
+#   - npm ci
 
 build:
   stage: building
   script:
+    - npm ci
     - ng build --prod
   artifacts:
     paths:
@@ -53,5 +54,5 @@ deploy:
   dependencies:
     - build
   script:
-    - echo ls
+    - ls
 
