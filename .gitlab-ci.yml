@@ -6,60 +6,74 @@ stages:
   - building
   - deploying
 
-npm:
-  stage: preparation
-  script:
-    - npm -v
-    - npm ci
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - node_modules/
+# npm:
+#   stage: preparation
+#   script:
+#     - npm -v
+#     - npm ci
+#   cache:
+#     key: ${CI_COMMIT_REF_SLUG}
+#     paths:
+#       - node_modules/
 
-#https://gitlab.com/gitlab-org/gitlab/-/issues/21409
-await_cache:
-  stage: sleeping
-  dependencies:
-    - npm
-  script:
-    - sleep 90
+# #https://gitlab.com/gitlab-org/gitlab/-/issues/21409
+# await_cache:
+#   stage: sleeping
+#   dependencies:
+#     - npm
+#   script:
+#     - sleep 90
 
-unit_test:
-  stage: testing
-  dependencies:
-    - await_cache
-  image: efgiese/efgiese-angular-chrome-headless
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
-  script:
-    - npm ci
-    - npm run test-headless
+# unit_test:
+#   stage: testing
+#   dependencies:
+#     - await_cache
+#   image: efgiese/efgiese-angular-chrome-headless
+#   cache:
+#     key: ${CI_COMMIT_REF_SLUG}
+#     paths:
+#       - node_modules/
+#   script:
+#     - npm run test-headless
 
-lint:
-  stage: testing
-  dependencies:
-    - await_cache
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
-  script:
-    - npm ci
-    - ng lint ipsenh-frontend
+# lint:
+#   stage: testing
+#   dependencies:
+#     - await_cache
+#   cache:
+#     key: ${CI_COMMIT_REF_SLUG}
+#     paths:
+#       - node_modules/
+#   script:
+#     - npm ci
+#     - ng lint ipsenh-frontend
 
-build:
+# build:
+#   stage: building
+#   dependencies:
+#     - unit_test
+#     - lint
+#   cache:
+#     key: ${CI_COMMIT_REF_SLUG}
+#     paths:
+#       - node_modules/
+#   script:
+#     - ng build --prod
+#   artifacts:
+#     paths:
+#       - dist/
+#     expire_in: 1 days
+#     when: always
+
+docker:
   stage: building
-  dependencies:
-    - unit_test
-    - lint
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
+  image: docker:latest
+  services:
+    - name: docker:dind
   script:
-    - npm ci
-    - ng build --prod
-  artifacts:
-    paths:
-      - dist/
-    expire_in: 1 days
-    when: always
+    - docker info
+    - docker build -t ipsenh-groep7-frontend .
+
 
 deploy:
   stage: deploying
