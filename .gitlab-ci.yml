@@ -45,6 +45,7 @@ lint:
     paths:
       - node_modules/
   script:
+    - npm ci
     - ng lint ipsenh-frontend
 
 build:
