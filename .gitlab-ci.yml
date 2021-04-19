@@ -49,8 +49,8 @@ docker:
       command: ["--insecure-registry","gitlab.groep-7.xyz:5050"]
   script:
     - docker login -u gitlab+deploy-token-1 -p LBePBpNrf42vzB8kdTQn gitlab.groep-7.xyz:5050
-    - docker build -t gitlab.groep-7.xyz:5050/ipsenh-frontend .
-    - docker push gitlab.groep-7.xyz:5050/ipsenh-frontend
+    - docker build -t gitlab.groep-7.xyz:5050/ashnawiar/ipsenh-frontend .
+    - docker push gitlab.groep-7.xyz:5050/ashnawiar/ipsenh-frontend
     
 deploy:
   stage: deploying
