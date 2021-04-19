@@ -21,14 +21,14 @@ unit_test:
   image: efgiese/efgiese-angular-chrome-headless
   script:
     - npm -v
-    - npm install
+    - npm ci
     - npm run test-headless
 
 lint:
   stage: testing
   script:
     - ng version
-    - npm install
+    - npm ci
     - ng lint ipsenh-frontend
 
 deploy_development:
