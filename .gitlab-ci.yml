@@ -19,8 +19,6 @@ npm:
 
 build:
   stage: building
-  dependencies:
-    - npm
   script:
     - ng -v
     - ng build --prod
@@ -30,22 +28,26 @@ build:
     expire_in: 1 days
     when: always
 
-test:
+unit_test:
   stage: testing
-  dependencies:
-    - build
   image: efgiese/efgiese-angular-chrome-headless
+  variables:
+    GIT_CLEAN_FLAGS: -ffd
   script:
     - npm -v
+    - npm run test-headless
+
+lint:
+  stage: testing
+  variables:
+    GIT_CLEAN_FLAGS: -ffd
+  script:
     - ng -v
     - eslint -v
-    - npm run test-headless
     - ng lint ipsenh-frontend
 
 deploy:
   stage: deploying
-  dependencies:
-    - test
   image: docker:19.03.12
   variables:
     DOCKER_HOST: tcp://docker:2375
