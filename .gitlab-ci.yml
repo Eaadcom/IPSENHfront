@@ -2,20 +2,20 @@ image: trion/ng-cli:11.2.6
 stages:
   - installing
   - building
-  - testing
+  - unit_testing
+  - linting
   - deploying
-
-cache:
-  untracked: true
-  key: ${CI_COMMIT_REF_SLUG}
-  paths:
-  - node_modules/
 
 npm:
   stage: installing
   script:
     - npm -v
     - npm ci
+  cache:
+    untracked: true
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - node_modules/
 
 build:
   stage: building
@@ -29,18 +29,14 @@ build:
     when: always
 
 unit_test:
-  stage: testing
+  stage: unit_testing
   image: efgiese/efgiese-angular-chrome-headless
-  variables:
-    GIT_CLEAN_FLAGS: -ffd
   script:
     - npm -v
     - npm run test-headless
 
 lint:
-  stage: testing
-  variables:
-    GIT_CLEAN_FLAGS: -ffd
+  stage: linting
   script:
     - ng version
     - ng lint ipsenh-frontend
