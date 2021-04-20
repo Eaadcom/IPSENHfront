@@ -1,11 +1,12 @@
 image: trion/ng-cli:11.2.6
 stages:
-  - building
+  - preparing
   - testing
+  - building
   - deploying
 
-build:
-  stage: building
+prepare:
+  stage: preparing
   script:
     - ng version
     - npm ci
@@ -31,8 +32,8 @@ lint:
     - npm ci
     - ng lint ipsenh-frontend
 
-deploy_development:
-  stage: deploying
+build_development:
+  stage: building
   image: docker:19.03.12
   variables:
     DOCKER_HOST: tcp://docker:2375
@@ -42,7 +43,7 @@ deploy_development:
       command: ["--insecure-registry","gitlab.groep-7.xyz:5050"]
   script:
     - docker version
-    - docker login -u gitlab+deploy-token-1 -p LBePBpNrf42vzB8kdTQn gitlab.groep-7.xyz:5050
+    - docker login -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD $CONTAINER_REGISTRY
     - docker build -t gitlab.groep-7.xyz:5050/ashnawiar/ipsenh-frontend:development .
     - docker push gitlab.groep-7.xyz:5050/ashnawiar/ipsenh-frontend:development
   only:
@@ -51,8 +52,8 @@ deploy_development:
     name: staging
     url: http://staging.groep-7.xyz
 
-deploy_production:
-  stage: deploying
+build_production:
+  stage: building
   image: docker:19.03.12
   variables:
     DOCKER_HOST: tcp://docker:2375
@@ -62,7 +63,7 @@ deploy_production:
       command: ["--insecure-registry","gitlab.groep-7.xyz:5050"]
   script:
     - docker version
-    - docker login -u gitlab+deploy-token-1 -p LBePBpNrf42vzB8kdTQn gitlab.groep-7.xyz:5050
+    - docker login -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD $CONTAINER_REGISTRY
     - docker build -t gitlab.groep-7.xyz:5050/ashnawiar/ipsenh-frontend .
     - docker push gitlab.groep-7.xyz:5050/ashnawiar/ipsenh-frontend
   only:
@@ -70,4 +71,19 @@ deploy_production:
   environment:
     name: production
     url: http://www.groep-7.xyz
+
+deploy:
+  stage: deploying
+  image: alpine
+  before_script:
+    - apk add openssh-client
+    - mk dir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo $SSH_KNOWN_HOSTS >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+    - eval $(ssh-agent -s)
+    - echo $SSH_PRIVATE_KEY | tr -d '\r' | ssh-add -
+  script:
+    - ssh -o StrictHostKeyChecking=no deployer@groep-7.xyz "cd ~; ls -l"
+
 
