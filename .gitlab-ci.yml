@@ -2,12 +2,12 @@ image: trion/ng-cli:11.2.6
 stages:
   - building
   - testing
+  - publishing
   - deploying
 
-build:
+build:app:
   stage: building
   script:
-    - ng version
     - npm ci
     - ng build --prod
   artifacts:
@@ -16,23 +16,27 @@ build:
     expire_in: 1 days
     when: always
 
-unit_test:
+test:unit:
   stage: testing
   image: efgiese/efgiese-angular-chrome-headless
   script:
-    - npm -v
     - npm ci
     - npm run test-headless
+  except:
+    - development
+    - master
 
-lint:
+test:lint:
   stage: testing
   script:
-    - ng version
     - npm ci
     - ng lint ipsenh-frontend
+  except:
+    - development
+    - master
 
-deploy_development:
-  stage: deploying
+publish:docker-staging:
+  stage: publishing
   image: docker:19.03.12
   variables:
     DOCKER_HOST: tcp://docker:2375
@@ -41,18 +45,17 @@ deploy_development:
     - name: docker:19.03.0-dind
       command: ["--insecure-registry","gitlab.groep-7.xyz:5050"]
   script:
-    - docker version
-    - docker login -u gitlab+deploy-token-1 -p LBePBpNrf42vzB8kdTQn gitlab.groep-7.xyz:5050
-    - docker build -t gitlab.groep-7.xyz:5050/ashnawiar/ipsenh-frontend:development .
-    - docker push gitlab.groep-7.xyz:5050/ashnawiar/ipsenh-frontend:development
+    - docker login -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD $CONTAINER_REGISTRY
+    - docker build -t $STAGING_IMAGE_TAG:$CI_COMMIT_SHORT_SHA -t $STAGING_IMAGE_TAG:latest .
+    - docker push $STAGING_IMAGE_TAG:$CI_COMMIT_SHORT_SHA
+    - docker push $STAGING_IMAGE_TAG:latest
   only:
     - development
   environment:
     name: staging
-    url: http://staging.groep-7.xyz
 
-deploy_production:
-  stage: deploying
+publish:docker-production:
+  stage: publishing
   image: docker:19.03.12
   variables:
     DOCKER_HOST: tcp://docker:2375
@@ -61,13 +64,57 @@ deploy_production:
     - name: docker:19.03.0-dind
       command: ["--insecure-registry","gitlab.groep-7.xyz:5050"]
   script:
-    - docker version
-    - docker login -u gitlab+deploy-token-1 -p LBePBpNrf42vzB8kdTQn gitlab.groep-7.xyz:5050
-    - docker build -t gitlab.groep-7.xyz:5050/ashnawiar/ipsenh-frontend .
-    - docker push gitlab.groep-7.xyz:5050/ashnawiar/ipsenh-frontend
+    - docker login -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD $CONTAINER_REGISTRY
+    - docker build -t $PRODUCTION_IMAGE_TAG:$CI_COMMIT_SHORT_SHA -t $PRODUCTION_IMAGE_TAG:latest .
+    - docker push $PRODUCTION_IMAGE_TAG:$CI_COMMIT_SHORT_SHA
+    - docker push $PRODUCTION_IMAGE_TAG:latest
   only:
     - master
   environment:
     name: production
-    url: http://www.groep-7.xyz
 
+deploy:staging-app:
+  stage: deploying
+  image: alpine
+  before_script:
+    - apk add openssh-client
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+  script:
+    - ssh -o StrictHostKeychecking=no $SERVER_USER@$SERVER_IP "bash $DEPLOY_SCRIPT
+      -u $PROJECT_TOKEN_USERNAME
+      -p $PROJECT_TOKEN_PASSWORD
+      -r $CONTAINER_REGISTRY
+      -i $STAGING_IMAGE_TAG:latest
+      -e staging -s staging_angular"
+  only:
+    - development
+  environment:
+    name: staging
+
+deploy:production-app:
+  stage: deploying
+  image: alpine
+  before_script:
+    - apk add openssh-client
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+  script:
+    - ssh -o StrictHostKeychecking=no $SERVER_USER@$SERVER_IP "bash $DEPLOY_SCRIPT
+      -u $PROJECT_TOKEN_USERNAME
+      -p $PROJECT_TOKEN_PASSWORD
+      -r $CONTAINER_REGISTRY
+      -i $PRODUCTION_IMAGE_TAG:latest
+      -e production -s production_angular"
+  only:
+    - master
+  environment:
+    name: production
