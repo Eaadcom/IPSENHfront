@@ -72,7 +72,7 @@ build_production:
     name: production
     url: http://www.groep-7.xyz
 
-deploy:
+deploy:staging:
   stage: deploying
   image: alpine
   before_script:
@@ -84,6 +84,6 @@ deploy:
     - eval $(ssh-agent -s)
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
   script:
-    - ssh -o StrictHostKeyChecking=no deployer@groep-7.xyz "cd ~; ls -l"
+    - ssh -o StrictHostKeychecking=no deployer@groep-7.xyz "bash deploy_backend_prod.sh -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD -r $CONTAINER_REGISTRY -i $CONTAINER_REGISTRY/AshnaWiar/ipsenh-frontend -e staging"
 
 
