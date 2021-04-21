@@ -1,7 +1,7 @@
 image: trion/ng-cli:11.2.6
 stages:
   - building
-  - testing
+#  - testing
   - publishing
   - deploying
 
@@ -17,26 +17,26 @@ build:app:
     expire_in: 1 days
     when: always
 
-test:unit:
-  stage: testing
-  image: efgiese/efgiese-angular-chrome-headless
-  script:
-    - npm -v
-    - npm ci
-    - npm run test-headless
-  except:
-    - development
-    - master
-
-test:lint:
-  stage: testing
-  script:
-    - ng version
-    - npm ci
-    - ng lint ipsenh-frontend
-  except:
-    - development
-    - master
+#test:unit:
+#  stage: testing
+#  image: efgiese/efgiese-angular-chrome-headless
+#  script:
+#    - npm -v
+#    - npm ci
+#    - npm run test-headless
+#  except:
+#    - development
+#    - master
+#
+#test:lint:
+#  stage: testing
+#  script:
+#    - ng version
+#    - npm ci
+#    - ng lint ipsenh-frontend
+#  except:
+#    - development
+#    - master
 
 publish:docker-staging:
   stage: publishing
@@ -53,11 +53,11 @@ publish:docker-staging:
     - docker build -t $TAG_STAGING:$CI_COMMIT_SHORT_SHA -t $TAG_STAGING:latest .
     - docker push $TAG_STAGING:$CI_COMMIT_SHORT_SHA
     - docker push $TAG_STAGING:latest
-  only:
-    - development
-  environment:
-    name: staging
-    url: $STAGING_URL
+#  only:
+#    - development
+#  environment:
+#    name: staging
+#    url: $STAGING_URL
 
 publish:docker-production:
   stage: publishing
@@ -93,11 +93,11 @@ deploy:staging-app:
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
   script:
     - ssh -o StrictHostKeychecking=no $SERVER_USER@$SERVER_IP "/bin/bash $DEPLOY_SCRIPT -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD -r $CONTAINER_REGISTRY -i $TAG_STAGING:latest -e staging -s staging_angular"
-  only:
-    - development
-  environment:
-    name: staging
-    url: $STAGING_URL
+#  only:
+#    - development
+#  environment:
+#    name: staging
+#    url: $STAGING_URL
 
 deploy:production-app:
   stage: deploying
