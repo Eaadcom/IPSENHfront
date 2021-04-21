@@ -8,7 +8,6 @@ stages:
 build:app:
   stage: building
   script:
-    - ng version
     - npm ci
     - ng build --prod
   artifacts:
@@ -21,7 +20,6 @@ test:unit:
   stage: testing
   image: efgiese/efgiese-angular-chrome-headless
   script:
-    - npm -v
     - npm ci
     - npm run test-headless
   except:
@@ -31,7 +29,6 @@ test:unit:
 test:lint:
   stage: testing
   script:
-    - ng version
     - npm ci
     - ng lint ipsenh-frontend
   except:
@@ -48,16 +45,14 @@ publish:docker-staging:
     - name: docker:19.03.0-dind
       command: ["--insecure-registry","gitlab.groep-7.xyz:5050"]
   script:
-    - docker version
     - docker login -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD $CONTAINER_REGISTRY
-    - docker build -t $TAG_STAGING:$CI_COMMIT_SHORT_SHA -t $TAG_STAGING:latest .
-    - docker push $TAG_STAGING:$CI_COMMIT_SHORT_SHA
-    - docker push $TAG_STAGING:latest
+    - docker build -t $STAGING_IMAGE_TAG:$CI_COMMIT_SHORT_SHA -t $STAGING_IMAGE_TAG:latest .
+    - docker push $STAGING_IMAGE_TAG:$CI_COMMIT_SHORT_SHA
+    - docker push $STAGING_IMAGE_TAG:latest
   only:
     - development
   environment:
     name: staging
-    url: $STAGING_URL
 
 publish:docker-production:
   stage: publishing
@@ -69,16 +64,14 @@ publish:docker-production:
     - name: docker:19.03.0-dind
       command: ["--insecure-registry","gitlab.groep-7.xyz:5050"]
   script:
-    - docker version
     - docker login -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD $CONTAINER_REGISTRY
-    - docker build -t $TAG_PRODUCTION:$CI_COMMIT_SHORT_SHA -t $TAG_PRODUCTION:latest .
-    - docker push $TAG_PRODUCTION:$CI_COMMIT_SHORT_SHA
-    - docker push $TAG_PRODUCTION:latest
+    - docker build -t $PRODUCTION_IMAGE_TAG:$CI_COMMIT_SHORT_SHA -t $PRODUCTION_IMAGE_TAG:latest .
+    - docker push $PRODUCTION_IMAGE_TAG:$CI_COMMIT_SHORT_SHA
+    - docker push $PRODUCTION_IMAGE_TAG:latest
   only:
     - master
   environment:
     name: production
-    url: $PRODUCTION_URL
 
 deploy:staging-app:
   stage: deploying
@@ -92,12 +85,16 @@ deploy:staging-app:
     - eval $(ssh-agent -s)
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
   script:
-    - ssh -o StrictHostKeychecking=no $SERVER_USER@$SERVER_IP "/bin/bash $DEPLOY_SCRIPT -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD -r $CONTAINER_REGISTRY -i $TAG_STAGING:latest -e staging -s staging_angular"
+    - ssh -o StrictHostKeychecking=no $SERVER_USER@$SERVER_IP "bash $DEPLOY_SCRIPT
+      -u $PROJECT_TOKEN_USERNAME
+      -p $PROJECT_TOKEN_PASSWORD
+      -r $CONTAINER_REGISTRY
+      -i $STAGING_IMAGE_TAG:latest
+      -e staging -s staging_angular"
   only:
     - development
   environment:
     name: staging
-    url: $STAGING_URL
 
 deploy:production-app:
   stage: deploying
@@ -111,9 +108,13 @@ deploy:production-app:
     - eval $(ssh-agent -s)
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
   script:
-    - ssh -o StrictHostKeychecking=no $SERVER_USER@$SERVER_IP "/bin/bash $DEPLOY_SCRIPT -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD -r $CONTAINER_REGISTRY -i $TAG_PRODUCTION:latest -e production -s staging_angular"
+    - ssh -o StrictHostKeychecking=no $SERVER_USER@$SERVER_IP "bash $DEPLOY_SCRIPT
+      -u $PROJECT_TOKEN_USERNAME
+      -p $PROJECT_TOKEN_PASSWORD
+      -r $CONTAINER_REGISTRY
+      -i $PRODUCTION_IMAGE_TAG:latest
+      -e production -s production_angular"
   only:
     - master
   environment:
     name: production
-    url: $PRODUCTION_URL
