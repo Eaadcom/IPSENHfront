@@ -93,8 +93,8 @@ deploy:staging-app:
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
   script:
     - ssh -o StrictHostKeychecking=no deployer@groep-7.xyz "/bin/bash $DEPLOY_SCRIPT -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD -r $CONTAINER_REGISTRY -i $TAG_STAGING:latest -e staging -s staging_angular"
-   only:
-     - development
+  only:
+    - development
   environment:
     name: staging
     url: $STAGING_URL
