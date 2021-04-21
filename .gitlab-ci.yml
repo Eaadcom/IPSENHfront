@@ -85,6 +85,7 @@ deploy:staging:
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
   script:
     - ssh -o StrictHostKeychecking=no deployer@groep-7.xyz "bash deploy_backend_prod.sh -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD -r $CONTAINER_REGISTRY -i $CONTAINER_REGISTRY/ashnawiar/ipsenh-frontend:development -e staging"
+    - /bin/bash deploy_app.sh -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD -r $CONTAINER_REGISTRY -i $CONTAINER_REGISTRY/ashnawiar/ipsenh-frontend:development -e staging -s production_angular
   only:
     - development
   environment:
@@ -103,7 +104,8 @@ deploy:production:
     - eval $(ssh-agent -s)
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
   script:
-    - ssh -o StrictHostKeychecking=no deployer@groep-7.xyz "bash deploy_backend_prod.sh -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD -r $CONTAINER_REGISTRY -i $CONTAINER_REGISTRY/ashnawiar/ipsenh-frontend -e staging"
+    - ssh -o StrictHostKeychecking=no deployer@groep-7.xyz "bash deploy_backend_prod.sh -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD -r $CONTAINER_REGISTRY -i $CONTAINER_REGISTRY/ashnawiar/ipsenh-frontend -e production"
+    - /bin/bash deploy_app.sh -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD -r $CONTAINER_REGISTRY -i $CONTAINER_REGISTRY/ashnawiar/ipsenh-frontend -e production -s production_angular
   only:
     - master
   environment:
