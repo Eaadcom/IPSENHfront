@@ -86,8 +86,8 @@ deploy:staging:
   script:
     - ssh -o StrictHostKeychecking=no deployer@groep-7.xyz "bash deploy_backend_prod.sh -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD -r $CONTAINER_REGISTRY -i $CONTAINER_REGISTRY/ashnawiar/ipsenh-frontend:development -e staging"
     - /bin/bash deploy_app.sh -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD -r $CONTAINER_REGISTRY -i $CONTAINER_REGISTRY/ashnawiar/ipsenh-frontend:development -e staging -s production_angular
-  only:
-    - development
+  # only:
+  #   - development
   environment:
     name: staging
     url: http://staging.groep-7.xyz
