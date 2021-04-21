@@ -1,12 +1,12 @@
 image: trion/ng-cli:11.2.6
 stages:
-  - preparing
-  - testing
   - building
+  - testing
+  - publishing
   - deploying
 
-prepare:
-  stage: preparing
+build:app:
+  stage: building
   script:
     - ng version
     - npm ci
@@ -17,62 +17,70 @@ prepare:
     expire_in: 1 days
     when: always
 
-unit_test:
+test:unit:
   stage: testing
   image: efgiese/efgiese-angular-chrome-headless
   script:
     - npm -v
     - npm ci
     - npm run test-headless
+  except:
+    - development
+    - master
 
-lint:
+test:lint:
   stage: testing
   script:
     - ng version
     - npm ci
     - ng lint ipsenh-frontend
+  except:
+    - development
+    - master
 
-build_development:
-  stage: building
+publish:docker-staging:
+  stage: publishing
   image: docker:19.03.12
   variables:
     DOCKER_HOST: tcp://docker:2375
     DOCKER_TLS_CERTDIR: ""
   services:
     - name: docker:19.03.0-dind
-      command: ["--insecure-registry","gitlab.groep-7.xyz:5050"]
+      command: ["--insecure-registry","$CONTAINER_REGISTRY"]
   script:
     - docker version
     - docker login -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD $CONTAINER_REGISTRY
-    - docker build -t gitlab.groep-7.xyz:5050/ashnawiar/ipsenh-frontend:development .
-    - docker push gitlab.groep-7.xyz:5050/ashnawiar/ipsenh-frontend:development
+    - docker build -t $TAG_STAGING:$CI_COMMIT_SHORT_SHA -t $TAG_STAGING:latest .
+    - docker push $TAG_STAGING:$CI_COMMIT_SHORT_SHA
+    - docker push $TAG_STAGING:latest
   only:
     - development
   environment:
     name: staging
-    url: http://staging.groep-7.xyz
+    url: $STAGING_URL
 
-build_production:
-  stage: building
+publish:docker-production:
+  stage: publishing
   image: docker:19.03.12
   variables:
     DOCKER_HOST: tcp://docker:2375
     DOCKER_TLS_CERTDIR: ""
   services:
     - name: docker:19.03.0-dind
-      command: ["--insecure-registry","gitlab.groep-7.xyz:5050"]
+      command: ["--insecure-registry","$CONTAINER_REGISTRY"]
   script:
     - docker version
     - docker login -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD $CONTAINER_REGISTRY
-    - docker build -t gitlab.groep-7.xyz:5050/ashnawiar/ipsenh-frontend .
-    - docker push gitlab.groep-7.xyz:5050/ashnawiar/ipsenh-frontend
+    - docker build -t $TAG_PRODUCTION:$CI_COMMIT_SHORT_SHA -t $TAG_PRODUCTION:latest .
+    - docker push $TAG_PRODUCTION:$CI_COMMIT_SHORT_SHA
+    - docker push $TAG_PRODUCTION:latest
   only:
     - master
   environment:
     name: production
-    url: http://www.groep-7.xyz
+    url: $PRODUCTION_URL
 
-deploy:staging:
+deploy:staging-app:
   stage: deploying
   image: alpine
   before_script:
@@ -84,14 +92,14 @@ deploy:staging:
     - eval $(ssh-agent -s)
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
   script:
-    - ssh -o StrictHostKeychecking=no deployer@groep-7.xyz "/bin/bash deploy_app.sh -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD -r $CONTAINER_REGISTRY -i $CONTAINER_REGISTRY/ashnawiar/ipsenh-frontend:development -e staging -s staging_angular"
-  # only:
-  #   - development
+    - ssh -o StrictHostKeychecking=no deployer@groep-7.xyz "/bin/bash $DEPLOY_SCRIPT -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD -r $CONTAINER_REGISTRY -i $TAG_STAGING:latest -e staging -s staging_angular"
+  only:
+    - development
   environment:
     name: staging
-    url: http://staging.groep-7.xyz
+    url: $STAGING_URL
 
-deploy:production:
+deploy:production-app:
   stage: deploying
   image: alpine
   before_script:
@@ -103,11 +111,11 @@ deploy:production:
     - eval $(ssh-agent -s)
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
   script:
-    - ssh -o StrictHostKeychecking=no deployer@groep-7.xyz "/bin/bash deploy_app.sh -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD -r $CONTAINER_REGISTRY -i $CONTAINER_REGISTRY/ashnawiar/ipsenh-frontend:development -e production -s staging_angular"
+    - ssh -o StrictHostKeychecking=no deployer@groep-7.xyz "/bin/bash $DEPLOY_SCRIPT -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD -r $CONTAINER_REGISTRY -i $TAG_PRODUCTION:latest -e production -s staging_angular"
   only:
     - master
   environment:
     name: production
-    url: http://production.groep-7.xyz
+    url: $PRODUCTION_URL
 
 
