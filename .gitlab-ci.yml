@@ -46,7 +46,7 @@ publish:docker-staging:
     DOCKER_TLS_CERTDIR: ""
   services:
     - name: docker:19.03.0-dind
-      command: ["--insecure-registry","$CONTAINER_REGISTRY"]
+      command: ["--insecure-registry","gitlab.groep-7.xyz:5050"]
   script:
     - docker version
     - docker login -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD $CONTAINER_REGISTRY
@@ -67,7 +67,7 @@ publish:docker-production:
     DOCKER_TLS_CERTDIR: ""
   services:
     - name: docker:19.03.0-dind
-      command: ["--insecure-registry","$CONTAINER_REGISTRY"]
+      command: ["--insecure-registry","gitlab.groep-7.xyz:5050"]
   script:
     - docker version
     - docker login -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD $CONTAINER_REGISTRY
@@ -92,7 +92,7 @@ deploy:staging-app:
     - eval $(ssh-agent -s)
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
   script:
-    - ssh -o StrictHostKeychecking=no deployer@groep-7.xyz "/bin/bash $DEPLOY_SCRIPT -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD -r $CONTAINER_REGISTRY -i $TAG_STAGING:latest -e staging -s staging_angular"
+    - ssh -o StrictHostKeychecking=no $SERVER_USER@$SERVER_IP "/bin/bash $DEPLOY_SCRIPT -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD -r $CONTAINER_REGISTRY -i $TAG_STAGING:latest -e staging -s staging_angular"
   only:
     - development
   environment:
@@ -111,11 +111,9 @@ deploy:production-app:
     - eval $(ssh-agent -s)
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
   script:
-    - ssh -o StrictHostKeychecking=no deployer@groep-7.xyz "/bin/bash $DEPLOY_SCRIPT -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD -r $CONTAINER_REGISTRY -i $TAG_PRODUCTION:latest -e production -s staging_angular"
+    - ssh -o StrictHostKeychecking=no $SERVER_USER@$SERVER_IP "/bin/bash $DEPLOY_SCRIPT -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD -r $CONTAINER_REGISTRY -i $TAG_PRODUCTION:latest -e production -s staging_angular"
   only:
     - master
   environment:
     name: production
     url: $PRODUCTION_URL
-
-
