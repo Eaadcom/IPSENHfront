@@ -46,8 +46,8 @@ build_development:
     - docker login -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD $CONTAINER_REGISTRY
     - docker build -t gitlab.groep-7.xyz:5050/ashnawiar/ipsenh-frontend:development .
     - docker push gitlab.groep-7.xyz:5050/ashnawiar/ipsenh-frontend:development
-  only:
-    - development
+  # only:
+  #   - development
   environment:
     name: staging
     url: http://staging.groep-7.xyz
@@ -85,5 +85,8 @@ deploy:staging:
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
   script:
     - ssh -o StrictHostKeychecking=no deployer@groep-7.xyz "bash deploy_backend_prod.sh -u $PROJECT_TOKEN_USERNAME -p $PROJECT_TOKEN_PASSWORD -r $CONTAINER_REGISTRY -i $CONTAINER_REGISTRY/ashnawiar/ipsenh-frontend:development -e staging"
+  environment:
+    name: staging
+    url: http://staging.groep-7.xyz
 
 
