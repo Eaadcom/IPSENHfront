@@ -5,6 +5,12 @@ stages:
   - publishing
   - deploying
 
+cache:
+  key: "$CI_COMMIT_REF_NAME"
+  untracked: true
+  paths:
+    - node_modules/
+
 build:app:
   stage: building
   script:
@@ -20,20 +26,18 @@ test:unit:
   stage: testing
   image: efgiese/efgiese-angular-chrome-headless
   script:
-    - npm ci
     - npm run test-headless
-  except:
-    - development
-    - master
+#  except:
+#    - development
+#    - master
 
 test:lint:
   stage: testing
   script:
-    - npm ci
     - ng lint ipsenh-frontend
-  except:
-    - development
-    - master
+#  except:
+#    - development
+#    - master
 
 publish:docker-staging:
   stage: publishing
@@ -93,8 +97,6 @@ deploy:staging-app:
       -e staging -s staging_angular"
   only:
     - development
-  environment:
-    name: staging
 
 deploy:production-app:
   stage: deploying
@@ -116,5 +118,3 @@ deploy:production-app:
       -e production -s production_angular"
   only:
     - master
-  environment:
-    name: production
