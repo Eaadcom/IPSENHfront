@@ -44,6 +44,7 @@ test:lint:
 publish:docker-staging:
   stage: publishing
   image: docker:19.03.12
+  cache: {}
   variables:
     DOCKER_HOST: tcp://docker:2375
     DOCKER_TLS_CERTDIR: ""
@@ -61,6 +62,7 @@ publish:docker-staging:
 publish:docker-production:
   stage: publishing
   image: docker:19.03.12
+  cache: {}
   variables:
     DOCKER_HOST: tcp://docker:2375
     DOCKER_TLS_CERTDIR: ""
@@ -78,6 +80,7 @@ publish:docker-production:
 deploy:staging-app:
   stage: deploying
   image: alpine
+  cache: {}
   before_script:
     - apk add openssh-client
     - mkdir -p ~/.ssh
@@ -101,6 +104,7 @@ deploy:staging-app:
 deploy:production-app:
   stage: deploying
   image: alpine
+  cache: {}
   before_script:
     - apk add openssh-client
     - mkdir -p ~/.ssh
