@@ -6,7 +6,7 @@ stages:
   - deploying
 
 cache: &global_cache
-  key: ${CI_COMMIT_REF_SLUG}
+  key: "$CI_COMMIT_REF_NAME"
   untracked: true
   paths:
     - node_modules/
@@ -31,7 +31,6 @@ test:unit:
     policy: pull
   script:
     - npm run test-headless
-
 
 test:lint:
   stage: testing
