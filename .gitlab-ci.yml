@@ -5,8 +5,8 @@ stages:
   - publishing
   - deploying
 
-cache:
-  key: "$CI_COMMIT_REF_NAME"
+cache: &global_cache
+  key: ${CI_JOB_NAME}
   untracked: true
   paths:
     - node_modules/
@@ -28,6 +28,7 @@ test:unit:
   script:
     - npm run test-headless
   cache:
+    <<: *global_cache
     policy: pull
 
 test:lint:
@@ -35,6 +36,7 @@ test:lint:
   script:
     - ng lint ipsenh-frontend
   cache:
+    <<: *global_cache
     policy: pull
 
 publish:docker-staging:
