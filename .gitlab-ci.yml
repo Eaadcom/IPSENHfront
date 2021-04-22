@@ -34,6 +34,7 @@ test:unit:
 
 test:lint:
   stage: testing
+  needs: ["test:unit"]
   cache:
     <<: *global_cache
     policy: pull
