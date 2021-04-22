@@ -89,7 +89,7 @@ deploy:staging-app:
       -u $PROJECT_TOKEN_USERNAME
       -p $PROJECT_TOKEN_PASSWORD
       -r $CONTAINER_REGISTRY
-      -i $STAGING_IMAGE_TAG:latest
+      -i $STAGING_IMAGE_TAG:$CI_COMMIT_SHORT_SHA
       -e staging -s staging_angular"
   only:
     - development
@@ -112,7 +112,7 @@ deploy:production-app:
       -u $PROJECT_TOKEN_USERNAME
       -p $PROJECT_TOKEN_PASSWORD
       -r $CONTAINER_REGISTRY
-      -i $PRODUCTION_IMAGE_TAG:latest
+      -i $PRODUCTION_IMAGE_TAG:$CI_COMMIT_SHORT_SHA
       -e production -s production_angular"
   only:
     - master
