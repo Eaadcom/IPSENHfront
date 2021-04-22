@@ -71,8 +71,6 @@ publish:docker-staging:
     - docker push $STAGING_IMAGE_TAG:latest
   only:
     - development
-  environment:
-    name: staging
 
 publish:docker-production:
   stage: publishing
@@ -90,9 +88,7 @@ publish:docker-production:
     - docker push $PRODUCTION_IMAGE_TAG:latest
   only:
     - master
-  environment:
-    name: production
-
+    
 deploy:staging-app:
   stage: deploying
   image: alpine
