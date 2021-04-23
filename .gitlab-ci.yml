@@ -6,21 +6,25 @@ stages:
   - publishing
   - deploying
 
-cache: &global_cache
-  key: global
-  untracked: true
-  paths:
-    - node_modules/
-  policy: pull
+#cache: &global_cache
+#  key: global
+#  untracked: true
+#  paths:
+#    - node_modules/
+#    - .npm/
+#  policy: pull
 
 build:app:
   stage: building
   script:
-    - npm ci --prefer-offline --no-audit
+    - npm ci
     - ng build --prod
-  cache:
-    <<: *global_cache
-    policy: pull-push
+#  cache:
+#    <<: *global_cache
+#    paths:
+#      - node_modules/
+#      - .npm/
+#    policy: pull-push
   artifacts:
     paths:
       - dist/
@@ -31,11 +35,13 @@ test:unit:
   stage: testing
   image: efgiese/efgiese-angular-chrome-headless
   script:
+    - npm ci
     - npm run test-headless
 
 test:lint:
   stage: testing
   script:
+    - npm ci
     - ng lint ipsenh-frontend
 
 sonarqube-check:
@@ -56,14 +62,11 @@ sonarqube-check:
   only:
     - development
     - master
-  except:
-    - development
-    - master
 
 publish:docker-staging:
   stage: publishing
   image: docker:19.03.12
-  cache: {}
+  #cache: {}
   variables:
     DOCKER_HOST: tcp://docker:2375
     DOCKER_TLS_CERTDIR: ""
@@ -81,7 +84,7 @@ publish:docker-staging:
 publish:docker-production:
   stage: publishing
   image: docker:19.03.12
-  cache: {}
+  #cache: {}
   variables:
     DOCKER_HOST: tcp://docker:2375
     DOCKER_TLS_CERTDIR: ""
@@ -99,7 +102,7 @@ publish:docker-production:
 deploy:staging-app:
   stage: deploying
   image: alpine
-  cache: {}
+  #cache: {}
   before_script:
     - apk add openssh-client
     - mkdir -p ~/.ssh
@@ -123,7 +126,7 @@ deploy:staging-app:
 deploy:production-app:
   stage: deploying
   image: alpine
-  cache: {}
+  #cache: {}
   before_script:
     - apk add openssh-client
     - mkdir -p ~/.ssh
