@@ -6,11 +6,21 @@ stages:
   - publishing
   - deploying
 
+cache: &global_cache
+  key: global
+  untracked: true
+  paths:
+    - node_modules/
+  policy: pull
+
 build:app:
   stage: building
   script:
-    - npm ci
+    - npm ci --prefer-offline --no-audit
     - ng build --prod
+  cache:
+    <<: *global_cache
+    policy: pull-push
   artifacts:
     paths:
       - dist/
@@ -21,24 +31,16 @@ test:unit:
   stage: testing
   image: efgiese/efgiese-angular-chrome-headless
   script:
-    - npm ci
     - npm run test-headless
-  except:
-    - development
-    - master
 
 test:lint:
   stage: testing
   script:
-    - npm ci
     - ng lint ipsenh-frontend
-  except:
-    - development
-    - master
 
 sonarqube-check:
   stage: sonarqube
-  image: 
+  image:
     name: sonarsource/sonar-scanner-cli:latest
     entrypoint: [""]
   variables:
@@ -48,16 +50,20 @@ sonarqube-check:
     key: "${CI_JOB_NAME}"
     paths:
       - .sonar/cache
-  script: 
+  script:
     - sonar-scanner
   allow_failure: true
   only:
+    - development
+    - master
+  except:
     - development
     - master
 
 publish:docker-staging:
   stage: publishing
   image: docker:19.03.12
+  cache: {}
   variables:
     DOCKER_HOST: tcp://docker:2375
     DOCKER_TLS_CERTDIR: ""
@@ -75,6 +81,7 @@ publish:docker-staging:
 publish:docker-production:
   stage: publishing
   image: docker:19.03.12
+  cache: {}
   variables:
     DOCKER_HOST: tcp://docker:2375
     DOCKER_TLS_CERTDIR: ""
@@ -88,10 +95,11 @@ publish:docker-production:
     - docker push $PRODUCTION_IMAGE_TAG:latest
   only:
     - master
-    
+
 deploy:staging-app:
   stage: deploying
   image: alpine
+  cache: {}
   before_script:
     - apk add openssh-client
     - mkdir -p ~/.ssh
@@ -115,6 +123,7 @@ deploy:staging-app:
 deploy:production-app:
   stage: deploying
   image: alpine
+  cache: {}
   before_script:
     - apk add openssh-client
     - mkdir -p ~/.ssh
