@@ -19,7 +19,6 @@ build:app:
   script:
     - npm ci --cache ./.npm --prefer-offline
     - ng build --prod
-    - ls
   cache:
     <<: *global_cache
     paths:
