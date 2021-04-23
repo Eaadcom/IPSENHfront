@@ -20,6 +20,9 @@ build:app:
     - ng build --prod
   cache:
     <<: *global_cache
+    paths:
+      - node_modules/
+      - .npm/
     policy: pull-push
   artifacts:
     paths:
