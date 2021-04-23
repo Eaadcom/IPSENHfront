@@ -11,13 +11,13 @@ cache: &global_cache
   untracked: true
   paths:
     - node_modules/
-    - npm/
+    - .npm/
   policy: pull
 
 build:app:
   stage: building
   script:
-    - npm ci --cache ./npm --prefer-offline
+    - npm ci --cache ./.npm --prefer-offline
     - ng build --prod
     - ls
   cache:
