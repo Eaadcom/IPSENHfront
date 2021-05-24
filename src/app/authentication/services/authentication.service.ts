@@ -14,7 +14,7 @@ export class AuthenticationService {
   private readonly endpoint;
 
   constructor(private api: ApiService) {
-    this.endpoint = 'auth/';
+    this.endpoint = 'auth';
   }
 
   login(credentials: Credentials): Observable<LoginResponse> {
