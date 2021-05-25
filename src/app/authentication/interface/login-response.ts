@@ -1,6 +1,6 @@
 import {UserInterface} from '../../user/interfaces/user-interface';
 
 export interface LoginResponse {
-  apiToken: string;
+  api_token: string;
   user: UserInterface;
 }

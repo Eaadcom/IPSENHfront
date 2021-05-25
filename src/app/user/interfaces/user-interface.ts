@@ -11,7 +11,7 @@ export interface UserInterface {
   about_me: string;
   age_range_bottom: number;
   age_range_top: number;
-  max_distance: string;
+  max_distance: number;
   interest: string;
   createdAt: Date;
   updatedAt: Date;
