@@ -17,8 +17,8 @@ export class User implements UserInterface {
     public age_range_top: number,
     public max_distance: number,
     public interest: string,
-    public createdAt: Date,
-    public updatedAt: Date,
+    public created_at: Date,
+    public updated_at: Date,
   ) {}
 
 }

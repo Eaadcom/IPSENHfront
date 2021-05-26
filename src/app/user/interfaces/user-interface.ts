@@ -13,6 +13,6 @@ export interface UserInterface {
   age_range_top: number;
   max_distance: number;
   interest: string;
-  createdAt: Date;
-  updatedAt: Date;
+  created_at: Date;
+  updated_at: Date;
 }
