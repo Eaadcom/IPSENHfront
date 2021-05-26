@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
+@import url('https://fonts.googleapis.com/css?family=Comfortaa');
+
+
+
+
+.wrapper {
+  position:  absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+}
+
+
+$edit-window-height: 400px;
+body {
+  background: #EC87C0;
+  left: 0;
+  right: 0;
+}
+
+.edit-window {
+  width: 800px;
+  height:$edit-window-height;
+  background: #fafbfc;
+  border-radius: 5px;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+}
+
+.window-border {
+  display: flex;
+  top: 0;
+  height: 50px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background: #E6E9ED;
+
+  .language {
+    position: relative;
+    top: 10px;
+    right: -655px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: none;
+    outline: none;
+    text-align:  center;
+    height: 30px;
+    border: none;
+  }
+  .close, .minimize,  .maximize {
+    top: 17px;
+    left: 10px;
+  }
+  .close {
+    position: relative;
+    width: 15px;
+    height: 15px;
+    border-radius: 28px;
+    background: #ED5565;
+  }
+
+  .minimize {
+    position: relative;
+    margin-left: 8px;
+    width: 15px;
+    height: 15px;
+    border-radius: 28px;
+    background: #FFCE54;
+  }
+
+  .maximize {
+    position: relative;
+    margin-left: 8px;
+    width: 15px;
+    height: 15px;
+    border-radius: 28px;
+    background: #48CFAD;
+  }
+}
+
+
+.input-area {
+  position: relative;
+  outline: none;
+}
+
+.preview {
+  position: absolute;
+  display: inline-block;
+  background: transparent;
+  padding: 0;
+  bottom: 0;
+  top: 0;
+  width: 100%;
+  height: $edit-window-height;
+  z-index: 3;
+}
+
+.textarea {
+  position: absolute;
+  display: inline-block;
+  padding: 0;
+  width: 100%;
+  height: $edit-window-height;
+  z-index: 3;
+  // Reset
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+
+.cousor {
+  position: absolute;
+  display: inline-block;
+  padding: 0;
+  width: 100%;
+  height: $edit-window-height;
+  z-index: 1;
+  // Reset
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.preview, .textarea, cousor {
+  font-size: 17px;
+  font-weight: 200;
+  font-family: 'Source Code Pro', monospace;
+}
+
+.pointer {
+  color: #333;
+}
