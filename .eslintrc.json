@@ -21,6 +21,16 @@
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
+        "@typescript-eslint/naming-convention": [
+          "error",
+          {
+            "selector": "variable",
+            "format": [
+              "camelCase",
+              "snake_case"
+            ]
+          }
+        ],
         "@angular-eslint/component-selector": [
           "error",
           {
