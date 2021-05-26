@@ -108,6 +108,7 @@
       "options": [
         "ban-keywords",
         "check-format",
+        "allow-snake-case",
         "allow-pascal-case"
       ]
     },

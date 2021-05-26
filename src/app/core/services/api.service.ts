@@ -18,11 +18,11 @@ export class ApiService {
     return this.httpClient.get<T>(this.endpoint + path);
   }
 
-  post<T>(path: string, body: object | string): Observable<T> {
+  post<T>(path: string, body: any): Observable<T> {
     return this.httpClient.post<T>(this.endpoint + path, body);
   }
 
-  put<T>(path: string, body: object): Observable<T>  {
+  put<T>(path: string, body: any): Observable<T>  {
     return this.httpClient.put<T>(this.endpoint + path, body);
   }
 
