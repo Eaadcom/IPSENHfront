@@ -28,10 +28,4 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('ipsenh-frontend');
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content h1').textContent).toContain('ipsenh-frontend app is running!');
-  });
 });

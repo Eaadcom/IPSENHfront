@@ -39,4 +39,8 @@ export class AuthenticationService {
   getApiToken(): string | null {
     return localStorage.getItem('api_token');
   }
+
+  isLoggedIn(): boolean {
+    return this.getApiToken() != null && this.getLocalUser() != null;
+  }
 }

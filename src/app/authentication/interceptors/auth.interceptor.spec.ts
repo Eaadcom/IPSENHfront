@@ -5,20 +5,18 @@ import {HttpClientTestingModule, HttpTestingController} from '@angular/common/ht
 import {HTTP_INTERCEPTORS, HttpClient} from '@angular/common/http';
 
 describe('AuthInterceptor', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [
-      HttpClientTestingModule,
-    ],
-    providers: [{
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    }]
-  }));
-
-  it('should be created', () => {
-    const interceptor: AuthInterceptor = TestBed.inject(AuthInterceptor);
-    expect(interceptor).toBeTruthy();
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        HttpClientTestingModule,
+      ],
+      providers: [{
+        provide: HTTP_INTERCEPTORS,
+        useClass: AuthInterceptor,
+        multi: true
+      }]
+    });
+    localStorage.clear();
   });
 
   it('should not have a authorization header', inject([HttpClient, HttpTestingController],
@@ -37,7 +35,7 @@ describe('AuthInterceptor', () => {
 
       http.get('/api').subscribe(response => expect(response).toEqual({data: 'test'}));
       const mockRequest = mock.expectOne('/api');
-      
+
       expect(mockRequest.request.headers.get('Authorization')).toEqual('Bearer token');
     }));
 

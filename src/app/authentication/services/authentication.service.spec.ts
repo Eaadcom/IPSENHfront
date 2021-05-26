@@ -18,7 +18,7 @@ describe('AuthenticationService', () => {
 
     httpMock = TestBed.inject(HttpTestingController);
     service = TestBed.inject(AuthenticationService);
-
+    localStorage.clear();
   });
 
   it('should be created', () => {
@@ -98,6 +98,17 @@ describe('AuthenticationService', () => {
 
     const req = httpMock.expectOne(environment.APIEndpoint + 'auth/login');
     expect(req.request.method).toBe('POST');
+  });
+
+  it('should return false if api_token and user is not set in localstorage', () => {
+    expect(service.isLoggedIn()).toBeFalse();
+  });
+
+  it('should return true if api_token and user is set in localstorage', () => {
+    localStorage.setItem('user', JSON.stringify({}));
+    localStorage.setItem('api_token', '');
+
+    expect(service.isLoggedIn()).toBeTrue();
   });
 
 });
