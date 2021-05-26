@@ -33,9 +33,7 @@ describe('IsAuthenticatedGuard', () => {
     expect(res).toBeFalse();
   });
 
-  function fakeRouterState(url: string): RouterStateSnapshot {
-    return {
-      url,
-    } as RouterStateSnapshot;
-  }
+  const fakeRouterState = (url: string): RouterStateSnapshot => ({
+    url,
+  } as RouterStateSnapshot);
 });

@@ -10,12 +10,12 @@ import {LoginResponse} from '../../interface/login-response';
 })
 export class LoginFormComponent implements OnInit {
 
+  @Output() login: EventEmitter<LoginResponse>;
   loginForm: FormGroup;
-  @Output() onLogin: EventEmitter<LoginResponse>;
 
   constructor(private authenticationService: AuthenticationService) {
+    this.login = new EventEmitter<LoginResponse>();
     this.loginForm = this.buildLoginForm();
-    this.onLogin = new EventEmitter<LoginResponse>();
   }
 
   ngOnInit(): void {
@@ -40,7 +40,7 @@ export class LoginFormComponent implements OnInit {
       .login(this.loginForm.value)
       .subscribe(
         value => {
-          this.onLogin.emit(value);
+          this.login.emit(value);
         },
         error => {
           console.log('failed to login user');

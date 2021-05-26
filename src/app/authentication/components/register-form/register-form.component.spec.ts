@@ -85,7 +85,7 @@ describe('RegisterFormComponent', () => {
   it('should emit RegisterResponse when login attempt was successful', () => {
     const form = fixture.debugElement.query(By.css('form'));
     fixture.detectChanges();
-    spyOn(component.onRegister, 'emit');
+    spyOn(component.register, 'emit');
 
     const registration = getUserRegistration();
 
@@ -101,23 +101,23 @@ describe('RegisterFormComponent', () => {
 
 
     httpMock.expectOne(environment.APIEndpoint + 'auth/register').flush(registerResponse);
-    expect(component.onRegister.emit).toHaveBeenCalledOnceWith(registerResponse);
+    expect(component.register.emit).toHaveBeenCalledOnceWith(registerResponse);
   });
 
   it('should emit onLogin event when login attempt was successful', () => {
     const form = fixture.debugElement.query(By.css('form'));
-    spyOn(component.onRegister, 'emit');
+    spyOn(component.register, 'emit');
 
     const registration = getUserRegistration();
 
     fillInForm(form, registration);
 
     httpMock.expectOne(environment.APIEndpoint + 'auth/register').flush({});
-    expect(component.onRegister.emit).toHaveBeenCalled();
+    expect(component.register.emit).toHaveBeenCalled();
   });
 
 
-  function fillInForm(form: DebugElement, userRegistration: any): void {
+  const fillInForm = (form: DebugElement, userRegistration: any): void => {
 
     Object.keys(userRegistration).forEach((key: string) => {
       const elm = form.query(By.css(`input[name=${key}]`)).nativeElement;
@@ -131,23 +131,21 @@ describe('RegisterFormComponent', () => {
 
     form.triggerEventHandler('submit', null);
     fixture.detectChanges();
-  }
+  };
 
-  function getUserRegistration(override ?: any): UserInterface {
-    return {
-      email: 'user@email.com',
-      password: 'secret01',
-      first_name: 'lorem ipsum',
-      middle_name: 'lorem ipsum',
-      last_name: 'lorem ipsum',
-      gender: 'lorem ipsum',
-      date_of_birth: new Date(),
-      about_me: 'lorem ipsum',
-      age_range_top: 25,
-      age_range_bottom: 22,
-      max_distance: 25,
-      interest: 'lorem ipsum',
-      ...override
-    } as UserInterface;
-  }
+  const getUserRegistration = (override?: any): UserInterface => ({
+    email: 'user@email.com',
+    password: 'secret01',
+    first_name: 'lorem ipsum',
+    middle_name: 'lorem ipsum',
+    last_name: 'lorem ipsum',
+    gender: 'lorem ipsum',
+    date_of_birth: new Date(),
+    about_me: 'lorem ipsum',
+    age_range_top: 25,
+    age_range_bottom: 22,
+    max_distance: 25,
+    interest: 'lorem ipsum',
+    ...override
+  } as UserInterface);
 });

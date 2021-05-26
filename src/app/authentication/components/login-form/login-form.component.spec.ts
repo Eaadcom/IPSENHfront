@@ -97,7 +97,7 @@ describe('LoginFormComponent', () => {
   it('should emit LoginResponse when login attempt was successful', () => {
     const form = fixture.debugElement.query(By.css('form'));
     fixture.detectChanges();
-    spyOn(component.onLogin, 'emit');
+    spyOn(component.login, 'emit');
 
     const credentials = {
       email: 'user@gmail.com',
@@ -115,13 +115,13 @@ describe('LoginFormComponent', () => {
     fillInFormToBeValid(form, credentials);
 
     httpMock.expectOne(environment.APIEndpoint + 'auth/login').flush(loginResponse);
-    expect(component.onLogin.emit).toHaveBeenCalledOnceWith(loginResponse);
+    expect(component.login.emit).toHaveBeenCalledOnceWith(loginResponse);
   });
 
   it('should emit onLogin event when login attempt was successful', () => {
     const form = fixture.debugElement.query(By.css('form'));
     fixture.detectChanges();
-    spyOn(component.onLogin, 'emit');
+    spyOn(component.login, 'emit');
 
     const credentials = {
       email: 'user@gmail.com',
@@ -131,11 +131,11 @@ describe('LoginFormComponent', () => {
     fillInFormToBeValid(form, credentials);
 
     httpMock.expectOne(environment.APIEndpoint + 'auth/login').flush({});
-    expect(component.onLogin.emit).toHaveBeenCalled();
+    expect(component.login.emit).toHaveBeenCalled();
   });
 
 
-  function fillInFormToBeValid(form: DebugElement, credentials: Credentials): void {
+  const fillInFormToBeValid = (form: DebugElement, credentials: Credentials): void => {
     const email = form.query(By.css('input[name=email]'));
     const password = form.query(By.css('input[name=password]'));
 
@@ -146,6 +146,6 @@ describe('LoginFormComponent', () => {
 
     form.triggerEventHandler('submit', null);
     fixture.detectChanges();
-  }
+  };
 
 });

@@ -10,12 +10,12 @@ import {RegisterResponse} from '../../interface/register-response';
 })
 export class RegisterFormComponent implements OnInit {
 
+  @Output() register: EventEmitter<RegisterResponse>;
   readonly registerForm: FormGroup;
-  @Output() onRegister: EventEmitter<RegisterResponse>;
 
   constructor(private authenticationService: AuthenticationService) {
     this.registerForm = this.buildForm();
-    this.onRegister = new EventEmitter<RegisterResponse>();
+    this.register = new EventEmitter<RegisterResponse>();
   }
 
   ngOnInit(): void {
@@ -49,7 +49,7 @@ export class RegisterFormComponent implements OnInit {
       .register(this.registerForm.value)
       .subscribe(
         response => {
-          this.onRegister.emit(response);
+          this.register.emit(response);
         },
         error => {
           console.log('failed to register');
