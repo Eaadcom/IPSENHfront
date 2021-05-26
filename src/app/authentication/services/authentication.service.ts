@@ -24,6 +24,7 @@ export class AuthenticationService {
       .post<LoginResponse>(`${this.endpoint}/login`, credentials)
       .pipe(tap(res => {
         localStorage.setItem('api_token', res.api_token);
+        localStorage.setItem('user', JSON.stringify(res.user));
       }));
   }
 
@@ -31,11 +32,11 @@ export class AuthenticationService {
     return this.api.post(`${this.endpoint}/register`, user);
   }
 
-  getAuthUser(): any {
-    return {};
+  getLocalUser(): UserInterface | null {
+    return JSON.parse(localStorage.getItem('user') as string) as UserInterface | null;
   }
 
-  private getLocalUser(): UserInterface | null {
-    return JSON.parse(localStorage.getItem('user') as string) as UserInterface | null;
+  getApiToken(): string | null {
+    return localStorage.getItem('api_token');
   }
 }

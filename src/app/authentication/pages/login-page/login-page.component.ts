@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LoginResponse} from '../../interface/login-response';
 
 @Component({
@@ -8,12 +8,13 @@ import {LoginResponse} from '../../interface/login-response';
 })
 export class LoginPageComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
-  onLogin($event: LoginResponse) {
-
+  onLogin($event: LoginResponse): void {
+    console.log('user logged in');
   }
 }
