@@ -1,0 +1,66 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+  <label>
+    E-mail
+    <input name="email" type="email" formControlName="email" required="required">
+  </label>
+
+  <label>
+    Password:
+    <input name="password" type="text" formControlName="password" required="required">
+  </label>
+
+  <label>
+    First name:
+    <input name="first_name" type="text" formControlName="first_name" required="required">
+  </label>
+
+  <label>
+    Middle name:
+    <input name="middle_name"type="text" formControlName="middle_name" required="required">
+  </label>
+
+  <label>
+    Last name:
+    <input name="last_name" type="text" formControlName="last_name" required="required">
+  </label>
+
+  <label>
+    Gender:
+    <input name="gender" type="text" formControlName="gender" required="required">
+  </label>
+
+  <label>
+    Date of birth:
+    <input name="date_of_birth" type="date" formControlName="date_of_birth" required="required">
+  </label>
+
+  <label>
+    About me:
+    <input name="about_me" type="text" formControlName="about_me" required="required">
+  </label>
+
+  <label>
+    age range bottom:
+    <input name="age_range_bottom" type="number" formControlName="age_range_bottom" required="required">
+  </label>
+
+  <label>
+    age range top:
+    <input name="age_range_top" type="number" formControlName="age_range_top" required="required">
+  </label>
+
+  <label>
+    max distance:
+    <input name="max_distance" type="number" formControlName="max_distance" required="required">
+  </label>
+
+  <label>
+    Interest:
+    <input name="interest" type="text" formControlName="interest" required="required">
+  </label>
+
+  <input type="submit" value="Login">
+
+  {{registerForm.valid ? 'form-valid' : 'form-invalid'}}
+</form>
