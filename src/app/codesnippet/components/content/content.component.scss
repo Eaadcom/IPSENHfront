@@ -1,146 +1,30 @@
-@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
-@import url('https://fonts.googleapis.com/css?family=Comfortaa');
-
-
-
-
-.wrapper {
-  position:  absolute;
-  margin: auto;
-  left: 0;
-  right: 0;
-}
-
-
-$edit-window-height: 400px;
-body {
-  background: #EC87C0;
-  left: 0;
-  right: 0;
-}
-
-.edit-window {
-  width: 800px;
-  height:$edit-window-height;
-  background: #fafbfc;
-  border-radius: 5px;
-  box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
-}
-
-.window-border {
-  display: flex;
+#editing, #highlighting {
+  /* Both elements need the same text and space styling so they are directly on top of each other */
+  margin: 10px;
+  padding: 10px;
+  border: 0;
+  width: calc(100% - 32px);
+  height: 150px;
+  position: absolute;
   top: 0;
-  height: 50px;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  background: #E6E9ED;
-
-  .language {
-    position: relative;
-    top: 10px;
-    right: -655px;
-    -webkit-appearance: none;
-    appearance: none;
-    background: none;
-    outline: none;
-    text-align:  center;
-    height: 30px;
-    border: none;
-  }
-  .close, .minimize,  .maximize {
-    top: 17px;
-    left: 10px;
-  }
-  .close {
-    position: relative;
-    width: 15px;
-    height: 15px;
-    border-radius: 28px;
-    background: #ED5565;
-  }
-
-  .minimize {
-    position: relative;
-    margin-left: 8px;
-    width: 15px;
-    height: 15px;
-    border-radius: 28px;
-    background: #FFCE54;
-  }
-
-  .maximize {
-    position: relative;
-    margin-left: 8px;
-    width: 15px;
-    height: 15px;
-    border-radius: 28px;
-    background: #48CFAD;
-  }
+  left: 0;
 }
 
-
-.input-area {
-  position: relative;
-  outline: none;
+#editing, #highlighting, #highlighting * {
+  /* Also add text styles to highlighting tokens */
+  font-size: 15pt;
+  font-family: monospace;
+  line-height: 20pt;
 }
 
-.preview {
-  position: absolute;
-  display: inline-block;
-  background: transparent;
-  padding: 0;
-  bottom: 0;
-  top: 0;
-  width: 100%;
-  height: $edit-window-height;
-  z-index: 3;
-}
-
-.textarea {
-  position: absolute;
-  display: inline-block;
-  padding: 0;
-  width: 100%;
-  height: $edit-window-height;
-  z-index: 3;
-  // Reset
-  margin: 0;
-  padding: 0;
-  background: none;
-  border: none;
-  border-radius: 0;
-  outline: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
-
-.cousor {
-  position: absolute;
-  display: inline-block;
-  padding: 0;
-  width: 100%;
-  height: $edit-window-height;
+#editing {
+  resize: none;
   z-index: 1;
-  // Reset
-  margin: 0;
-  padding: 0;
-  background: none;
-  border: none;
-  border-radius: 0;
-  outline: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+  color: transparent;
+  background: transparent;
+  caret-color: white; /* Or choose your favorite color */
 }
 
-.preview, .textarea, cousor {
-  font-size: 17px;
-  font-weight: 200;
-  font-family: 'Source Code Pro', monospace;
-}
-
-.pointer {
-  color: #333;
+#highlighting {
+  z-index: 0;
 }
