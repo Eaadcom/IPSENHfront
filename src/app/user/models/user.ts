@@ -15,10 +15,10 @@ export class User implements UserInterface {
     public about_me: string,
     public age_range_bottom: number,
     public age_range_top: number,
-    public max_distance: string,
+    public max_distance: number,
     public interest: string,
-    public createdAt: Date,
-    public updatedAt: Date,
+    public created_at: Date,
+    public updated_at: Date,
   ) {}
 
 }
