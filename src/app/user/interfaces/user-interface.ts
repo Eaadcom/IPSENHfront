@@ -2,17 +2,17 @@ export interface UserInterface {
   id: string;
   email: string;
   password: string;
-  apiToken: string;
-  firstName: string;
-  middleName: string;
-  lastName: string;
+  api_token: string;
+  first_name: string;
+  middle_name: string;
+  last_name: string;
   gender: string;
-  dateOfBirth: Date;
-  aboutMe: string;
-  ageRangeBottom: number;
-  ageRangeTop: number;
-  maxDistance: string;
+  date_of_birth: Date;
+  about_me: string;
+  age_range_bottom: number;
+  age_range_top: number;
+  max_distance: number;
   interest: string;
-  createdAt: Date;
-  updatedAt: Date;
+  created_at: Date;
+  updated_at: Date;
 }
