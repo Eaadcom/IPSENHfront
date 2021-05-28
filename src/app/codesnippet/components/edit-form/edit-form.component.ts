@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {CodesnippetService} from '../../services/codesnippet.service';
 import {Codesnippet} from '../../models/codesnippet.model';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {AuthenticationService} from '../../../authentication/services/authentication.service';
+import {CodesnippetInterface} from '../../interfaces/codesnippet.interface';
 
 @Component({
   selector: 'app-edit-form',
@@ -14,23 +16,29 @@ export class EditFormComponent implements OnInit{
   formBuilder: FormBuilder = new FormBuilder();
   snippetForm: FormGroup = this.formBuilder.group(this.codesnippet);
 
-  constructor(private service: CodesnippetService) { }
+  constructor(private service: CodesnippetService, private authService: AuthenticationService) { }
 
   ngOnInit(): void {
     this.service.getCodesnippetsByAuthenticatedUser().subscribe(response => {
-      this.codesnippet = response[0];
+      // this.codesnippet = response[0];
       this.buildForm();
     });
   }
 
   saveSnippet(): void {
-    const codesnippet: Codesnippet = this.snippetForm.value;
+    const codesnippet = this.snippetForm.value as CodesnippetInterface;
+    console.log(codesnippet);
     codesnippet.content = this.codesnippet.content;
-    if (this.codesnippet.id !== null) {
+    if (codesnippet.id !== undefined) {
       this.service.updateCodesnippet(codesnippet.id, codesnippet).subscribe(response => {
         console.log(response);
       });
     } else {
+      console.log(codesnippet.theme);
+      const id = this.authService.getLocalUser()?.id;
+      if (id){
+        codesnippet.user_id = id;
+      }
       this.service.addCodesnippet(codesnippet).subscribe(response => {
         console.log(response);
       });
@@ -38,7 +46,15 @@ export class EditFormComponent implements OnInit{
 
   }
   private buildForm(): void {
-    this.snippetForm = this.formBuilder.group(this.codesnippet);
+    if (this.codesnippet) {
+      this.snippetForm = this.formBuilder.group(this.codesnippet);
+    } else {
+      this.snippetForm = new FormGroup({
+        content: new FormControl(''),
+        language: new FormControl(''),
+        theme: new FormControl(''),
+      });
+    }
   }
 
 }

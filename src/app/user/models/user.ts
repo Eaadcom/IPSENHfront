@@ -3,7 +3,7 @@ import {UserInterface} from '../interfaces/user-interface';
 export class User implements UserInterface {
 
   constructor(
-    public id: string,
+    public id: number,
     public email: string,
     public password: string,
     public api_token: string,
