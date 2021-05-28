@@ -10,7 +10,7 @@ import {Codesnippet} from '../models/codesnippet.model';
 export class CodesnippetService {
 
 
-  private resourcePath = '/codesnippet';
+  private resourcePath = 'v1/codesnippet';
   constructor(private apiService: ApiService) { }
 
 
@@ -30,8 +30,8 @@ export class CodesnippetService {
     return this.apiService.delete(this.resourcePath + '/' + codesnippetId);
   }
 
-  updateUser(codesnippetId: number, codesnippet: Codesnippet): Observable<HttpResponse<any>> {
-    return this.apiService.post(this.resourcePath + '/' + codesnippetId, codesnippet);
+  updateCodesnippet(codesnippetId: number, codesnippet: Codesnippet): Observable<HttpResponse<any>> {
+    return this.apiService.put(this.resourcePath + '/' + codesnippetId, codesnippet);
   }
 
 }

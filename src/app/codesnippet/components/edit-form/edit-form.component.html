@@ -1,1 +1,13 @@
-<p>edit-form works!</p>
+<form [formGroup]="snippetForm">
+  <app-content [codesnippet]="codesnippet" [form]="snippetForm">
+
+  </app-content>
+  <div class="submit">
+    <button (click)="saveSnippet()">Sla op</button>
+  </div>
+</form>
+
+
+
+<snippet-highlight theme="dark" language="javascript" content="{{codesnippet?.content}}"></snippet-highlight>
+

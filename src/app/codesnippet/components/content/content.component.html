@@ -1,2 +1,6 @@
-<snippet-highlight theme="dark" language="javascript" content="{{input}}"></snippet-highlight>
+
+<div class="container" *ngIf="form">
+  <pre><input *ngIf="codesnippet" [(ngModel)]="codesnippet.content"/></pre>
+</div>
+<!--<div *ngIf="codesnippet">{{codesnippet.content}}</div>-->
 

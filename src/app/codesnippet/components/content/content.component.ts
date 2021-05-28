@@ -1,4 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Codesnippet} from '../../models/codesnippet.model';
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-content',
@@ -7,16 +9,10 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ContentComponent implements OnInit {
 
-  input = `function myFunction() {
-  document.getElementById("demo1").innerHTML = "Hello there!";
-  document.getElementById("demo2").innerHTML = "How are you?";
-}`;
+  @Input() form!: FormGroup;
+  @Input() codesnippet?: Codesnippet;
 
   constructor() {
-
-  }
-
-  public onChange(event: Event): void {
 
   }
 
