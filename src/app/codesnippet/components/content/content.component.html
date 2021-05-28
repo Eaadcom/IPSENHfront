@@ -1,16 +1,2 @@
-<!--<div class="container">-->
-<!--  <div class="text-area">-->
-<!--    <pre><code id="code" [contentEditable]="editable" [innerHTML]="code" (input)="onChange($event)"></code></pre>-->
+<snippet-highlight theme="dark" language="javascript" content="{{input}}"></snippet-highlight>
 
-
-
-<!--&lt;!&ndash;    <h4>Highlight response</h4>&ndash;&gt;-->
-<!--&lt;!&ndash;    <pre>{{ response | json }}</pre>&ndash;&gt;-->
-<!--  </div>-->
-<!--</div>-->
-<!--<pre><code  [highlight]="input" (highlighted)="onHighlight($event)"></code></pre>-->
-<textarea id="editing" spellcheck="false" #textAreaElement (input)="update(textAreaElement.value); sync_scroll(textAreaElement);" (scroll)="sync_scroll(textAreaElement)"></textarea>
-
-<pre id="highlighting" aria-hidden="true">
-  <code class="language-html" id="highlighting-content"></code>
-</pre>

@@ -12,8 +12,6 @@ export class ContentComponent implements OnInit {
   document.getElementById("demo2").innerHTML = "How are you?";
 }`;
 
-  code: any;
-
   constructor() {
 
   }
