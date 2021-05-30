@@ -1,0 +1,17 @@
+<div>
+  <div id="PotentialMatchName">
+    {{ currentPotentialMatch.first_name }} {{ currentPotentialMatch.middle_name }} {{ this.currentPotentialMatch.last_name }}
+  </div>
+
+  <div>
+    <textarea>codesnippet</textarea>
+  </div>
+
+  <div id="PotentialMatchAge">
+    {{ this.getAgeOfPotentialMatch() }}
+  </div>
+
+  <div id="PotentialMatchAboutMe">
+    {{ this.currentPotentialMatch.about_me }}
+  </div>
+</div>

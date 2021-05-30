@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../../core/services/api.service';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {RegisterResponse} from '../../../authentication/interface/register-response';
+import { LoginResponse } from 'src/app/authentication/interface/login-response';
+import {tap} from 'rxjs/operators';
+import {MatchService} from '../../services/match.service';
 
 @Component({
   selector: 'app-match-page',
@@ -10,20 +13,9 @@ import {RegisterResponse} from '../../../authentication/interface/register-respo
 })
 export class MatchPageComponent implements OnInit {
 
-  private readonly userEndpoint;
-  potentialMatches;
-
-  constructor(private api: ApiService) {
-    this.potentialMatches = this.getPotentialMatches(1).subscribe((response => {
-      console.log(response);
-    }));
-    this.userEndpoint = 'user';
+  constructor() {
   }
 
   ngOnInit(): void {
-  }
-
-  getPotentialMatches(userId: number): Observable<RegisterResponse> {
-    return this.api.get(`${this.userEndpoint}/getPotentialMatches/${userId}`);
   }
 }
