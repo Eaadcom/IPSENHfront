@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatchService} from '../../services/match.service';
 import {User} from '../../../user/models/user';
+import {AuthenticationService} from '../../../authentication/services/authentication.service';
 
 @Component({
   selector: 'app-potential-match-info',
@@ -12,7 +13,8 @@ export class PotentialMatchInfoComponent implements OnInit {
   potentialMatches: any;
   currentPotentialMatch = {} as User;
 
-  constructor(private matchService: MatchService) {
+  constructor(private matchService: MatchService,
+              private authService: AuthenticationService) {
     this.getMorePotentialMatches();
   }
 
@@ -22,12 +24,13 @@ export class PotentialMatchInfoComponent implements OnInit {
   nextPotentialMatch(): void{
     this.potentialMatches.shift();
     this.getUserInfoOfPotentialMatch();
-    console.log(this.currentPotentialMatch);
   }
 
   getMorePotentialMatches(): void {
-    this.matchService.getPotentialMatches(1).subscribe((response => {
+    const user_id = parseInt(JSON.parse(this.authService.getLocalUser()?.id || '{}'), 10);
+    this.matchService.getPotentialMatches(user_id).subscribe((response => {
       this.potentialMatches = response;
+      console.log(this.potentialMatches);
       this.getUserInfoOfPotentialMatch();
     }));
   }
@@ -44,11 +47,11 @@ export class PotentialMatchInfoComponent implements OnInit {
     return `${age} years old`;
   }
 
-  getCurrentPotentialMatch(): User{
+  getCurrentPotentialMatch(): User {
     return this.currentPotentialMatch;
   }
 
-  onButtonClick($event: boolean) {
-    // ophalen user..
+  onButtonClick($event: boolean): void {
+    this.nextPotentialMatch();
   }
 }
