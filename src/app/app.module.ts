@@ -8,12 +8,14 @@ import {AuthInterceptor} from './authentication/interceptors/auth.interceptor';
 import {AuthenticationModule} from './authentication/authentication.module';
 import { PotentialMatchInfoComponent } from './match/components/potential-match-info/potential-match-info.component';
 import { MatchButtonsComponent } from './match/components/match-buttons/match-buttons.component';
+import {MatchPageComponent} from './match/pages/match-page/match-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PotentialMatchInfoComponent,
     MatchButtonsComponent,
+    MatchPageComponent,
   ],
   imports: [
     BrowserModule,
