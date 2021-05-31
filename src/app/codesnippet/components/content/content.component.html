@@ -1,6 +1,7 @@
-
 <div class="container" *ngIf="form">
-  <pre><input *ngIf="codesnippet" [(ngModel)]="codesnippet.content"/></pre>
+  <pre><textarea spellcheck="false" *ngIf="codesnippet" [(ngModel)]="codesnippet.content"></textarea></pre>
 </div>
-<!--<div *ngIf="codesnippet">{{codesnippet.content}}</div>-->
+<div *ngIf="codesnippet && !form">
+  <snippet-highlight [theme]="codesnippet.theme" [language]="codesnippet.language" content="{{codesnippet.content}}"></snippet-highlight>
+</div>
 

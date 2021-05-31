@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Codesnippet} from '../../models/codesnippet.model';
-import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-content',
@@ -9,14 +8,12 @@ import {FormGroup} from '@angular/forms';
 })
 export class ContentComponent implements OnInit {
 
-  @Input() form!: FormGroup;
-  @Input() codesnippet?: Codesnippet;
+  @Input() form = false;
+  @Input() codesnippet!: Codesnippet;
 
   constructor() {
-
   }
 
   ngOnInit(): void {
-
   }
 }
