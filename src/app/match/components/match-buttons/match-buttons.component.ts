@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MatchService} from '../../services/match.service';
 import {Like} from '../../models/like';
-import {PotentialMatchInfoComponent} from '../potential-match-info/potential-match-info.component';
+import {UserInterface} from '../../../user/interfaces/user-interface';
 
 @Component({
   selector: 'app-match-buttons',
@@ -10,22 +10,34 @@ import {PotentialMatchInfoComponent} from '../potential-match-info/potential-mat
 })
 export class MatchButtonsComponent implements OnInit {
 
-  constructor(private matchService: MatchService,
-              private potentialMatchInfoComponent: PotentialMatchInfoComponent) { }
+  @Input() currentPotentialMatch!: UserInterface | any;
+  @Output() buttonClick: EventEmitter<boolean>;
+
+  constructor(private matchService: MatchService) {
+    this.buttonClick = new EventEmitter<boolean>();
+  }
+
 
   ngOnInit(): void {
   }
 
   onLike(type: string): void {
-    const currentPotentialMatch = this.potentialMatchInfoComponent.getCurrentPotentialMatch();
+    if (this.currentPotentialMatch === undefined) {
+      console.log('no user selected');
+      this.buttonClick.emit(false);
+    }
+    const currentPotentialMatch = this.currentPotentialMatch; // this.potentialMatchInfoComponent.getCurrentPotentialMatch();
 
-    const user_id = parseInt(JSON.parse(localStorage.getItem('user') || '{}').id, 10);
+    const user_id = parseInt(JSON.parse(localStorage.getItem('user') || '{}').id, 10); // use auth service
     const user_id_of_liked_user = parseInt(currentPotentialMatch.id, 10);
 
     const like = new Like(user_id, user_id_of_liked_user, type);
 
-    this.matchService.postLike(like).subscribe(response => {
-      this.potentialMatchInfoComponent.nextPotentialMatch();
-    });
+    // this.matchService.postLike(like).subscribe(response => {
+    //   this.potentialMatchInfoComponent.nextPotentialMatch();
+    // });
+
+    this.buttonClick.emit(true);
+
   }
 }

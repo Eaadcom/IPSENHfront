@@ -1,5 +1,5 @@
 export interface UserInterface {
-  id: string;
+  id?: string;
   email: string;
   password: string;
   api_token: string;

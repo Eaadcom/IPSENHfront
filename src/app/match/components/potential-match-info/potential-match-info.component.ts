@@ -47,4 +47,8 @@ export class PotentialMatchInfoComponent implements OnInit {
   getCurrentPotentialMatch(): User{
     return this.currentPotentialMatch;
   }
+
+  onButtonClick($event: boolean) {
+    // ophalen user..
+  }
 }

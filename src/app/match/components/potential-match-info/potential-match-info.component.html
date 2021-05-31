@@ -15,3 +15,5 @@
     {{ this.currentPotentialMatch.about_me }}
   </div>
 </div>
+
+<app-match-buttons [currentPotentialMatch]="currentPotentialMatch" (buttonClick)="onButtonClick($event)"></app-match-buttons>
