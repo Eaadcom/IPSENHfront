@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MatchService} from '../../services/match.service';
 import {UserInterface} from '../../../user/interfaces/user-interface';
 import {AuthenticationService} from '../../../authentication/services/authentication.service';
+import {LikeType} from '../../interfaces/like-type';
 
 @Component({
   selector: 'app-match-buttons',
@@ -12,12 +13,12 @@ export class MatchButtonsComponent implements OnInit {
 
   @Input() currentPotentialMatch!: UserInterface | any;
   @Output() buttonClick: EventEmitter<boolean>;
+  likeType = LikeType;
 
   constructor(private matchService: MatchService,
               private authService: AuthenticationService) {
     this.buttonClick = new EventEmitter<boolean>();
   }
-
 
   ngOnInit(): void {
   }
