@@ -13,6 +13,9 @@
   <div class="submit">
     <button (click)="saveForm()" [disabled]="snippetForm.invalid">Sla op</button>
   </div>
+  <div class="delete" *ngIf="!newCodesnippet">
+    <button (click)="deleteCodesnippet()">Verwijder</button>
+  </div>
 </form>
 
 

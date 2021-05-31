@@ -17,11 +17,15 @@ export class EditFormComponent implements OnInit{
   snippetForm: FormGroup = new FormGroup({}, undefined, undefined);
   themeOptions = Array<string>();
   languageOptions = Array<string>();
+  newCodesnippet = true;
 
   constructor(private service: CodesnippetService, private authService: AuthenticationService) {
     this.service.getCodesnippetsByAuthenticatedUser().subscribe(response => {
-      this.codesnippet = response[0];
-      this.buildForm();
+      if (response[0] !== undefined) {
+        this.codesnippet = response[0];
+        this.isExistingCodesnippet();
+        this.buildForm();
+      }
     });
   }
 
@@ -34,15 +38,24 @@ export class EditFormComponent implements OnInit{
   saveForm(): void {
     const codesnippet = this.snippetForm.value as CodesnippetInterface;
     codesnippet.content = this.codesnippet.content;
-    if (codesnippet.id !== undefined) {
-      this.updateCodesnippet(codesnippet);
-    } else {
+    if (this.newCodesnippet) {
       this.createCodesnippet(codesnippet);
+    } else {
+      this.updateCodesnippet(codesnippet);
     }
+  }
+  deleteCodesnippet(): void {
+    this.service.deleteCodesnippet(this.codesnippet.id).subscribe(response => {
+      console.log(response);
+    });
   }
 
   capatalizeFirstLetter(word: string): string {
     return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+  }
+
+  private isExistingCodesnippet(): void {
+    this.newCodesnippet = false;
   }
 
   private updateCodesnippet(codesnippet: Codesnippet): void {
@@ -62,14 +75,14 @@ export class EditFormComponent implements OnInit{
   }
 
   private buildForm(): void {
-    if (this.codesnippet.id !== undefined) {
-      this.snippetForm = this.formBuilder.group(this.codesnippet);
-    } else {
+    if (this.newCodesnippet) {
       this.snippetForm = new FormGroup({
         content: new FormControl(''),
         language: new FormControl(''),
         theme: new FormControl(''),
       });
+    } else {
+      this.snippetForm = this.formBuilder.group(this.codesnippet);
     }
   }
 
