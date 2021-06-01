@@ -22,6 +22,9 @@ export class PotentialMatchInfoComponent implements OnInit {
   }
 
   nextPotentialMatch(): void{
+    if (this.potentialMatches.length === 1){
+      console.log('Will run out of matches');
+    }
     this.potentialMatches.shift();
     this.getUserInfoOfPotentialMatch();
   }
@@ -45,10 +48,6 @@ export class PotentialMatchInfoComponent implements OnInit {
     const timeDiff = Math.abs(Date.now() - new Date(this.currentPotentialMatch.date_of_birth).getTime());
     const age = Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25);
     return `${age} years old`;
-  }
-
-  getCurrentPotentialMatch(): User {
-    return this.currentPotentialMatch;
   }
 
   onButtonClick($event: boolean): void {
