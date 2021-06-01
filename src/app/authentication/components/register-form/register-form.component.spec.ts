@@ -97,7 +97,7 @@ describe('RegisterFormComponent', () => {
         id: 'id',
         email: 'email',
       }
-    } as RegisterResponse;
+    } as unknown as RegisterResponse;
 
 
     httpMock.expectOne(environment.APIEndpoint + 'auth/register').flush(registerResponse);
