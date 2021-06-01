@@ -14,7 +14,6 @@ export class ChatPageComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    console.log('test');
     this.likeMatches = this.route.snapshot.data.likeMatches;
   }
 }
