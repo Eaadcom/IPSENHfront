@@ -1,0 +1,23 @@
+<form [formGroup]="snippetForm">
+  <app-content [codesnippet]="codesnippet" [form]="true">
+
+  </app-content>
+  <div class="themeAndLanguage-dropdown">
+    <select formControlName="theme" required>
+      <option *ngFor="let theme of themeOptions" [ngValue]="theme">{{this.capatalizeFirstLetter(theme)}}</option>
+    </select>
+    <select formControlName="language" required>
+      <option *ngFor="let language of languageOptions" [ngValue]="language">{{this.capatalizeFirstLetter(language)}}</option>
+    </select>
+  </div>
+  <div class="submit">
+    <button (click)="saveForm()" [disabled]="snippetForm.invalid">Sla op</button>
+  </div>
+  <div class="delete" *ngIf="!newCodesnippet">
+    <button (click)="deleteCodesnippet()">Verwijder</button>
+  </div>
+</form>
+
+
+
+

@@ -18,7 +18,7 @@ export class ApiService {
     return this.httpClient.get<T>(this.endpoint + path);
   }
 
-  post<T>(path: string, body: any | string): Observable<T> {
+  post<T>(path: string, body: any): Observable<T> {
     return this.httpClient.post<T>(this.endpoint + path, body);
   }
 

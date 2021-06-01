@@ -110,7 +110,7 @@ describe('LoginFormComponent', () => {
         id: 'id',
         email: 'email',
       }
-    } as LoginResponse;
+    } as unknown as LoginResponse;
 
     fillInFormToBeValid(form, credentials);
 
