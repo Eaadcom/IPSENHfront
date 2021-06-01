@@ -6,6 +6,8 @@ import {AppComponent} from './app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './authentication/interceptors/auth.interceptor';
 import {AuthenticationModule} from './authentication/authentication.module';
+import {CodesnippetModule} from './codesnippet/codesnippet.module';
+
 
 @NgModule({
   declarations: [
@@ -16,6 +18,7 @@ import {AuthenticationModule} from './authentication/authentication.module';
     AuthenticationModule,
     AppRoutingModule,
     HttpClientModule,
+    CodesnippetModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
