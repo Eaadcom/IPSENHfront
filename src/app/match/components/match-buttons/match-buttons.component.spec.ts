@@ -46,7 +46,7 @@ describe('MatchButtonsComponent', () => {
     spyOn(component.buttonClick, 'emit');
 
     component.currentPotentialMatch = new User(
-      '', '', '', '', '', '', '',
+      0, '', '', '', '', '', '',
       '', new Date(), '', 1, 2, 25, '', new Date(), new Date()
     );
 
@@ -60,7 +60,7 @@ describe('MatchButtonsComponent', () => {
   it('should send POST request', () => {
 
     component.currentPotentialMatch = new User(
-      '1', '', '', '', '', '', '',
+      1, '', '', '', '', '', '',
       '', new Date(), '', 1, 2, 25, '', new Date(), new Date()
     );
 

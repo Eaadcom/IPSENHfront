@@ -52,7 +52,7 @@ describe('PotentialMatchInfoComponent', () => {
   it('should return a string when queried for the match age', () => {
 
     component.currentPotentialMatch = new User(
-      'f', '', '', '', '', '', '',
+      1, '', '', '', '', '', '',
       '', new Date(), '', 1, 2, 25, '', new Date(), new Date()
     );
 

@@ -9,6 +9,7 @@ import {AuthenticationModule} from './authentication/authentication.module';
 import { PotentialMatchInfoComponent } from './match/components/potential-match-info/potential-match-info.component';
 import { MatchButtonsComponent } from './match/components/match-buttons/match-buttons.component';
 import {MatchPageComponent} from './match/pages/match-page/match-page.component';
+import {CodesnippetModule} from './codesnippet/codesnippet.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {MatchPageComponent} from './match/pages/match-page/match-page.component'
     AuthenticationModule,
     AppRoutingModule,
     HttpClientModule,
+    CodesnippetModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

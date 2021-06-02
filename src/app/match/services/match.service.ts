@@ -19,7 +19,7 @@ export class MatchService {
     this.likeEndpoint = 'v1/like';
   }
 
-  getPotentialMatches(userId: number): Observable<RegisterResponse> {
+  getPotentialMatches(userId: number | undefined): Observable<RegisterResponse> {
     return this.api.get(`${this.userEndpoint}/potentialmatches/${userId}`);
   }
 
