@@ -4,20 +4,15 @@ import {RegisterPageComponent} from './authentication/pages/register-page/regist
 import {LoginPageComponent} from './authentication/pages/login-page/login-page.component';
 import {ChatPageComponent} from './chat/pages/chat-page/chat-page.component';
 import {LikeMatchListResolver} from './chat/resolvers/like-match-list.resolver';
+import {MatchPageComponent} from './match/pages/match-page/match-page.component';
 import {IsAuthenticatedGuard} from './authentication/guards/is-authenticated.guard';
 import {EditFormComponent} from './codesnippet/components/edit-form/edit-form.component';
 
 const routes: Routes = [
-  {path: 'login',
-    component: LoginPageComponent
-  },
-  {path: 'register',
-    component: RegisterPageComponent
-  },
-  {path: 'codesnippet',
-    component: EditFormComponent,
-    canActivate: [IsAuthenticatedGuard]
-  },
+  {path: 'login', component: LoginPageComponent},
+  {path: 'register', component: RegisterPageComponent},
+  {path: 'match', component: MatchPageComponent},
+  {path: 'codesnippet', component: EditFormComponent, canActivate: [IsAuthenticatedGuard]},
   {path: 'chat',
     component: ChatPageComponent,
     resolve: { likeMatches: LikeMatchListResolver }
