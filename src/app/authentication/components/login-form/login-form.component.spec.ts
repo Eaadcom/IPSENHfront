@@ -8,6 +8,7 @@ import {DebugElement} from '@angular/core';
 import {environment} from '../../../../environments/environment';
 import {Credentials} from '../../interface/credentials';
 import {LoginResponse} from '../../interface/login-response';
+import {SharedModule} from '../../../shared/shared.module';
 
 describe('LoginFormComponent', () => {
   let component: LoginFormComponent;
@@ -17,7 +18,7 @@ describe('LoginFormComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [LoginFormComponent],
-      imports: [HttpClientTestingModule, ReactiveFormsModule]
+      imports: [HttpClientTestingModule, ReactiveFormsModule, SharedModule]
     })
       .compileComponents();
 

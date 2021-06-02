@@ -8,11 +8,12 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from '@angular/material/dialog';
 import {CudDialogComponent} from '../codesnippet/components/cud-dialog/cud-dialog.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 @NgModule({
-  declarations: [],
   imports: [
+    BrowserAnimationsModule,
     CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -23,6 +24,7 @@ import {CudDialogComponent} from '../codesnippet/components/cud-dialog/cud-dialo
     MatDialogModule,
   ],
   exports: [
+    BrowserAnimationsModule,
     CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -34,9 +36,6 @@ import {CudDialogComponent} from '../codesnippet/components/cud-dialog/cud-dialo
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
-  ],
-  entryComponents: [
-    CudDialogComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
