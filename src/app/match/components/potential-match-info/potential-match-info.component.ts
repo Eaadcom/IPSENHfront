@@ -33,7 +33,6 @@ export class PotentialMatchInfoComponent implements OnInit {
     const user_id = this.authService.getLocalUser()?.id;
     this.matchService.getPotentialMatches(user_id).subscribe((response => {
       this.potentialMatches = response;
-      console.log(this.potentialMatches);
       this.getUserInfoOfPotentialMatch();
     }));
   }
@@ -48,6 +47,12 @@ export class PotentialMatchInfoComponent implements OnInit {
     const timeDiff = Math.abs(Date.now() - new Date(this.currentPotentialMatch.date_of_birth).getTime());
     const age = Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25);
     return `${age} years old`;
+  }
+
+  getNameOfPotentialMatch(): string {
+    return this.currentPotentialMatch.first_name + ' '
+      + this.currentPotentialMatch.middle_name + ' '
+    + this.currentPotentialMatch.last_name;
   }
 
   onButtonClick($event: boolean): void {

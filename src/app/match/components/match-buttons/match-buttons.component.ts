@@ -26,7 +26,6 @@ export class MatchButtonsComponent implements OnInit {
 
   onLike(type: string): void {
     if (this.currentPotentialMatch === undefined) {
-      console.log('no user selected');
       this.buttonClick.emit(false);
     }
 
