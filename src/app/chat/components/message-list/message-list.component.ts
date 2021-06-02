@@ -28,9 +28,7 @@ export class MessageListComponent implements OnInit {
     this.messageService
       .create(message)
       .subscribe(
-        response => {
-          console.log(response);
-        },
+        response => {},
         error => {
           this.likeMatch.messages?.pop();
         }

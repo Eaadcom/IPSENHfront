@@ -14,6 +14,8 @@ export class MessageService {
   constructor(private apiService: ApiService) { }
 
   create(message: Message): Observable<any> {
-    return this.apiService.post(`${this.resourceLikeMatchPath}${message.like_match_id}${this.resourceMessagePath}`, message);
+    return this.apiService.post(
+      `${this.resourceLikeMatchPath}${message.like_match_id}${this.resourceMessagePath}`,
+      message);
   }
 }

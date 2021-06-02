@@ -48,8 +48,6 @@ export class LikeMatchListComponent implements OnInit, OnDestroy {
       const channel = this.echo.channel(`messages.${likeMatch?.id}`);
 
       channel.listen('.my-event', (data: any) => {
-        console.log(data);
-
         if (data.sender_id !== this.authService.getLocalUser()?.id) {
           this.addMessageToChat(likeMatch, data);
         }

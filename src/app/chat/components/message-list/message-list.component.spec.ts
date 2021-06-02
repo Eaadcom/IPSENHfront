@@ -23,7 +23,6 @@ describe('MessageListComponent', () => {
   });
 
   it('should create', () => {
-    // component.likeMatch = new LikeMatchResponse(1, new Dat)
     expect(component).toBeTruthy();
   });
 });
