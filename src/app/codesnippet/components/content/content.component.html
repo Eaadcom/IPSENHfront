@@ -2,6 +2,6 @@
   <pre><textarea spellcheck="false" *ngIf="codesnippet" [(ngModel)]="codesnippet.content"></textarea></pre>
 </div>
 <div *ngIf="codesnippet && !form">
-  <snippet-highlight [theme]="codesnippet.theme" [language]="codesnippet.language" content="{{codesnippet.content}}"></snippet-highlight>
+  <snippet-highlight [theme]="codesnippet.theme" [language]="codesnippet.language" [content]="codesnippet.content"></snippet-highlight>
 </div>
 

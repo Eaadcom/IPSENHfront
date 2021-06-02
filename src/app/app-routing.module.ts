@@ -6,7 +6,8 @@ import {ChatPageComponent} from './chat/pages/chat-page/chat-page.component';
 import {LikeMatchListResolver} from './chat/resolvers/like-match-list.resolver';
 import {MatchPageComponent} from './match/pages/match-page/match-page.component';
 import {IsAuthenticatedGuard} from './authentication/guards/is-authenticated.guard';
-import {EditFormComponent} from './codesnippet/components/edit-form/edit-form.component';
+import {CodesnippetOverviewComponent} from './codesnippet/components/codesnippet-overview/codesnippet-overview.component';
+import {CodesnippetResolver} from './codesnippet/resolver/codesnippet.resolver';
 
 const routes: Routes = [
   {path: 'login', component:
@@ -20,8 +21,9 @@ const routes: Routes = [
     canActivate: [IsAuthenticatedGuard]
   },
   {path: 'codesnippet',
-    component: EditFormComponent,
-    canActivate: [IsAuthenticatedGuard]
+    component: CodesnippetOverviewComponent,
+    canActivate: [IsAuthenticatedGuard],
+    resolve: { Codesnippets: CodesnippetResolver },
   },
   {path: 'chat',
     component: ChatPageComponent,

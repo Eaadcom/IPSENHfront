@@ -12,10 +12,12 @@ export class LoginFormComponent implements OnInit {
 
   @Output() login: EventEmitter<LoginResponse>;
   loginForm: FormGroup;
+  hide: boolean;
 
   constructor(private authenticationService: AuthenticationService) {
     this.login = new EventEmitter<LoginResponse>();
     this.loginForm = this.buildLoginForm();
+    this.hide = true;
   }
 
   ngOnInit(): void {
@@ -26,10 +28,11 @@ export class LoginFormComponent implements OnInit {
     return new FormGroup({
       email: new FormControl('', Validators.email),
       password: new FormControl('', Validators.minLength(8)),
-    }, [Validators.required]);
+    });
   }
 
   onSubmit(): void {
+    console.log(this.loginForm);
     if (this.loginForm.valid) {
       this.attemptUserLogin();
     }
