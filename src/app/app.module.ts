@@ -11,14 +11,12 @@ import { PotentialMatchInfoComponent } from './match/components/potential-match-
 import { MatchButtonsComponent } from './match/components/match-buttons/match-buttons.component';
 import {MatchPageComponent} from './match/pages/match-page/match-page.component';
 import {CodesnippetModule} from './codesnippet/codesnippet.module';
+import {MatchModule} from './match/match.module';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    PotentialMatchInfoComponent,
-    MatchButtonsComponent,
-    MatchPageComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -26,13 +24,14 @@ import {CodesnippetModule} from './codesnippet/codesnippet.module';
     AppRoutingModule,
     HttpClientModule,
     ChatModule,
-    CodesnippetModule
+    CodesnippetModule,
+    MatchModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-  }, PotentialMatchInfoComponent],
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

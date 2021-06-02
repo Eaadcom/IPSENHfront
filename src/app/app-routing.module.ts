@@ -9,12 +9,23 @@ import {IsAuthenticatedGuard} from './authentication/guards/is-authenticated.gua
 import {EditFormComponent} from './codesnippet/components/edit-form/edit-form.component';
 
 const routes: Routes = [
-  {path: 'login', component: LoginPageComponent},
-  {path: 'register', component: RegisterPageComponent},
-  {path: 'match', component: MatchPageComponent},
-  {path: 'codesnippet', component: EditFormComponent, canActivate: [IsAuthenticatedGuard]},
+  {path: 'login', component:
+    LoginPageComponent
+  },
+  {path: 'register',
+    component: RegisterPageComponent
+  },
+  {path: 'match',
+    component: MatchPageComponent,
+    canActivate: [IsAuthenticatedGuard]
+  },
+  {path: 'codesnippet',
+    component: EditFormComponent,
+    canActivate: [IsAuthenticatedGuard]
+  },
   {path: 'chat',
     component: ChatPageComponent,
+    canActivate: [IsAuthenticatedGuard],
     resolve: { likeMatches: LikeMatchListResolver }
   }
 ];
