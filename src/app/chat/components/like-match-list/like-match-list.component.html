@@ -1,0 +1,27 @@
+<nb-layout>
+
+  <nb-layout-column>
+
+    <nb-card>
+
+      <nb-list>
+
+        <nb-list-item
+          *ngFor="let likeMatch of likeMatches"
+          (click)="showMessagesOfLikeMatch(likeMatch)">
+
+          {{getNameOfLikeMatchUser(likeMatch)}}
+
+        </nb-list-item>
+
+      </nb-list>
+
+    </nb-card>
+
+    <app-message-list *ngIf="showLikeMatch" [likeMatch]="showLikeMatch"></app-message-list>
+
+  </nb-layout-column>
+
+</nb-layout>
+
+
