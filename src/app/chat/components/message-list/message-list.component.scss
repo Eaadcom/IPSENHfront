@@ -1,0 +1,12 @@
+::ng-deep nb-layout-column {
+  justify-content: center;
+  display: flex;
+}
+nb-chat {
+  max-height: 30em;
+  max-width: 30em;
+}
+
+.nb-theme-default nb-chat-message .avatar {
+  display: none;
+}

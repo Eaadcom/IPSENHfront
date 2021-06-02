@@ -1,0 +1,15 @@
+<nb-chat title="{{likeMatch?.matched_user?.first_name}}">
+
+  <nb-chat-message *ngFor="let message of likeMatch?.messages"
+                   [message]="message?.content"
+                   [date]="message?.created_at"
+                   [dateFormat]="'short'"
+                   [reply]="message?.is_sender">
+  </nb-chat-message>
+
+  <nb-chat-form
+    (send)="sendMessage($event)"
+    [dropFiles]="false">
+  </nb-chat-form>
+
+</nb-chat>
