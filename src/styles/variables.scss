@@ -7,10 +7,10 @@
 @mixin large {
   @media (max-width: 1000px) { @content; }
 }
-$light-palette: #bcdcd2;
-$medium-palette: #7FDCC9;
-$dark-palette: #335770;
-$highlight-palette: #335770;
+$light-palette: #D8E5E4;
+$medium-palette: #83C9A1;
+$dark-palette: #1576AB;
+$highlight-palette: #AD4F1C;
 
 //$headerHeight: 4rem;
 //$thetransition: all .5s cubic-bezier(1,.25,0,.75) 0s;

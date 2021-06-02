@@ -1,9 +1,11 @@
+@import "src/styles/variables";
+
 .container {
   height: 100%;
   width: fit-content;
   display:flex;
   flex-wrap: nowrap;
-  background-color: #7f7f7f;
+  background-color: $light-palette;
 }
 
 .child {
