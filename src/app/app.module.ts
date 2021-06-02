@@ -10,9 +10,6 @@ import {CodesnippetModule} from './codesnippet/codesnippet.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ReactiveFormsModule} from '@angular/forms';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -25,10 +22,7 @@ import {MatIconModule} from '@angular/material/icon';
     HttpClientModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule
-    CodesnippetModule
+    CodesnippetModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

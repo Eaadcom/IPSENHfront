@@ -3,12 +3,14 @@ import {RouterModule, Routes} from '@angular/router';
 import {RegisterPageComponent} from './authentication/pages/register-page/register-page.component';
 import {LoginPageComponent} from './authentication/pages/login-page/login-page.component';
 import {IsAuthenticatedGuard} from './authentication/guards/is-authenticated.guard';
-import {EditFormComponent} from './codesnippet/components/edit-form/edit-form.component';
+import {CodesnippetOverviewComponent} from './codesnippet/components/codesnippet-overview/codesnippet-overview.component';
+import {CodesnippetResolver} from './codesnippet/resolver/codesnippet.resolver';
 
 const routes: Routes = [
   {path: 'login', component: LoginPageComponent},
   {path: 'register', component: RegisterPageComponent},
-  {path: 'codesnippet', component: EditFormComponent, canActivate: [IsAuthenticatedGuard]},
+  {path: 'codesnippet', component: CodesnippetOverviewComponent,
+    resolve: { Codesnippets: CodesnippetResolver }, canActivate: [IsAuthenticatedGuard]},
 ];
 
 @NgModule({
