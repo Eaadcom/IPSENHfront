@@ -1,0 +1,19 @@
+<div>
+  <div id="PotentialMatchName">
+    {{ getNameOfPotentialMatch() }}
+  </div>
+
+  <div>
+    <textarea>codesnippet</textarea>
+  </div>
+
+  <div id="PotentialMatchAge">
+    {{ getAgeOfPotentialMatch() }}
+  </div>
+
+  <div id="PotentialMatchAboutMe">
+    {{ currentPotentialMatch.about_me }}
+  </div>
+</div>
+
+<app-match-buttons [currentPotentialMatch]="currentPotentialMatch" (buttonClick)="onButtonClick($event)"></app-match-buttons>
