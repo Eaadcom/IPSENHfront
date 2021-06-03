@@ -1,37 +1,38 @@
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ReactiveFormsModule} from '@angular/forms';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
-import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from '@angular/material/dialog';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
+import {
+  NbCardModule,
+  NbChatModule,
+  NbDialogModule,
+  NbListModule,
+  NbThemeModule,
+  NbUserModule
+} from '@nebular/theme';
 
 @NgModule({
   imports: [
     BrowserAnimationsModule,
     CommonModule,
     ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    MatButtonModule,
-    MatCardModule,
-    MatDialogModule,
+    NbDialogModule.forRoot(),
+    NbThemeModule.forRoot(),
+    NbCardModule,
+    NbListModule,
+    NbUserModule,
+    NbChatModule,
   ],
   exports: [
     BrowserAnimationsModule,
     CommonModule,
     ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    MatButtonModule,
-    MatCardModule,
-    MatDialogModule,
+    NbDialogModule,
+    NbThemeModule,
+    NbCardModule,
+    NbListModule,
+    NbUserModule,
+    NbChatModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
