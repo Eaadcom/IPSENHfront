@@ -1,28 +1,9 @@
-<mat-card class="example-card" style="max-width: max-content; margin: 0 auto;">
-  <mat-card-header>
-    <mat-card-title>Login</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" id="login_form">
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" id="login_form">
 
-      <mat-form-field appearance="standard">
-        <mat-label>E-mail</mat-label>
-        <input name="email" matInput placeholder="email" formControlName="email" required="required">
-      </mat-form-field>
 
-      <mat-form-field appearance="standard">
-        <mat-label>Enter your password</mat-label>
-        <input name="password" matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" type="button"
-                [attr.aria-pressed]="hide">
-          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
-      </mat-form-field>
+  <input name="email" placeholder="email" formControlName="email" required="required">
 
-    </form>
-  </mat-card-content>
-  <mat-card-actions>
-    <a mat-button routerLink="/register">Register</a>
-    <button mat-button (click)="onSubmit()">Login</button>
-  </mat-card-actions>
-</mat-card>
+  <input name="password" [type]="hide ? 'password' : 'text'" formControlName="password">
+  <a routerLink="/register">Register</a>
+  <button (click)="onSubmit()">Login</button>
+</form>
