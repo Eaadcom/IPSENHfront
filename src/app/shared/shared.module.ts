@@ -7,7 +7,6 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from '@angular/material/dialog';
-import {CudDialogComponent} from '../codesnippet/components/cud-dialog/cud-dialog.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
@@ -33,9 +32,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatButtonModule,
     MatCardModule,
     MatDialogModule,
-  ],
-  providers: [
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
