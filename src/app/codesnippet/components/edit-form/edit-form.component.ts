@@ -50,6 +50,10 @@ export class EditFormComponent implements OnInit{
     return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
   }
 
+  setCodesnippetTheme(theme: string): void {
+    this.codesnippet.theme = theme;
+  }
+
   private isNewCodesnippet(): void {
     this.newCodesnippet = true;
   }

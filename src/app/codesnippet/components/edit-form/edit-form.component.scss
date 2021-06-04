@@ -1,5 +1,5 @@
 nb-card {
-  width: 20vw;
+  width: 25rem;
   height: auto;
 }
 
@@ -23,9 +23,15 @@ nb-card {
 .saveAndDelete {
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-flow: row nowrap;
   margin: 1rem 0;
+  padding: 0 1rem;
+
+  .submit *, .delete *{
+    width: 8rem;
+  }
+
 }
 
 .themeAndLanguage {
@@ -33,11 +39,13 @@ nb-card {
     .select-button {
       min-width: 0;
       width: 8rem;
+      padding: 0.6rem 1rem;
     }
   }
   margin: 1rem 0;
+  padding: 0 1rem;
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-flow: row nowrap;
 }

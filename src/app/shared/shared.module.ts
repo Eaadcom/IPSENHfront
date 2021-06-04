@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
+  NbButtonGroupModule,
   NbButtonModule,
   NbCardModule,
   NbChatModule,
@@ -28,6 +29,7 @@ import {
     NbInputModule,
     NbSelectModule,
     NbButtonModule,
+    NbButtonGroupModule,
   ],
   exports: [
     BrowserAnimationsModule,
@@ -42,6 +44,7 @@ import {
     NbInputModule,
     NbSelectModule,
     NbButtonModule,
+    NbButtonGroupModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
