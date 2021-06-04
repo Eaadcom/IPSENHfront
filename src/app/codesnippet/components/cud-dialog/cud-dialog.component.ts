@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Codesnippet} from '../../models/codesnippet.model';
 
 @Component({
   selector: 'app-cud-dialog',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CudDialogComponent implements OnInit {
 
+  @Input() codesnippet = {} as Codesnippet;
+
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

@@ -1,0 +1,43 @@
+nb-card {
+  width: 20vw;
+  height: auto;
+}
+
+.round {
+  $radius: .75rem;
+  border-radius: $radius;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center
+}
+
+.textarea {
+  width: 100%;
+}
+
+.saveAndDelete {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-flow: row nowrap;
+  margin: 1rem 0;
+}
+
+.themeAndLanguage {
+  nb-select ::ng-deep {
+    .select-button {
+      min-width: 0;
+      width: 8rem;
+    }
+  }
+  margin: 1rem 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-flow: row nowrap;
+}

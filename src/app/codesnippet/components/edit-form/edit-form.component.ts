@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CodesnippetService} from '../../services/codesnippet.service';
 import {Codesnippet} from '../../models/codesnippet.model';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
@@ -12,24 +12,20 @@ import {CodesnippetInterface} from '../../interfaces/codesnippet.interface';
 })
 export class EditFormComponent implements OnInit{
 
-  public codesnippet = {} as Codesnippet;
+  @Input() codesnippet = {} as Codesnippet;
   formBuilder: FormBuilder = new FormBuilder();
   snippetForm: FormGroup = new FormGroup({}, undefined, undefined);
   themeOptions = Array<string>();
   languageOptions = Array<string>();
-  newCodesnippet = true;
+  newCodesnippet = false;
 
-  constructor(private service: CodesnippetService, private authService: AuthenticationService) {
-    this.service.getCodesnippetsByAuthenticatedUser().subscribe(response => {
-      if (response[0] !== undefined) {
-        this.codesnippet = response[0];
-        this.isExistingCodesnippet();
-        this.buildForm();
-      }
-    });
-  }
+  constructor(private service: CodesnippetService, private authService: AuthenticationService) {}
 
   ngOnInit(): void {
+    if (this.codesnippet.id === undefined) {
+      this.isNewCodesnippet();
+      this.buildForm();
+    }
     this.setLanguageOptions();
     this.setThemeOptions();
     this.buildForm();
@@ -54,8 +50,8 @@ export class EditFormComponent implements OnInit{
     return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
   }
 
-  private isExistingCodesnippet(): void {
-    this.newCodesnippet = false;
+  private isNewCodesnippet(): void {
+    this.newCodesnippet = true;
   }
 
   private updateCodesnippet(codesnippet: Codesnippet): void {

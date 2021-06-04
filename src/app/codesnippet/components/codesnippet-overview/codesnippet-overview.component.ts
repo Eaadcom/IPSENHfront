@@ -25,6 +25,10 @@ export class CodesnippetOverviewComponent implements OnInit {
   }
 
   openDialog(editableCodesnippet: Codesnippet): void {
-    this.dialogService.open(CudDialogComponent);
+    this.dialogService.open(CudDialogComponent, {
+      context: {codesnippet: editableCodesnippet},
+      closeOnBackdropClick: false,
+      closeOnEsc: false,
+    });
   }
 }
