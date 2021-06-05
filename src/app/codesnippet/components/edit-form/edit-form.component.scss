@@ -1,3 +1,5 @@
+@import "src/styles/variables";
+
 nb-card {
   width: 25rem;
   height: auto;
@@ -7,7 +9,10 @@ nb-card {
   $radius: .75rem;
   border-radius: $radius;
 }
+::ng-deep textarea {
+  @include scrollbars(.5em, slategray);
 
+}
 .container {
   width: 100%;
   display: flex;

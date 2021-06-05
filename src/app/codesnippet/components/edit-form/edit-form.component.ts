@@ -22,7 +22,7 @@ export class EditFormComponent implements OnInit{
   constructor(private service: CodesnippetService, private authService: AuthenticationService) {}
 
   ngOnInit(): void {
-    if (this.codesnippet.id === undefined) {
+    if (typeof this.codesnippet.id !== 'number') {
       this.isNewCodesnippet();
       this.buildForm();
     }
@@ -34,6 +34,7 @@ export class EditFormComponent implements OnInit{
   saveForm(): void {
     const codesnippet = this.snippetForm.value as CodesnippetInterface;
     codesnippet.content = this.codesnippet.content;
+    codesnippet.theme = this.codesnippet.theme;
     if (this.newCodesnippet) {
       this.createCodesnippet(codesnippet);
     } else {
@@ -52,6 +53,7 @@ export class EditFormComponent implements OnInit{
 
   setCodesnippetTheme(theme: string): void {
     this.codesnippet.theme = theme;
+    console.log(this.codesnippet);
   }
 
   private isNewCodesnippet(): void {

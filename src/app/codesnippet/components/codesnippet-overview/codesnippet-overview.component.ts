@@ -18,10 +18,17 @@ export class CodesnippetOverviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.codesnippets = this.route.snapshot.data.Codesnippets;
+    const emptyCodesnippet = this.setEmptyCodesnippet();
+    this.codesnippets.unshift(emptyCodesnippet);
   }
 
-  openEditForm(codesnippet: Codesnippet): void {
-    this.openDialog(codesnippet);
+  openEditForm(codesnippet?: Codesnippet): void {
+    if (codesnippet) {
+      this.openDialog(codesnippet);
+    }
+    else {
+      this.openDialog({} as Codesnippet);
+    }
   }
 
   openDialog(editableCodesnippet: Codesnippet): void {
@@ -30,5 +37,9 @@ export class CodesnippetOverviewComponent implements OnInit {
       closeOnBackdropClick: false,
       closeOnEsc: false,
     });
+  }
+
+  private setEmptyCodesnippet(): Codesnippet {
+    return new Codesnippet(null as any, null as any, '', 'basic', 'light', null as any, null as any);
   }
 }

@@ -1,9 +1,5 @@
 @import "src/styles/variables";
 
-textarea, pre, .container {
-  width: 100%;
-  height: 100%;
-}
 pre {
   margin: 0;
 }
@@ -15,9 +11,17 @@ textarea {
   white-space: nowrap;
 }
 
-::ng-deep snippet-highlight *{
-  margin: 0 !important;
+::ng-deep snippet-highlight {
+  * {
+    margin: 0 !important;
+  }
+  pre {
+    height: 25rem;
+    width: 25rem;
+    @include scrollbars(.5em, slategray);
+  }
 }
+
 
 ::ng-deep snippet-highlight .dark .code-toolbar {
   .toolbar {
