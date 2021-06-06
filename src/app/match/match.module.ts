@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import {PotentialMatchInfoComponent} from './components/potential-match-info/potential-match-info.component';
 import {MatchButtonsComponent} from './components/match-buttons/match-buttons.component';
 import {MatchPageComponent} from './pages/match-page/match-page.component';
-
-
+import {NbCardModule, NbLayoutModule, NbButtonModule, NbListModule} from '@nebular/theme';
+import {CodesnippetModule} from '../codesnippet/codesnippet.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +13,12 @@ import {MatchPageComponent} from './pages/match-page/match-page.component';
     MatchPageComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    NbCardModule,
+    NbLayoutModule,
+    NbButtonModule,
+    NbListModule,
+    CodesnippetModule
   ],
   providers: [
     PotentialMatchInfoComponent

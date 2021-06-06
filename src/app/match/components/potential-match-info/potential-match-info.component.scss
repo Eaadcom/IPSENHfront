@@ -1,0 +1,89 @@
+#match-flip-card {
+  margin: auto;
+  margin-top: 7vh;
+
+  height: 64vh;
+  width: 50vw;
+
+  border-radius: 25px;
+}
+
+#match-info-card-front {
+  border-radius: 25px;
+}
+
+#match-info-card-back {
+  border-radius: 25px;
+}
+
+#match-info-body-front {
+
+  height: 64vh;
+  width: 50vw;
+
+  display: grid;
+  grid-template-columns: 0.5fr 1fr 1fr 1fr 0.5fr;
+  grid-template-rows: 0.35fr 1fr 1fr 0.3fr 0.7fr;
+}
+
+#match-info-body-back {
+  height: 64vh;
+  width: 50vw;
+
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+}
+
+#code-snippet {
+  grid-column: 2/5;
+  grid-row: 2/4;
+}
+
+#code-snippet-content {
+  width: 100%;
+  height: 100%;
+}
+
+#potential-match-name-list {
+  grid-column: 2/4;
+  grid-row-start: 1;
+
+  display: grid;
+  grid-template-columns: 0.5fr 1fr ;
+}
+
+#potential-match-name {
+  grid-column-start: 2;
+  margin-top: 1vh;
+}
+
+#dot {
+  margin-top: 0.7vh;
+  height: 25px;
+  width: 25px;
+  background-color: #1576ab;
+  border-radius: 50%;
+}
+
+#dotText{
+  margin-top: 0.13vh;
+  color: white;
+  text-align: center;
+}
+
+#match-buttons {
+  grid-column: 2/5;
+  grid-row-start: 5;
+}
+
+#potential-match-age {
+  grid-column-start: 4;
+  grid-row-start: 1;
+}
+
+#potential-match-about-me {
+  grid-column: 2/5;
+  grid-row: 2/4;
+}
+
