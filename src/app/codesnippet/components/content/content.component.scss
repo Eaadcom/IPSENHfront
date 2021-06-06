@@ -6,7 +6,8 @@ pre {
 
 textarea {
   min-height: 20rem;
-  resize: none;
+  min-width: 25rem;
+  resize: both;
   overflow: auto;
   white-space: nowrap;
 }
