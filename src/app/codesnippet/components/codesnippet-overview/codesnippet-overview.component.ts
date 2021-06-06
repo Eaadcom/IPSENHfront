@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Codesnippet} from '../../models/codesnippet.model';
 import {CudDialogComponent} from '../cud-dialog/cud-dialog.component';
-import {NbDialogService} from '@nebular/theme';
+import {NbDialogRef, NbDialogService} from '@nebular/theme';
 
 @Component({
   selector: 'app-codesnippet-overview',
@@ -12,6 +12,7 @@ import {NbDialogService} from '@nebular/theme';
 export class CodesnippetOverviewComponent implements OnInit {
 
   codesnippets: Codesnippet[] = [];
+  dialogRef: NbDialogRef<CudDialogComponent> | undefined;
 
   constructor(private route: ActivatedRoute, private dialogService: NbDialogService) {
   }
@@ -32,11 +33,18 @@ export class CodesnippetOverviewComponent implements OnInit {
   }
 
   openDialog(editableCodesnippet: Codesnippet): void {
-    this.dialogService.open(CudDialogComponent, {
-      context: {codesnippet: editableCodesnippet},
+    this.dialogRef = this.dialogService.open(CudDialogComponent, {
+      context: {
+        codesnippets: this.codesnippets,
+        codesnippet: editableCodesnippet,
+      },
       closeOnBackdropClick: false,
       closeOnEsc: false,
     });
+    // this.dialogRef.onClose.subscribe(response => {
+    //   const newSnippet = response as Codesnippet;
+    //   this.codesnippets.push(newSnippet);
+    // });
   }
 
   private setEmptyCodesnippet(): Codesnippet {
