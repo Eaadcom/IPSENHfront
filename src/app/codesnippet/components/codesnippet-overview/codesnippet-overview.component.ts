@@ -38,13 +38,21 @@ export class CodesnippetOverviewComponent implements OnInit {
         codesnippets: this.codesnippets,
         codesnippet: editableCodesnippet,
       },
-      closeOnBackdropClick: false,
-      closeOnEsc: false,
+      closeOnBackdropClick: this.isCloseableDialog(editableCodesnippet),
+      closeOnEsc: this.isCloseableDialog(editableCodesnippet),
     });
     // this.dialogRef.onClose.subscribe(response => {
     //   const newSnippet = response as Codesnippet;
     //   this.codesnippets.push(newSnippet);
     // });
+  }
+
+  private isCloseableDialog(codesnippet: Codesnippet): boolean {
+    return this.isNewCodesnippet(codesnippet);
+  }
+
+  private isNewCodesnippet(codesnippet: Codesnippet): boolean {
+    return typeof codesnippet.id !== 'number';
   }
 
   private setEmptyCodesnippet(): Codesnippet {
