@@ -29,7 +29,6 @@ export class PotentialMatchInfoComponent implements OnInit {
   getCodeSnippetsOfPotentialMatch(): void {
     this.codesnippetService.getCodesnippetsByUserId(
       this.currentPotentialMatch.id).subscribe((response => {
-        console.log(response);
         this.codesnippet = response[0];
     }));
   }
