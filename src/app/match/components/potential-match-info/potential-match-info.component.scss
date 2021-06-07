@@ -1,3 +1,5 @@
+@import "src/styles/variables";
+
 #flip-card-button-div {
   max-height: 100vh;
 
@@ -88,8 +90,12 @@
   margin-right: 0.5vw;
   height: 35px;
   width: 35px;
-  background-color: #1576ab;
+  background-color: $dark-palette;
   border-radius: 50%;
+}
+
+.dark {
+  background-color: $highlight-palette !important;
 }
 
 .dotText{
@@ -129,4 +135,26 @@
 img {
   max-height: 50px;
   max-width: 50px;
+}
+
+#noPotentialMatches{
+  display: none;
+  visibility: hidden;
+
+  color: $medium-palette;
+  font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
+  font-size: 1em;
+
+  grid-column: 3/4;
+  grid-row-start: 3;
+}
+
+.noMatches {
+  display: none;
+  visibility: hidden;
+}
+
+.noMatchNotification {
+  display: revert !important;
+  visibility: visible !important;
 }

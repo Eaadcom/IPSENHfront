@@ -16,6 +16,9 @@ export class PotentialMatchInfoComponent implements OnInit {
   currentPotentialMatch = {} as User;
   codesnippet = {} as Codesnippet;
   cardFlipped = false;
+  loading = true;
+  codesnippetDarkTheme = false;
+  noMatches = false; // TODO refactor this variable
 
   constructor(private matchService: MatchService,
               private authService: AuthenticationService,
@@ -30,13 +33,16 @@ export class PotentialMatchInfoComponent implements OnInit {
     this.codesnippetService.getCodesnippetsByUserId(
       this.currentPotentialMatch.id).subscribe((response => {
         this.codesnippet = response[0];
+        this.getCodesnippetTheme();
+        this.loading = false;
     }));
   }
 
+  getCodesnippetTheme(): void {
+    this.codesnippetDarkTheme = this.codesnippet.theme === 'dark';
+  }
+
   nextPotentialMatch(): void{
-    if (this.potentialMatches.length === 1){
-      console.log('Will run out of matches');
-    }
     this.potentialMatches.shift();
     this.getUserInfoOfPotentialMatch();
   }
@@ -50,10 +56,16 @@ export class PotentialMatchInfoComponent implements OnInit {
   }
 
   getUserInfoOfPotentialMatch(): void{
-    this.matchService.getUserInfo(this.potentialMatches[0]).subscribe((response => {
-      this.currentPotentialMatch = response;
-      this.getCodeSnippetsOfPotentialMatch();
-    }));
+    if (this.potentialMatches.length !== 0) {
+      this.loading = true;
+      this.matchService.getUserInfo(this.potentialMatches[0]).subscribe((response => {
+        this.currentPotentialMatch = response;
+        this.getCodeSnippetsOfPotentialMatch();
+      }));
+    } else {
+      this.noMatches = true;
+      this.loading = false;
+    }
   }
 
   getAgeOfPotentialMatch(): string {
@@ -69,7 +81,7 @@ export class PotentialMatchInfoComponent implements OnInit {
   }
 
   getFirstLetterOfPotentialMatchName(): string {
-    return this.currentPotentialMatch.first_name[0];
+    return this.currentPotentialMatch.first_name[0].toUpperCase();
   }
 
   onButtonClick($event: boolean): void {

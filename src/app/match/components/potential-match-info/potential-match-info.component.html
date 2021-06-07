@@ -1,12 +1,18 @@
 <nb-layout>
   <nb-layout-column>
     <div id="flip-card-button-div">
-      <nb-flip-card id="match-flip-card" [showToggleButton]="false" [flipped]="cardFlipped">
+      <nb-flip-card id="match-flip-card" [showToggleButton]="false" [flipped]="cardFlipped"
+                    [nbSpinner]="loading" nbSpinnerStatus="primary" nbSpinnerSize="giant">
         <nb-card-front>
           <nb-card id="match-info-card-front">
-            <nb-card-body id="match-info-body-front">
-              <div class="potential-match-name-list">
-                <div class="dot">
+            <nb-card-body id="match-info-body-front" *ngIf="!loading">
+
+              <div id="noPotentialMatches" [ngClass]="{'noMatchNotification' : noMatches}">
+                There are no more potential matches for your preferences right now, Enjoy!
+              </div>
+
+              <div class="potential-match-name-list" [ngClass]="{'noMatches' : noMatches}">
+                <div class="dot" [ngClass]="{'dark' : codesnippetDarkTheme}">
                   <div class="dotText">
                     {{ getFirstLetterOfPotentialMatchName() }}
                   </div>
@@ -16,18 +22,20 @@
                 </div>
               </div>
 
-              <div  id="code-snippet">
+              <div id="code-snippet" [ngClass]="{'noMatches' : noMatches}">
                   <app-content [codesnippet]="codesnippet"></app-content>
               </div>
 
-              <app-match-buttons id="match-buttons" [currentPotentialMatch]="currentPotentialMatch" (buttonClick)="onButtonClick($event)"></app-match-buttons>
+              <app-match-buttons id="match-buttons" [currentPotentialMatch]="currentPotentialMatch"
+                                 *ngIf="!noMatches"
+                                 (buttonClick)="onButtonClick($event)"></app-match-buttons>
 
             </nb-card-body>
           </nb-card>
         </nb-card-front>
 
         <nb-card-back>
-          <nb-card id="match-info-card-back">
+          <nb-card id="match-info-card-back" [ngClass]="{'noMatches' : noMatches}">
             <nb-card-body id="match-info-body-back">
 
               <div class="potential-match-name-list">
@@ -50,7 +58,7 @@
           </nb-card>
         </nb-card-back>
       </nb-flip-card>
-      <div id="flip-button-div">
+      <div id="flip-button-div" *ngIf="!noMatches">
         <i (click)="flipCard()" id="flip-button">
           <img src="../../../../assets/rotation.jpg"/>
         </i>
