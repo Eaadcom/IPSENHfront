@@ -3,7 +3,7 @@ import {LikeMatchResponse} from '../../models/like-match-response.model';
 import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
 import {MessageResponse} from '../../models/message-response.model';
-import {AuthenticationService} from '../../../authentication/services/authentication.service';
+import {NbTokenLocalStorage, NbTokenStorage} from '@nebular/auth';
 
 @Component({
   selector: 'app-like-match-list',
@@ -17,7 +17,7 @@ export class LikeMatchListComponent implements OnInit, OnDestroy {
   echo: Echo;
   pusher: Pusher;
 
-  constructor(private authService: AuthenticationService) {
+  constructor(private authService: NbTokenStorage) {
     this.pusher = new Pusher('2649bb334eb27f74faf8');
     this.echo = new Echo({
       broadcaster: 'pusher',
@@ -48,7 +48,7 @@ export class LikeMatchListComponent implements OnInit, OnDestroy {
       const channel = this.echo.channel(`messages.${likeMatch?.id}`);
 
       channel.listen('.my-event', (data: any) => {
-        if (data.sender_id !== this.authService.getLocalUser()?.id) {
+        if (data.sender_id !== this.authService.get().getPayload().id) {
           this.addMessageToChat(likeMatch, data);
         }
       });

@@ -42,6 +42,7 @@ export class PotentialMatchInfoComponent implements OnInit {
   }
 
   getMorePotentialMatches(): void {
+    console.log(this.authService.getLocalUser());
     const user_id = this.authService.getLocalUser()?.id;
     this.matchService.getPotentialMatches(user_id).subscribe((response => {
       this.potentialMatches = response;
