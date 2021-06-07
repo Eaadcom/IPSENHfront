@@ -1,11 +1,36 @@
+#flip-card-button-div {
+  max-height: 100vh;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+}
+
 #match-flip-card {
   margin: auto;
   margin-top: 7vh;
 
   height: 64vh;
   width: 50vw;
+  // max-width: 620px;
 
   border-radius: 25px;
+
+  grid-column-start: 2;
+}
+
+#flip-button-div {
+  margin-top: 3vh;
+
+  display: flex;
+  justify-content: center;
+
+  grid-column-start: 2;
+  grid-row-start: 2;
+}
+
+#flip-button {
+  cursor: pointer;
 }
 
 #match-info-card-front {
@@ -22,8 +47,8 @@
   width: 50vw;
 
   display: grid;
-  grid-template-columns: 0.5fr 1fr 1fr 1fr 0.5fr;
-  grid-template-rows: 0.35fr 1fr 1fr 0.3fr 0.7fr;
+  grid-template-columns: 0.1fr 1fr 1fr 1fr 0.1fr;
+  grid-template-rows: 0.4fr 1fr 1fr 0.9fr 0.7fr;
 }
 
 #match-info-body-back {
@@ -31,8 +56,8 @@
   width: 50vw;
 
   display: grid;
-  grid-template-columns: 20% 20% 20% 20% 20%;
-  grid-template-rows: 20% 20% 20% 20% 20%;
+  grid-template-columns: 0.1fr 1fr 1fr 1fr 0.1fr;
+  grid-template-rows: 0.35fr 0.1fr 1fr 0.7fr 0.7fr;
 }
 
 #code-snippet {
@@ -45,7 +70,7 @@
   height: 100%;
 }
 
-#potential-match-name-list {
+.potential-match-name-list {
   grid-column: 2/4;
   grid-row-start: 1;
 
@@ -53,12 +78,12 @@
   grid-template-columns: 0.2fr 1fr ;
 }
 
-#potential-match-name {
+.potential-match-name {
   grid-column-start: 2;
   margin-top: 1.3vh;
 }
 
-#dot {
+.dot {
   margin-top: 0.7vh;
   margin-left: 1vw;
   margin-right: 0.5vw;
@@ -68,14 +93,16 @@
   border-radius: 50%;
 }
 
-#dotText{
+.dotText{
   font-size: 20px;
-  margin-top: 0.65vh;
+  margin-top: 0.75vh;
   color: white;
   text-align: center;
 }
 
 #match-buttons {
+  margin-top: 0.5vh;
+
   grid-column: 2/5;
   grid-row-start: 5;
 }
@@ -86,8 +113,21 @@
   margin-top: 1.3vh;
 }
 
-#potential-match-about-me {
+#about-me-list {
   grid-column: 2/5;
-  grid-row: 2/4;
+  grid-row: 3/5;
+
+  display: grid;
+  grid-template-columns: 0.2fr 1fr 1fr 1fr 0.2fr ;
 }
 
+#potential-match-about-me {
+  grid-column: 2/5;
+}
+
+.nb-shuffle { cursor: pointer; }
+
+img {
+  max-height: 50px;
+  max-width: 50px;
+}

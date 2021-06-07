@@ -3,7 +3,6 @@ import {MatchService} from '../../services/match.service';
 import {User} from '../../../user/models/user';
 import {AuthenticationService} from '../../../authentication/services/authentication.service';
 import {Codesnippet} from '../../../codesnippet/models/codesnippet.model';
-import {ActivatedRoute} from '@angular/router';
 import {CodesnippetService} from '../../../codesnippet/services/codesnippet.service';
 
 @Component({
@@ -16,6 +15,7 @@ export class PotentialMatchInfoComponent implements OnInit {
   potentialMatches: any;
   currentPotentialMatch = {} as User;
   codesnippet = {} as Codesnippet;
+  cardFlipped = false;
 
   constructor(private matchService: MatchService,
               private authService: AuthenticationService,
@@ -74,5 +74,9 @@ export class PotentialMatchInfoComponent implements OnInit {
 
   onButtonClick($event: boolean): void {
     this.nextPotentialMatch();
+  }
+
+  flipCard(): void {
+    this.cardFlipped = !this.cardFlipped;
   }
 }

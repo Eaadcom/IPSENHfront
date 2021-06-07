@@ -1,16 +1,17 @@
 <nb-layout>
   <nb-layout-column>
-      <nb-flip-card id="match-flip-card">
+    <div id="flip-card-button-div">
+      <nb-flip-card id="match-flip-card" [showToggleButton]="false" [flipped]="cardFlipped">
         <nb-card-front>
           <nb-card id="match-info-card-front">
             <nb-card-body id="match-info-body-front">
-              <div id="potential-match-name-list">
-                <div id="dot">
-                  <div id="dotText">
+              <div class="potential-match-name-list">
+                <div class="dot">
+                  <div class="dotText">
                     {{ getFirstLetterOfPotentialMatchName() }}
                   </div>
                 </div>
-                <div id="potential-match-name">
+                <div class="potential-match-name">
                   {{ getNameOfPotentialMatch() }}
                 </div>
               </div>
@@ -18,10 +19,6 @@
               <div  id="code-snippet">
                   <app-content [codesnippet]="codesnippet"></app-content>
               </div>
-
-<!--              <div id="potential-match-age">-->
-<!--                {{ getAgeOfPotentialMatch() }}-->
-<!--              </div>-->
 
               <app-match-buttons id="match-buttons" [currentPotentialMatch]="currentPotentialMatch" (buttonClick)="onButtonClick($event)"></app-match-buttons>
 
@@ -33,13 +30,31 @@
           <nb-card id="match-info-card-back">
             <nb-card-body id="match-info-body-back">
 
-              <div id="potential-match-about-me">
-                {{ currentPotentialMatch.about_me }}
+              <div class="potential-match-name-list">
+                <div class="dot">
+                  <div class="dotText">
+                    {{ getFirstLetterOfPotentialMatchName() }}
+                  </div>
+                </div>
+                <div class="potential-match-name">
+                  {{ getNameOfPotentialMatch() }}
+                </div>
+              </div>
+              <div id="about-me-list">
+                <div id="potential-match-about-me">
+                  {{ currentPotentialMatch.about_me }}
+                </div>
               </div>
 
             </nb-card-body>
           </nb-card>
         </nb-card-back>
       </nb-flip-card>
+      <div id="flip-button-div">
+        <i (click)="flipCard()" id="flip-button">
+          <img src="../../../../assets/rotation.jpg"/>
+        </i>
+      </div>
+    </div>
   </nb-layout-column>
 </nb-layout>
