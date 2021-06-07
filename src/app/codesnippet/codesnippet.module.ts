@@ -9,16 +9,22 @@ import { CodesnippetOverviewComponent } from './components/codesnippet-overview/
 import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
-  declarations: [ContentComponent, EditFormComponent, CudDialogComponent, CodesnippetOverviewComponent],
+  declarations: [
+    ContentComponent,
+    EditFormComponent,
+    CudDialogComponent,
+    CodesnippetOverviewComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [
     CodesnippetService,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  entryComponents: [CudDialogComponent],
 })
 export class CodesnippetModule { }

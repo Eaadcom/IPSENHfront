@@ -4,6 +4,7 @@ import { PotentialMatchInfoComponent } from './potential-match-info.component';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {environment} from '../../../../environments/environment';
 import {User} from '../../../user/models/user';
+import {MatchModule} from '../../match.module';
 
 describe('PotentialMatchInfoComponent', () => {
   let component: PotentialMatchInfoComponent;
@@ -12,8 +13,8 @@ describe('PotentialMatchInfoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PotentialMatchInfoComponent ],
-      imports: [HttpClientTestingModule]
+      // declarations: [ PotentialMatchInfoComponent ],
+      imports: [HttpClientTestingModule, MatchModule]
     })
       .compileComponents();
 

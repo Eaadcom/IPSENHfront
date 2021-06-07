@@ -11,6 +11,7 @@ import {CodesnippetModule} from './codesnippet/codesnippet.module';
 import {MatchModule} from './match/match.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ReactiveFormsModule} from '@angular/forms';
+import {NbLayoutModule} from '@nebular/theme';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     CodesnippetModule,
+    NbLayoutModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

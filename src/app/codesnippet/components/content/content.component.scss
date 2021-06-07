@@ -1,3 +1,55 @@
-::ng-deep snippet-highlight *{
-  margin: 0 !important;
+@import "src/styles/variables";
+
+pre {
+  margin: 0;
+}
+
+textarea {
+  min-height: 25rem;
+  min-width: 24.9rem;
+  max-height: 50rem;
+  max-width: 60rem;
+  resize: both;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+::ng-deep snippet-highlight {
+  * {
+    margin: 0 !important;
+  }
+  pre {
+    height: 25rem;
+    width: 25rem;
+    @include scrollbars(.5em, slategray);
+  }
+}
+
+
+::ng-deep snippet-highlight .dark .code-toolbar {
+  .toolbar {
+    a {
+      background: $highlight-palette !important;
+    }
+    span {
+      background: $highlight-palette !important;
+    }
+  }
+  pre {
+    border-top-color: $highlight-palette !important;
+  }
+}
+
+::ng-deep snippet-highlight .light .code-toolbar {
+  .toolbar {
+    a {
+      background: $dark-palette !important;
+    }
+    span {
+      background: $dark-palette !important;
+    }
+  }
+  pre {
+    border-top-color: $dark-palette !important;
+  }
 }

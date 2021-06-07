@@ -7,6 +7,31 @@
 @mixin large {
   @media (max-width: 1000px) { @content; }
 }
+
+@mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, white,  50%)) {
+  // For Google Chrome
+  &::-webkit-scrollbar {
+    width:  $size;
+    height: $size;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $foreground-color;
+    border-radius: 0.75rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $background-color;
+    border-radius: 0.75rem;
+  }
+
+  // For Internet Explorer
+  & {
+    scrollbar-face-color: $foreground-color;
+    scrollbar-track-color: $background-color;
+  }
+}
+
 $light-palette: #D8E5E4;
 $medium-palette: #83C9A1;
 $dark-palette: #1576AB;

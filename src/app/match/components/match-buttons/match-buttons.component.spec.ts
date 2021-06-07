@@ -1,10 +1,12 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MatchButtonsComponent } from './match-buttons.component';
+import {MatchButtonsComponent} from './match-buttons.component';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {User} from '../../../user/models/user';
 import {environment} from '../../../../environments/environment';
 import {LikeType} from '../../interfaces/like-type';
+import {MatchModule} from '../../match.module';
+import {SharedModule} from '../../../shared/shared.module';
 
 describe('MatchButtonsComponent', () => {
   let component: MatchButtonsComponent;
@@ -14,7 +16,7 @@ describe('MatchButtonsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ MatchButtonsComponent ],
-      imports: [HttpClientTestingModule]
+      imports: [HttpClientTestingModule, SharedModule]
     })
       .compileComponents();
 
@@ -26,6 +28,7 @@ describe('MatchButtonsComponent', () => {
     fixture = TestBed.createComponent(MatchButtonsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    localStorage.clear();
   });
 
   it('should create', () => {
