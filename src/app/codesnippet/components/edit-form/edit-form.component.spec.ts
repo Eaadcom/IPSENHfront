@@ -3,6 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { EditFormComponent } from './edit-form.component';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {CodesnippetService} from '../../services/codesnippet.service';
+import {CodesnippetModule} from '../../codesnippet.module';
+import {SharedModule} from '../../../shared/shared.module';
 
 describe('EditFormComponent', () => {
   let component: EditFormComponent;
@@ -12,14 +14,9 @@ describe('EditFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditFormComponent ]
+      imports: [CodesnippetModule, SharedModule, HttpClientTestingModule],
     })
     .compileComponents();
-  });
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule]
-    });
     service = TestBed.inject(CodesnippetService);
     httpMock = TestBed.inject(HttpTestingController);
   });

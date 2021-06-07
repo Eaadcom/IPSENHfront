@@ -5,6 +5,7 @@ import {HttpClientTestingModule, HttpTestingController} from '@angular/common/ht
 import {User} from '../../../user/models/user';
 import {environment} from '../../../../environments/environment';
 import {LikeType} from '../../interfaces/like-type';
+import {MatchModule} from '../../match.module';
 
 describe('MatchButtonsComponent', () => {
   let component: MatchButtonsComponent;
@@ -13,8 +14,8 @@ describe('MatchButtonsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MatchButtonsComponent ],
-      imports: [HttpClientTestingModule]
+      // declarations: [ MatchButtonsComponent ],
+      imports: [HttpClientTestingModule, MatchModule]
     })
       .compileComponents();
 
