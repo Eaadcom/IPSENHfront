@@ -216,4 +216,22 @@ describe('LikeMatchListComponent', () => {
 
     expect(component.showLikeMatch).toBeInstanceOf(Object);
   });
+
+  it('should set showNotification of likeMatch to true if the showLikeMatch is not the used likeMatch', () => {
+    component.showLikeMatch = new LikeMatchResponse();
+    fixture.detectChanges();
+
+    component.setShowNotificationOnLikeMatch(likeMatch);
+
+    expect(likeMatch.showNotification).toBeTrue();
+  });
+
+  it('should set showNotification of likeMatch to false if the showLikeMatch is the used likeMatch', () => {
+    component.showLikeMatch = likeMatch;
+    fixture.detectChanges();
+
+    component.setShowNotificationOnLikeMatch(likeMatch);
+
+    expect(likeMatch.showNotification).toBeFalse();
+  });
 });

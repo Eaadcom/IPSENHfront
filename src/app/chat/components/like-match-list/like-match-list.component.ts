@@ -50,10 +50,8 @@ export class LikeMatchListComponent implements OnInit, OnDestroy {
 
       channel.listen('.my-event', (data: any) => {
         if (data.sender_id !== this.authService.getLocalUser()?.id) {
-          console.log(data);
           this.addMessageToChat(likeMatch, data);
-
-          this.showLikeMatch !== likeMatch ? likeMatch.showNotification = true : likeMatch.showNotification = false;
+          this.setShowNotificationOnLikeMatch(likeMatch);
         }
       });
     });
@@ -71,5 +69,9 @@ export class LikeMatchListComponent implements OnInit, OnDestroy {
       created_at: data.created_at,
       is_sender: false
     });
+  }
+
+  setShowNotificationOnLikeMatch(likeMatch: LikeMatchResponse): void {
+    likeMatch.showNotification = likeMatch !== this.showLikeMatch;
   }
 }
