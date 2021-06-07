@@ -2,11 +2,18 @@ import {Message} from './message.model';
 
 describe('Message', () => {
 
+  let message: Message;
+
+  beforeEach(() => {
+    message = new Message('', '');
+  });
+
   it('should create an instance', () => {
-    const message = new Message(
-      '', '', 0, '', new Date(), new Date()
-    );
     expect(message).toBeTruthy();
+  });
+
+  it('created object should be an instance of Message', () => {
+    expect(message).toBeInstanceOf(Message);
   });
 });
 
