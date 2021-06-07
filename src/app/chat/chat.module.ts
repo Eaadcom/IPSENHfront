@@ -4,7 +4,7 @@ import {ChatPageComponent} from './pages/chat-page/chat-page.component';
 import {LikeMatchListComponent} from './components/like-match-list/like-match-list.component';
 import {MessageListComponent} from './components/message-list/message-list.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NbCardModule, NbChatModule, NbLayoutModule, NbListModule, NbThemeModule, NbUserModule} from '@nebular/theme';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -16,12 +16,7 @@ import {NbCardModule, NbChatModule, NbLayoutModule, NbListModule, NbThemeModule,
   imports: [
     CommonModule,
     BrowserAnimationsModule,
-    NbThemeModule.forRoot(),
-    NbLayoutModule,
-    NbCardModule,
-    NbListModule,
-    NbUserModule,
-    NbChatModule
+    SharedModule
   ]
 })
 export class ChatModule { }

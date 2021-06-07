@@ -1,23 +1,21 @@
-<form [formGroup]="snippetForm">
-  <app-content [codesnippet]="codesnippet" [form]="true">
-
-  </app-content>
-  <div class="themeAndLanguage-dropdown">
-    <select formControlName="theme" required>
-      <option *ngFor="let theme of themeOptions" [ngValue]="theme">{{this.capatalizeFirstLetter(theme)}}</option>
-    </select>
-    <select formControlName="language" required>
-      <option *ngFor="let language of languageOptions" [ngValue]="language">{{this.capatalizeFirstLetter(language)}}</option>
-    </select>
+<form [formGroup]="snippetForm" class="container">
+  <app-content [codesnippet]="codesnippet" [form]="true" class="textarea"></app-content>
+  <div class="themeAndLanguage">
+    <nb-button-group>
+      <button nbButtonToggle *ngFor="let theme of themeOptions" [pressed]="codesnippet.theme == theme" (click)="setCodesnippetTheme(theme)">
+        {{theme}}
+      </button>
+    </nb-button-group>
+    <nb-select fullWidth="false" formControlName="language" [(selected)]="codesnippet.language" required>
+      <nb-option *ngFor="let language of languageOptions" [value]="language">{{this.capatalizeFirstLetter(language)}}</nb-option>
+    </nb-select>
   </div>
-  <div class="submit">
-    <button (click)="saveForm()" [disabled]="snippetForm.invalid">Sla op</button>
-  </div>
-  <div class="delete" *ngIf="!newCodesnippet">
-    <button (click)="deleteCodesnippet()">Verwijder</button>
+  <div class="saveAndDelete">
+    <div class="submit">
+      <button nbButton fullWidth status="primary"  shape="rectangle" (click)="saveForm()" [disabled]="snippetForm.invalid">Sla op</button>
+    </div>
+    <div class="delete" *ngIf="!newCodesnippet">
+      <button nbButton fullWidth status="danger" shape="rectangle" (click)="deleteCodesnippet()">Verwijder</button>
+    </div>
   </div>
 </form>
-
-
-
-

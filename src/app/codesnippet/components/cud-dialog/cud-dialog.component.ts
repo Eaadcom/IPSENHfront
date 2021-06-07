@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Codesnippet} from '../../models/codesnippet.model';
+import {NbDialogRef} from '@nebular/theme';
 
 @Component({
   selector: 'app-cud-dialog',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CudDialogComponent implements OnInit {
 
-  constructor() { }
+  @Input() codesnippet = {} as Codesnippet;
+  @Input() codesnippets = {} as Codesnippet[];
+
+  constructor(public dialogRef: NbDialogRef<CudDialogComponent>) { }
 
   ngOnInit(): void {
+
   }
 
 }

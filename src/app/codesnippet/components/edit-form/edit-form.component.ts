@@ -1,9 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CodesnippetService} from '../../services/codesnippet.service';
 import {Codesnippet} from '../../models/codesnippet.model';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {AuthenticationService} from '../../../authentication/services/authentication.service';
 import {CodesnippetInterface} from '../../interfaces/codesnippet.interface';
+import {NbDialogRef} from '@nebular/theme';
+import {CudDialogComponent} from '../cud-dialog/cud-dialog.component';
 
 @Component({
   selector: 'app-edit-form',
@@ -12,24 +14,24 @@ import {CodesnippetInterface} from '../../interfaces/codesnippet.interface';
 })
 export class EditFormComponent implements OnInit{
 
-  public codesnippet = {} as Codesnippet;
+  @Input() codesnippet = {} as Codesnippet;
+  @Input() codesnippets = {} as Codesnippet[];
+  @Input() dialogRef?: NbDialogRef<CudDialogComponent>;
+  backupSnippet = {} as Codesnippet;
   formBuilder: FormBuilder = new FormBuilder();
   snippetForm: FormGroup = new FormGroup({}, undefined, undefined);
   themeOptions = Array<string>();
   languageOptions = Array<string>();
-  newCodesnippet = true;
+  newCodesnippet = false;
 
-  constructor(private service: CodesnippetService, private authService: AuthenticationService) {
-    this.service.getCodesnippetsByAuthenticatedUser().subscribe(response => {
-      if (response[0] !== undefined) {
-        this.codesnippet = response[0];
-        this.isExistingCodesnippet();
-        this.buildForm();
-      }
-    });
-  }
+  constructor(private service: CodesnippetService, private authService: AuthenticationService) {}
 
   ngOnInit(): void {
+    if (typeof this.codesnippet.id !== 'number') {
+      this.isNewCodesnippet();
+      this.buildForm();
+    }
+    this.setBackupSnippet();
     this.setLanguageOptions();
     this.setThemeOptions();
     this.buildForm();
@@ -38,29 +40,38 @@ export class EditFormComponent implements OnInit{
   saveForm(): void {
     const codesnippet = this.snippetForm.value as CodesnippetInterface;
     codesnippet.content = this.codesnippet.content;
+    codesnippet.theme = this.codesnippet.theme;
     if (this.newCodesnippet) {
       this.createCodesnippet(codesnippet);
     } else {
       this.updateCodesnippet(codesnippet);
     }
   }
-  deleteCodesnippet(): void {
-    this.service.deleteCodesnippet(this.codesnippet.id).subscribe(response => {
-      console.log(response);
-    });
-  }
+
 
   capatalizeFirstLetter(word: string): string {
     return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
   }
 
-  private isExistingCodesnippet(): void {
-    this.newCodesnippet = false;
+  setCodesnippetTheme(theme: string): void {
+    this.codesnippet.theme = theme;
+  }
+
+  deleteCodesnippet(): void {
+    this.dialogRef?.close();
+    this.service.deleteCodesnippet(this.codesnippet.id).subscribe(response => {
+    }, error => {
+      this.resetSnippet();
+    }, () => {
+      this.removeCodesnippetById(this.codesnippet.id);
+    });
   }
 
   private updateCodesnippet(codesnippet: Codesnippet): void {
+    this.dialogRef?.close();
     this.service.updateCodesnippet(codesnippet.id, codesnippet).subscribe(response => {
-      console.log(response);
+    }, error => {
+      this.resetSnippet();
     });
   }
 
@@ -70,7 +81,27 @@ export class EditFormComponent implements OnInit{
       codesnippet.user_id = id;
     }
     this.service.addCodesnippet(codesnippet).subscribe(response => {
-      console.log(response);
+      try {
+        // @ts-ignore
+        codesnippet.id = response.id;
+      } catch (e) {
+        alert('Codesnippet id niet gevonden.');
+      }
+    }, error => {
+      this.resetSnippet();
+      this.dialogRef?.close();
+    }, () => {
+      this.codesnippets.push(codesnippet);
+      this.dialogRef?.close();
+      this.resetSnippet();
+    });
+  }
+
+  private removeCodesnippetById(id: number): void{
+    this.codesnippets.forEach( (item, index) => {
+      if (item.id === id) {
+        this.codesnippets.splice(index, 1);
+      }
     });
   }
 
@@ -106,5 +137,17 @@ export class EditFormComponent implements OnInit{
       'tsx, tt2, twig, typescript, ts, velocity, verilog, vhdl, vim, visual-basic, vb, wasm, wiki, ' +
       'xeora, xeoracube, xojo, xquery, yaml';
     this.languageOptions.push(...languages.split(', '));
+  }
+
+  private setBackupSnippet(): void {
+    Object.assign(this.backupSnippet, this.codesnippet);
+  }
+
+  private resetSnippet(): void {
+    Object.assign(this.codesnippet, this.backupSnippet);
+  }
+
+  private isNewCodesnippet(): void {
+    this.newCodesnippet = true;
   }
 }

@@ -1,41 +1,50 @@
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ReactiveFormsModule} from '@angular/forms';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
-import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from '@angular/material/dialog';
-import {CudDialogComponent} from '../codesnippet/components/cud-dialog/cud-dialog.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
+import {
+  NbButtonGroupModule,
+  NbButtonModule,
+  NbCardModule,
+  NbChatModule,
+  NbDialogModule,
+  NbInputModule,
+  NbListModule,
+  NbSelectModule,
+  NbThemeModule,
+  NbUserModule
+} from '@nebular/theme';
 
 @NgModule({
   imports: [
     BrowserAnimationsModule,
     CommonModule,
     ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    MatButtonModule,
-    MatCardModule,
-    MatDialogModule,
+    NbDialogModule.forRoot(),
+    NbThemeModule.forRoot(),
+    NbCardModule,
+    NbListModule,
+    NbUserModule,
+    NbChatModule,
+    NbInputModule,
+    NbSelectModule,
+    NbButtonModule,
+    NbButtonGroupModule,
   ],
   exports: [
     BrowserAnimationsModule,
     CommonModule,
     ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    MatButtonModule,
-    MatCardModule,
-    MatDialogModule,
-  ],
-  providers: [
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
+    NbDialogModule,
+    NbThemeModule,
+    NbCardModule,
+    NbListModule,
+    NbUserModule,
+    NbChatModule,
+    NbInputModule,
+    NbSelectModule,
+    NbButtonModule,
+    NbButtonGroupModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
