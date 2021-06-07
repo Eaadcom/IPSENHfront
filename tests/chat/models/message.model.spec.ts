@@ -1,4 +1,4 @@
-import {Message} from './message.model';
+import {Message} from '../../../src/app/chat/models/message.model';
 
 describe('Message', () => {
 

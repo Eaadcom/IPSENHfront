@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { LikeMatchService } from './like-match.service';
-import {environment} from '../../../environments/environment';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {LikeMatchService} from '../../../src/app/chat/services/like-match.service';
+import {environment} from '../../../src/environments/environment';
 
 describe('LikeMatchService', () => {
   let service: LikeMatchService;

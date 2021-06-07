@@ -9,7 +9,6 @@ import {AuthenticationModule} from './authentication/authentication.module';
 import {ChatModule} from './chat/chat.module';
 import {CodesnippetModule} from './codesnippet/codesnippet.module';
 import {MatchModule} from './match/match.module';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ReactiveFormsModule} from '@angular/forms';
 import {NbTokenLocalStorage, NbTokenStorage} from '@nebular/auth';
 import {NbLayoutModule} from '@nebular/theme';
@@ -25,7 +24,6 @@ import {NbLayoutModule} from '@nebular/theme';
     HttpClientModule,
     ChatModule,
     MatchModule,
-    BrowserAnimationsModule,
     ReactiveFormsModule,
     CodesnippetModule,
     NbLayoutModule,

@@ -1,4 +1,4 @@
-import { LikeMatchResponse } from './like-match-response.model';
+import {LikeMatchResponse} from '../../../src/app/chat/models/like-match-response.model';
 
 describe('LikeMatchResponse', () => {
 

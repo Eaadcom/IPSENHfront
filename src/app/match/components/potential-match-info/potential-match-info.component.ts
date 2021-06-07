@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatchService} from '../../services/match.service';
 import {User} from '../../../user/models/user';
 import {AuthenticationService} from '../../../authentication/services/authentication.service';
@@ -13,7 +13,7 @@ import {CodesnippetService} from '../../../codesnippet/services/codesnippet.serv
 })
 export class PotentialMatchInfoComponent implements OnInit {
 
-  potentialMatches: any;
+  potentialMatches: any[] = [];
   currentPotentialMatch = {} as User;
   codesnippet = {} as Codesnippet;
 
@@ -29,12 +29,12 @@ export class PotentialMatchInfoComponent implements OnInit {
   getCodeSnippetsOfPotentialMatch(): void {
     this.codesnippetService.getCodesnippetsByUserId(
       this.currentPotentialMatch.id).subscribe((response => {
-        this.codesnippet = response[0];
+      this.codesnippet = response[0];
     }));
   }
 
-  nextPotentialMatch(): void{
-    if (this.potentialMatches.length === 1){
+  nextPotentialMatch(): void {
+    if (this.potentialMatches.length === 1) {
       console.log('Will run out of matches');
     }
     this.potentialMatches.shift();
@@ -42,7 +42,6 @@ export class PotentialMatchInfoComponent implements OnInit {
   }
 
   getMorePotentialMatches(): void {
-    console.log(this.authService.getLocalUser());
     const user_id = this.authService.getLocalUser()?.id;
     this.matchService.getPotentialMatches(user_id).subscribe((response => {
       this.potentialMatches = response;
@@ -50,7 +49,7 @@ export class PotentialMatchInfoComponent implements OnInit {
     }));
   }
 
-  getUserInfoOfPotentialMatch(): void{
+  getUserInfoOfPotentialMatch(): void {
     this.matchService.getUserInfo(this.potentialMatches[0]).subscribe((response => {
       this.currentPotentialMatch = response;
       this.getCodeSnippetsOfPotentialMatch();
@@ -66,11 +65,11 @@ export class PotentialMatchInfoComponent implements OnInit {
   getNameOfPotentialMatch(): string {
     return this.currentPotentialMatch.first_name + ' '
       + this.currentPotentialMatch.middle_name + ' '
-    + this.currentPotentialMatch.last_name;
+      + this.currentPotentialMatch.last_name;
   }
 
   getFirstLetterOfPotentialMatchName(): string {
-    return this.currentPotentialMatch.first_name[0];
+    return this.currentPotentialMatch !== undefined ? this.currentPotentialMatch.first_name[0] : '';
   }
 
   onButtonClick($event: boolean): void {

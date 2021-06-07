@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
-import { LikeMatchListResolver } from './like-match-list.resolver';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {LikeMatchListResolver} from '../../../src/app/chat/resolvers/like-match-list.resolver';
 
 describe('LikeMatchListResolver', () => {
   let resolver: LikeMatchListResolver;

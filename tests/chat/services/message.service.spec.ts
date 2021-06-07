@@ -1,10 +1,10 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { MessageService } from './message.service';
-import {environment} from '../../../environments/environment';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {Message} from '../models/message.model';
 import {RouterTestingModule} from '@angular/router/testing';
+import {MessageService} from '../../../src/app/chat/services/message.service';
+import {environment} from '../../../src/environments/environment';
+import {Message} from '../../../src/app/chat/models/message.model';
 
 describe('MessageService', () => {
   let service: MessageService;

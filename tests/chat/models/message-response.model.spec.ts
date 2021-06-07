@@ -1,5 +1,4 @@
-import { MessageResponse } from './message-response.model';
-import {LikeMatchResponse} from './like-match-response.model';
+import {MessageResponse} from '../../../src/app/chat/models/message-response.model';
 
 describe('MessageResponse', () => {
 

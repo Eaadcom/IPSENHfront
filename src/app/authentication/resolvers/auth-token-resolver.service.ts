@@ -10,7 +10,7 @@ import {NbAuthService, NbAuthToken} from '@nebular/auth';
 @Injectable({
   providedIn: 'root'
 })
-export class NbAuthTokenResolver implements Resolve<NbAuthToken> {
+export class AuthTokenResolver implements Resolve<NbAuthToken> {
 
   constructor(private authService: NbAuthService) {
   }

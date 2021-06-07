@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "test-headless": "ng test --watch=false --browsers=ChromeHeadless --codeCoverage=true",
+    "test-headless": "ng test  --browsers=ChromeHeadless --codeCoverage=true",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -31,7 +31,7 @@
     "zone.js": "~0.11.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.1102.5",
+    "@angular-devkit/build-angular": "^12.0.3",
     "@angular-eslint/builder": "2.0.2",
     "@angular-eslint/eslint-plugin": "2.0.2",
     "@angular-eslint/eslint-plugin-template": "2.0.2",

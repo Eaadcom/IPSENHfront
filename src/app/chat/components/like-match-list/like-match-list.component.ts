@@ -12,7 +12,7 @@ import {NbTokenLocalStorage, NbTokenStorage} from '@nebular/auth';
 })
 export class LikeMatchListComponent implements OnInit, OnDestroy {
 
-  @Input() likeMatches!: LikeMatchResponse[];
+  @Input() likeMatches: LikeMatchResponse[] = [];
   showLikeMatch!: LikeMatchResponse;
   echo: Echo;
   pusher: Pusher;
@@ -45,7 +45,7 @@ export class LikeMatchListComponent implements OnInit, OnDestroy {
   }
 
   subscribeToChannels(): void {
-    this.likeMatches?.forEach( (likeMatch: LikeMatchResponse) => {
+    this.likeMatches.forEach( (likeMatch: LikeMatchResponse) => {
       const channel = this.echo.channel(`messages.${likeMatch?.id}`);
 
       channel.listen('.my-event', (data: any) => {

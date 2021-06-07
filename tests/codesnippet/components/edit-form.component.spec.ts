@@ -1,10 +1,10 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EditFormComponent } from './edit-form.component';
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {CodesnippetService} from '../../services/codesnippet.service';
-import {CodesnippetModule} from '../../codesnippet.module';
-import {SharedModule} from '../../../shared/shared.module';
+import {HttpTestingController} from '@angular/common/http/testing';
+import {EditFormComponent} from '../../../src/app/codesnippet/components/edit-form/edit-form.component';
+import {CodesnippetService} from '../../../src/app/codesnippet/services/codesnippet.service';
+import {CodesnippetModule} from '../../../src/app/codesnippet/codesnippet.module';
+import {AppTestingModule} from '../../app/app-testing.module';
 
 describe('EditFormComponent', () => {
   let component: EditFormComponent;
@@ -14,9 +14,9 @@ describe('EditFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CodesnippetModule, SharedModule, HttpClientTestingModule],
+      imports: [AppTestingModule, CodesnippetModule],
     })
-    .compileComponents();
+      .compileComponents();
     service = TestBed.inject(CodesnippetService);
     httpMock = TestBed.inject(HttpTestingController);
   });
