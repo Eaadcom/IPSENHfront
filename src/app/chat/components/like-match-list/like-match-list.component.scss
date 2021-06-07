@@ -1,4 +1,59 @@
+@import "src/styles/variables";
+
+div.container {
+  display: flex;
+  justify-content: center;
+  padding-top: 3em;
+}
+
+::ng-deep .nb-theme-default nb-chat .header {
+  border-top-left-radius: 0;
+}
+
 nb-card {
-  max-width: 20em;
-  max-height: 30em;
+  border-bottom-right-radius: 0;
+  margin: 0;
+}
+
+app-message-list {
+  height: 40em;
+  width: 40em;
+}
+
+nb-list, nb-card {
+  border-bottom-left-radius: 0.5rem;
+  border-top-left-radius: 0.5rem;
+  background-color: $medium-palette;
+  height: 40em;
+}
+
+nb-list {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  width: 10em;
+}
+
+nb-list-item, ::ng-deep .nb-theme-default nb-list-item:first-child {
+  border-top: none;
+  border-bottom: darken($medium-palette, 10%) 1px solid;
+  color: #fff;
+  transition: 0.3s;
+  position: relative;
+}
+
+nb-list-item:hover, ::ng-deep .nb-theme-default nb-list-item:first-child:hover {
+  background-color: lighten($medium-palette, 5%);
+}
+
+nb-list-item:hover nb-badge {
+  background-color: lighten($highlight-palette, 5%);
+}
+
+::ng-deep .nb-theme-default nb-badge.status-basic {
+  position: absolute;
+  margin-right: 10px;
+  background-color: $highlight-palette;
+  color: #fff;
+  font-weight: lighter;
+  transition: 0.3s
 }

@@ -37,6 +37,7 @@ export class LikeMatchListComponent implements OnInit, OnDestroy {
 
   showMessagesOfLikeMatch(likeMatch: LikeMatchResponse): void {
     this.showLikeMatch = likeMatch;
+    likeMatch.showNotification = false;
   }
 
   getNameOfLikeMatchUser(likeMatch: LikeMatchResponse): string {
@@ -50,6 +51,7 @@ export class LikeMatchListComponent implements OnInit, OnDestroy {
       channel.listen('.my-event', (data: any) => {
         if (data.sender_id !== this.authService.get().getPayload().id) {
           this.addMessageToChat(likeMatch, data);
+          this.setShowNotificationOnLikeMatch(likeMatch);
         }
       });
     });
@@ -67,5 +69,9 @@ export class LikeMatchListComponent implements OnInit, OnDestroy {
       created_at: data.created_at,
       is_sender: false
     });
+  }
+
+  setShowNotificationOnLikeMatch(likeMatch: LikeMatchResponse): void {
+    likeMatch.showNotification = likeMatch !== this.showLikeMatch;
   }
 }

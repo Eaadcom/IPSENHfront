@@ -1,12 +1,40 @@
-::ng-deep nb-layout-column {
-  justify-content: center;
-  display: flex;
-}
-nb-chat {
-  max-height: 30em;
-  max-width: 30em;
-}
+@import "src/styles/variables";
 
-.nb-theme-default nb-chat-message .avatar {
+::ng-deep .nb-theme-default nb-chat-message .avatar {
   display: none;
 }
+
+::ng-deep .nb-theme-default [nbButton].appearance-filled.status-primary,
+::ng-deep .nb-theme-default .appearance-filled.status-primary[nbButtonToggle],
+::ng-deep .nb-theme-default [nbButton].appearance-filled.status-primary:focus,
+::ng-deep .nb-theme-default .appearance-filled.status-primary:focus[nbButtonToggle] {
+  background-color: $highlight-palette;
+  border-color: $highlight-palette;
+}
+
+::ng-deep .nb-theme-default [nbButton].appearance-filled.status-primary:hover,
+::ng-deep .nb-theme-default .appearance-filled.status-primary:hover[nbButtonToggle] {
+  background-color: lighten($highlight-palette, 10%);
+}
+
+::ng-deep .nb-theme-default [nbInput].status-basic:focus,
+::ng-deep .nb-theme-default [nbButton].appearance-filled.status-primary:hover,
+::ng-deep .nb-theme-default .appearance-filled.status-primary:hover[nbButtonToggle] {
+  border-color: lighten($highlight-palette, 10%);
+}
+
+::ng-deep .nb-theme-default nb-chat-message.not-reply nb-chat-message-text .text {
+  background-color: $dark-palette;
+}
+
+::ng-deep .nb-theme-default nb-chat-message.reply nb-chat-message-text .text {
+  color: $dark-palette;
+  background-color: lighten($dark-palette, 55%);
+}
+
+::ng-deep [dir=ltr] .nb-theme-default nb-chat-form input.with-button,
+::ng-deep .nb-theme-default [nbInput].status-basic:focus {
+  color: #8f9bb3;
+}
+
+
