@@ -3,6 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChatPageComponent } from './chat-page.component';
 import {ActivatedRoute} from '@angular/router';
 import {RouterTestingModule} from '@angular/router/testing';
+import {LikeMatchService} from '../../services/like-match.service';
+import {LikeMatchResponse} from '../../models/like-match-response.model';
 
 describe('ChatPageComponent', () => {
   let component: ChatPageComponent;
