@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatchService} from '../../services/match.service';
 import {User} from '../../../user/models/user';
 import {AuthenticationService} from '../../../authentication/services/authentication.service';
+import {Codesnippet} from '../../../codesnippet/models/codesnippet.model';
+import {ActivatedRoute} from '@angular/router';
+import {CodesnippetService} from '../../../codesnippet/services/codesnippet.service';
 
 @Component({
   selector: 'app-potential-match-info',
@@ -10,19 +13,28 @@ import {AuthenticationService} from '../../../authentication/services/authentica
 })
 export class PotentialMatchInfoComponent implements OnInit {
 
-  potentialMatches: any;
+  potentialMatches: any[] = [];
   currentPotentialMatch = {} as User;
+  codesnippet = {} as Codesnippet;
 
   constructor(private matchService: MatchService,
-              private authService: AuthenticationService) {
+              private authService: AuthenticationService,
+              private codesnippetService: CodesnippetService) {
     this.getMorePotentialMatches();
   }
 
   ngOnInit(): void {
   }
 
-  nextPotentialMatch(): void{
-    if (this.potentialMatches.length === 1){
+  getCodeSnippetsOfPotentialMatch(): void {
+    this.codesnippetService.getCodesnippetsByUserId(
+      this.currentPotentialMatch.id).subscribe((response => {
+      this.codesnippet = response[0];
+    }));
+  }
+
+  nextPotentialMatch(): void {
+    if (this.potentialMatches.length === 1) {
       console.log('Will run out of matches');
     }
     this.potentialMatches.shift();
@@ -37,9 +49,10 @@ export class PotentialMatchInfoComponent implements OnInit {
     }));
   }
 
-  getUserInfoOfPotentialMatch(): void{
+  getUserInfoOfPotentialMatch(): void {
     this.matchService.getUserInfo(this.potentialMatches[0]).subscribe((response => {
-      this.currentPotentialMatch = response[0];
+      this.currentPotentialMatch = response;
+      this.getCodeSnippetsOfPotentialMatch();
     }));
   }
 
@@ -52,7 +65,11 @@ export class PotentialMatchInfoComponent implements OnInit {
   getNameOfPotentialMatch(): string {
     return this.currentPotentialMatch.first_name + ' '
       + this.currentPotentialMatch.middle_name + ' '
-    + this.currentPotentialMatch.last_name;
+      + this.currentPotentialMatch.last_name;
+  }
+
+  getFirstLetterOfPotentialMatchName(): string {
+    return this.currentPotentialMatch !== undefined ? this.currentPotentialMatch.first_name[0] : '';
   }
 
   onButtonClick($event: boolean): void {

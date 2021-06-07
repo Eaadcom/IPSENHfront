@@ -9,8 +9,8 @@ import {AuthenticationModule} from './authentication/authentication.module';
 import {ChatModule} from './chat/chat.module';
 import {CodesnippetModule} from './codesnippet/codesnippet.module';
 import {MatchModule} from './match/match.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ReactiveFormsModule} from '@angular/forms';
+import {NbTokenLocalStorage, NbTokenStorage} from '@nebular/auth';
 import {NbLayoutModule} from '@nebular/theme';
 
 @NgModule({
@@ -23,18 +23,15 @@ import {NbLayoutModule} from '@nebular/theme';
     AppRoutingModule,
     HttpClientModule,
     ChatModule,
-    CodesnippetModule,
     MatchModule,
-    BrowserAnimationsModule,
     ReactiveFormsModule,
     CodesnippetModule,
     NbLayoutModule,
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptor,
-    multi: true
-  }],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    {provide: NbTokenStorage, useClass: NbTokenLocalStorage},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

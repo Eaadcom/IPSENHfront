@@ -1,19 +1,45 @@
-<div>
-  <div id="PotentialMatchName">
-    {{ getNameOfPotentialMatch() }}
-  </div>
+<nb-layout>
+  <nb-layout-column>
+      <nb-flip-card id="match-flip-card">
+        <nb-card-front>
+          <nb-card id="match-info-card-front">
+            <nb-card-body id="match-info-body-front">
+              <div id="potential-match-name-list">
+                <div id="dot">
+                  <div id="dotText">
+                    {{ getFirstLetterOfPotentialMatchName() }}
+                  </div>
+                </div>
+                <div id="potential-match-name">
+                  {{ getNameOfPotentialMatch() }}
+                </div>
+              </div>
 
-  <div>
-    <textarea>codesnippet</textarea>
-  </div>
+              <div  id="code-snippet">
+                  <app-content [codesnippet]="codesnippet"></app-content>
+              </div>
 
-  <div id="PotentialMatchAge">
-    {{ getAgeOfPotentialMatch() }}
-  </div>
+<!--              <div id="potential-match-age">-->
+<!--                {{ getAgeOfPotentialMatch() }}-->
+<!--              </div>-->
 
-  <div id="PotentialMatchAboutMe">
-    {{ currentPotentialMatch.about_me }}
-  </div>
-</div>
+              <app-match-buttons id="match-buttons" [currentPotentialMatch]="currentPotentialMatch" (buttonClick)="onButtonClick($event)"></app-match-buttons>
 
-<app-match-buttons [currentPotentialMatch]="currentPotentialMatch" (buttonClick)="onButtonClick($event)"></app-match-buttons>
+            </nb-card-body>
+          </nb-card>
+        </nb-card-front>
+
+        <nb-card-back>
+          <nb-card id="match-info-card-back">
+            <nb-card-body id="match-info-body-back">
+
+              <div id="potential-match-about-me">
+                {{ currentPotentialMatch.about_me }}
+              </div>
+
+            </nb-card-body>
+          </nb-card>
+        </nb-card-back>
+      </nb-flip-card>
+  </nb-layout-column>
+</nb-layout>

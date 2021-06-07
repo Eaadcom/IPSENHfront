@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
 import {CanActivate, CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
-import {AuthenticationService} from '../services/authentication.service';
+import {NbAuthService} from '@nebular/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IsAuthenticatedGuard implements CanActivate, CanActivateChild {
 
-  constructor(private authenticationService: AuthenticationService) {
+  constructor(private authenticationService: NbAuthService) {
   }
 
   canActivate(
@@ -20,7 +20,7 @@ export class IsAuthenticatedGuard implements CanActivate, CanActivateChild {
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.authenticationService.isLoggedIn();
+    return this.authenticationService.isAuthenticated();
   }
 
 }

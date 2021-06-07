@@ -1,6 +1,0 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" id="login_form">
-  <input name="email" placeholder="email" formControlName="email" required="required">
-  <input name="password" [type]="hide ? 'password' : 'text'" formControlName="password">
-  <a routerLink="/register">Register</a>
-  <button (click)="onSubmit()">Login</button>
-</form>

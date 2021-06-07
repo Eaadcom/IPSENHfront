@@ -11,17 +11,19 @@ export class MatchService {
 
   private readonly userEndpoint;
   private readonly likeEndpoint;
+  private readonly codesnippetEndpoint;
 
   constructor(private api: ApiService) {
     this.userEndpoint = 'v1/user';
     this.likeEndpoint = 'v1/like';
+    this.codesnippetEndpoint = 'v1/codesnippet';
   }
 
   getPotentialMatches(userId: number | undefined): Observable<Array<number>> {
     return this.api.get(`${this.userEndpoint}/potentialmatches/${userId}`);
   }
 
-  getUserInfo(userId: number): Observable<Array<User>> {
+  getUserInfo(userId: number): Observable<User> {
     return this.api.get(`${this.userEndpoint}/${userId}`);
   }
 

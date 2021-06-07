@@ -6,17 +6,17 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {AuthenticationService} from '../services/authentication.service';
+import {NbTokenStorage} from '@nebular/auth';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private authenticationService: AuthenticationService) {
+  constructor(private authenticationService: NbTokenStorage ) {
   }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
-    const apiToken = this.authenticationService.getApiToken();
+    const apiToken = this.authenticationService.get().toString();
 
     if (apiToken != null) {
       request = request.clone({

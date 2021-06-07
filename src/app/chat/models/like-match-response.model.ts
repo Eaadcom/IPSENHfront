@@ -1,6 +1,6 @@
 import {LikeMatchInterface} from '../interfaces/like-match-interface';
-import {User} from '../../user/models/user';
 import {MessageResponse} from './message-response.model';
+import {User} from '../../user/models/user';
 
 export class LikeMatchResponse implements LikeMatchInterface {
   constructor(
