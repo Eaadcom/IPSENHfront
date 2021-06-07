@@ -12,7 +12,8 @@ import {
   NbListModule,
   NbSelectModule,
   NbThemeModule,
-  NbUserModule
+  NbUserModule,
+  NbBadgeModule
 } from '@nebular/theme';
 
 @NgModule({
@@ -30,6 +31,7 @@ import {
     NbSelectModule,
     NbButtonModule,
     NbButtonGroupModule,
+    NbBadgeModule
   ],
   exports: [
     BrowserAnimationsModule,
@@ -45,6 +47,7 @@ import {
     NbSelectModule,
     NbButtonModule,
     NbButtonGroupModule,
+    NbBadgeModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
