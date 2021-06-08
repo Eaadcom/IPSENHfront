@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  APIEndpoint: 'http://localhost:8080/api/',
+  APIRoutes: {
+    auth: {
+      login: 'auth/login',
+      register: 'auth/register',
+      logout: 'auth/logout',
+      refresh: 'auth/refresh-token',
+    },
+  },
 };
 
 /*

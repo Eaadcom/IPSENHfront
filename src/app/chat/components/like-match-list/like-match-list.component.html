@@ -1,0 +1,22 @@
+<div class="container">
+
+  <nb-card>
+
+    <nb-list>
+
+      <nb-list-item
+        *ngFor="let likeMatch of likeMatches"
+        (click)="showMessagesOfLikeMatch(likeMatch)">
+
+        {{getNameOfLikeMatchUser(likeMatch)}}
+        <nb-badge *ngIf="likeMatch.showNotification" text="new" position="center right"></nb-badge>
+
+      </nb-list-item>
+
+    </nb-list>
+
+  </nb-card>
+
+  <app-message-list [likeMatch]="showLikeMatch"></app-message-list>
+
+</div>

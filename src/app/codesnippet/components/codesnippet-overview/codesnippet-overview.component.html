@@ -1,0 +1,5 @@
+<div class="container">
+  <div *ngFor="let codesnippet of codesnippets" class="child">
+    <app-content [codesnippet]="codesnippet" (click)="openEditForm(codesnippet)"></app-content>
+  </div>
+</div>

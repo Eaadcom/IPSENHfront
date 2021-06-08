@@ -7,3 +7,9 @@ services:
     container_name: angular
     volumes:
       - "./dist/ipsenh-frontend:/usr/share/nginx/html"
+    networks:
+      - ipsenh-backend_lumen
+
+networks:
+  ipsenh-backend_lumen:
+    external: true

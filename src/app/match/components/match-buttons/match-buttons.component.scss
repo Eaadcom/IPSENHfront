@@ -1,0 +1,14 @@
+#buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 3fr;
+}
+
+div {
+  text-align: center;
+}
+
+img {
+  max-height: 40px;
+  max-width: 40px;
+}
