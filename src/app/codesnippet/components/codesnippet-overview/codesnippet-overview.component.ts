@@ -41,10 +41,6 @@ export class CodesnippetOverviewComponent implements OnInit {
       closeOnBackdropClick: this.isCloseableDialog(editableCodesnippet),
       closeOnEsc: this.isCloseableDialog(editableCodesnippet),
     });
-    // this.dialogRef.onClose.subscribe(response => {
-    //   const newSnippet = response as Codesnippet;
-    //   this.codesnippets.push(newSnippet);
-    // });
   }
 
   private isCloseableDialog(codesnippet: Codesnippet): boolean {
