@@ -3,7 +3,6 @@ import {MatchService} from '../../services/match.service';
 import {User} from '../../../user/models/user';
 import {AuthenticationService} from '../../../authentication/services/authentication.service';
 import {Codesnippet} from '../../../codesnippet/models/codesnippet.model';
-import {ActivatedRoute} from '@angular/router';
 import {CodesnippetService} from '../../../codesnippet/services/codesnippet.service';
 
 @Component({
@@ -13,9 +12,13 @@ import {CodesnippetService} from '../../../codesnippet/services/codesnippet.serv
 })
 export class PotentialMatchInfoComponent implements OnInit {
 
-  potentialMatches: any[] = [];
+  potentialMatches: number[] = [];
   currentPotentialMatch = {} as User;
   codesnippet = {} as Codesnippet;
+  cardFlipped = false;
+  loading = true;
+  codesnippetDarkTheme = false;
+  hasMatches = true;
 
   constructor(private matchService: MatchService,
               private authService: AuthenticationService,
@@ -24,21 +27,6 @@ export class PotentialMatchInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
-
-  getCodeSnippetsOfPotentialMatch(): void {
-    this.codesnippetService.getCodesnippetsByUserId(
-      this.currentPotentialMatch.id).subscribe((response => {
-      this.codesnippet = response[0];
-    }));
-  }
-
-  nextPotentialMatch(): void {
-    if (this.potentialMatches.length === 1) {
-      console.log('Will run out of matches');
-    }
-    this.potentialMatches.shift();
-    this.getUserInfoOfPotentialMatch();
   }
 
   getMorePotentialMatches(): void {
@@ -50,16 +38,26 @@ export class PotentialMatchInfoComponent implements OnInit {
   }
 
   getUserInfoOfPotentialMatch(): void {
-    this.matchService.getUserInfo(this.potentialMatches[0]).subscribe((response => {
-      this.currentPotentialMatch = response;
-      this.getCodeSnippetsOfPotentialMatch();
+    if (this.areTherePotentialMatches()) {
+      this.loading = true;
+      this.matchService.getUserInfo(this.potentialMatches[0]).subscribe((response => {
+        this.currentPotentialMatch = response;
+        this.getCodeSnippetsOfPotentialMatch();
+      }));
+    }
+  }
+
+  getCodeSnippetsOfPotentialMatch(): void {
+    this.codesnippetService.getCodesnippetsByUserId(
+      this.currentPotentialMatch.id).subscribe((response => {
+        this.codesnippet = response[0];
+        this.getCodesnippetTheme();
+        this.loading = false;
     }));
   }
 
-  getAgeOfPotentialMatch(): string {
-    const timeDiff = Math.abs(Date.now() - new Date(this.currentPotentialMatch.date_of_birth).getTime());
-    const age = Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25);
-    return `${age} years old`;
+  getCodesnippetTheme(): void {
+    this.codesnippetDarkTheme = this.codesnippet.theme === 'dark';
   }
 
   getNameOfPotentialMatch(): string {
@@ -69,10 +67,29 @@ export class PotentialMatchInfoComponent implements OnInit {
   }
 
   getFirstLetterOfPotentialMatchName(): string {
-    return this.currentPotentialMatch !== undefined ? this.currentPotentialMatch.first_name[0] : '';
+    return this.currentPotentialMatch.first_name[0].toUpperCase();
+  }
+
+  areTherePotentialMatches(): boolean {
+    if (this.potentialMatches.length !== 0){
+      return true;
+    } else {
+      this.hasMatches = false;
+      this.loading = false;
+      return false;
+    }
+  }
+
+  nextPotentialMatch(): void {
+    this.potentialMatches.shift();
+    this.getUserInfoOfPotentialMatch();
   }
 
   onButtonClick($event: boolean): void {
     this.nextPotentialMatch();
+  }
+
+  flipCard(): void {
+    this.cardFlipped = !this.cardFlipped;
   }
 }

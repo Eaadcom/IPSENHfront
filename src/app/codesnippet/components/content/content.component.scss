@@ -20,7 +20,7 @@ textarea {
   }
   pre {
     height: 25rem;
-    width: 25rem;
+    min-width: 25rem;
     @include scrollbars(.5em, slategray);
   }
 }
