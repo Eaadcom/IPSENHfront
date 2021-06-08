@@ -1,0 +1,18 @@
+.form-control-group-inline {
+  display: inline-flex;
+  gap: 1rem;
+
+  .form-control-group-item  input{
+    width: 100%
+  }
+}
+
+.form-control-inline-group {
+  width: 100%;
+  display: inline-flex;
+  gap: 1rem;
+
+  .form-control-group {
+    width: 100%;
+  }
+}

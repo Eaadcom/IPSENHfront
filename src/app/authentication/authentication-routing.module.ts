@@ -6,6 +6,7 @@ import {
   NbLogoutComponent,
   NbRegisterComponent,
 } from '@nebular/auth';
+import {RegisterComponent} from './pages/register/register.component';
 
 const routes: Routes = [
   {
@@ -22,7 +23,7 @@ const routes: Routes = [
       },
       {
         path: 'register',
-        component: NbRegisterComponent,
+        component: RegisterComponent,
       },
       {
         path: 'logout',
