@@ -1,4 +1,4 @@
-<nb-chat title="{{likeMatch?.matched_user?.first_name}}">
+<nb-chat [title]="getChatTitleName()">
 
   <nb-chat-message *ngFor="let message of likeMatch?.messages"
                    [message]="message?.content"

@@ -54,4 +54,10 @@ export class MessageListComponent implements OnInit {
   getLocalUserId(): number | undefined {
     return this.authService.getLocalUser()?.id;
   }
+
+  getChatTitleName(): string {
+    return this.likeMatch !== undefined
+      ? `Chatting with ${this.likeMatch?.matched_user?.first_name}`
+      : 'Open a chat';
+  }
 }

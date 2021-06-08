@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatchService} from '../../services/match.service';
 import {User} from '../../../user/models/user';
 import {AuthenticationService} from '../../../authentication/services/authentication.service';
@@ -12,13 +12,13 @@ import {CodesnippetService} from '../../../codesnippet/services/codesnippet.serv
 })
 export class PotentialMatchInfoComponent implements OnInit {
 
-  potentialMatches: any;
+  potentialMatches: any[] = [];
   currentPotentialMatch = {} as User;
   codesnippet = {} as Codesnippet;
   cardFlipped = false;
   loading = true;
   codesnippetDarkTheme = false;
-  noMatches = false; // TODO refactor this variable
+  hasMatches = true;
 
   constructor(private matchService: MatchService,
               private authService: AuthenticationService,
@@ -27,6 +27,27 @@ export class PotentialMatchInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  getMorePotentialMatches(): void {
+    const user_id = this.authService.getLocalUser()?.id;
+    this.matchService.getPotentialMatches(user_id).subscribe((response => {
+      this.potentialMatches = response;
+      this.getUserInfoOfPotentialMatch();
+    }));
+  }
+
+  getUserInfoOfPotentialMatch(): void {
+    if (this.potentialMatches.length !== 0) {
+      this.loading = true;
+      this.matchService.getUserInfo(this.potentialMatches[0]).subscribe((response => {
+        this.currentPotentialMatch = response;
+        this.getCodeSnippetsOfPotentialMatch();
+      }));
+    } else {
+      this.hasMatches = false;
+      this.loading = false;
+    }
   }
 
   getCodeSnippetsOfPotentialMatch(): void {
@@ -42,46 +63,19 @@ export class PotentialMatchInfoComponent implements OnInit {
     this.codesnippetDarkTheme = this.codesnippet.theme === 'dark';
   }
 
-  nextPotentialMatch(): void{
-    this.potentialMatches.shift();
-    this.getUserInfoOfPotentialMatch();
-  }
-
-  getMorePotentialMatches(): void {
-    const user_id = this.authService.getLocalUser()?.id;
-    this.matchService.getPotentialMatches(user_id).subscribe((response => {
-      this.potentialMatches = response;
-      this.getUserInfoOfPotentialMatch();
-    }));
-  }
-
-  getUserInfoOfPotentialMatch(): void{
-    if (this.potentialMatches.length !== 0) {
-      this.loading = true;
-      this.matchService.getUserInfo(this.potentialMatches[0]).subscribe((response => {
-        this.currentPotentialMatch = response;
-        this.getCodeSnippetsOfPotentialMatch();
-      }));
-    } else {
-      this.noMatches = true;
-      this.loading = false;
-    }
-  }
-
-  getAgeOfPotentialMatch(): string {
-    const timeDiff = Math.abs(Date.now() - new Date(this.currentPotentialMatch.date_of_birth).getTime());
-    const age = Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25);
-    return `${age} years old`;
-  }
-
   getNameOfPotentialMatch(): string {
     return this.currentPotentialMatch.first_name + ' '
       + this.currentPotentialMatch.middle_name + ' '
-    + this.currentPotentialMatch.last_name;
+      + this.currentPotentialMatch.last_name;
   }
 
   getFirstLetterOfPotentialMatchName(): string {
     return this.currentPotentialMatch.first_name[0].toUpperCase();
+  }
+
+  nextPotentialMatch(): void {
+    this.potentialMatches.shift();
+    this.getUserInfoOfPotentialMatch();
   }
 
   onButtonClick($event: boolean): void {

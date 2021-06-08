@@ -1,5 +1,6 @@
 @import "src/styles/variables";
 
+// contains flip button and flip card
 #flip-card-button-div {
   max-height: 100vh;
 
@@ -7,7 +8,7 @@
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
 }
-
+// flip card
 #match-flip-card {
   margin: auto;
   margin-top: 7vh;
@@ -20,6 +21,7 @@
   grid-column-start: 2;
 }
 
+// flip button
 #flip-button-div {
   margin-top: 3vh;
 
@@ -34,44 +36,43 @@
   cursor: pointer;
 }
 
-#match-info-card-front {
+img {
+  max-height: 50px;
+  max-width: 50px;
+}
+
+// both sides of the flip card
+.match-info-card {
   border-radius: 25px;
 }
 
-#match-info-card-back {
-  border-radius: 25px;
-}
-
-#match-info-body-front {
-
+.match-info-body {
   height: 64vh;
   width: 39rem;
-
-  display: grid;
-  grid-template-columns: 0.1fr 1fr 1fr 1fr 0.1fr;
-  grid-template-rows: 0.4fr 1fr 1fr 0.9fr 0.7fr;
 }
 
-#match-info-body-back {
-  height: 64vh;
-  width: 39rem;
-
-  display: grid;
-  grid-template-columns: 0.1fr 1fr 1fr 1fr 0.1fr;
-  grid-template-rows: 0.35fr 0.1fr 1fr 0.7fr 0.7fr;
+.firstnameLetterDot {
+  margin-top: 0.7vh;
+  margin-left: 1vw;
+  margin-right: 0.5vw;
+  height: 35px;
+  width: 35px;
+  background-color: $dark-palette;
+  border-radius: 50%;
 }
 
-#code-snippet {
-  grid-column: 2/5;
-  grid-row: 2/4;
+.dotText {
+  font-size: 20px;
+  margin-top: 0.75vh;
+  color: white;
+  text-align: center;
 }
 
-#code-snippet-content {
-  width: 100%;
-  height: 100%;
+.darkTheme {
+  background-color: $highlight-palette !important;
 }
 
-.potential-match-name-list {
+.potential-match-name-grid {
   grid-column: 2/4;
   grid-row-start: 1;
 
@@ -84,25 +85,21 @@
   margin-top: 1.3vh;
 }
 
-.dot {
-  margin-top: 0.7vh;
-  margin-left: 1vw;
-  margin-right: 0.5vw;
-  height: 35px;
-  width: 35px;
-  background-color: $dark-palette;
-  border-radius: 50%;
+// frontside of the flip card
+#match-info-body-front-grid {
+  display: grid;
+  grid-template-columns: 0.1fr 1fr 1fr 1fr 0.1fr;
+  grid-template-rows: 0.4fr 1fr 1fr 0.9fr 0.7fr;
 }
 
-.dark {
-  background-color: $highlight-palette !important;
+#code-snippet {
+  grid-column: 2/5;
+  grid-row: 2/4;
 }
 
-.dotText{
-  font-size: 20px;
-  margin-top: 0.75vh;
-  color: white;
-  text-align: center;
+#code-snippet-content {
+  width: 100%;
+  height: 100%;
 }
 
 #match-buttons {
@@ -112,13 +109,23 @@
   grid-row-start: 5;
 }
 
-#potential-match-age {
-  grid-column-start: 4;
-  grid-row-start: 1;
-  margin-top: 1.3vh;
+#noPotentialMatches{
+  color: $medium-palette;
+  font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
+  font-size: 1em;
+
+  grid-column: 3/4;
+  grid-row-start: 3;
 }
 
-#about-me-list {
+// backside of the flip card
+#match-info-body-back-grid {
+  display: grid;
+  grid-template-columns: 0.1fr 1fr 1fr 1fr 0.1fr;
+  grid-template-rows: 0.35fr 0.1fr 1fr 0.7fr 0.7fr;
+}
+
+#about-me-grid {
   grid-column: 2/5;
   grid-row: 3/5;
 
@@ -128,33 +135,4 @@
 
 #potential-match-about-me {
   grid-column: 2/5;
-}
-
-.nb-shuffle { cursor: pointer; }
-
-img {
-  max-height: 50px;
-  max-width: 50px;
-}
-
-#noPotentialMatches{
-  display: none;
-  visibility: hidden;
-
-  color: $medium-palette;
-  font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
-  font-size: 1em;
-
-  grid-column: 3/4;
-  grid-row-start: 3;
-}
-
-.noMatches {
-  display: none;
-  visibility: hidden;
-}
-
-.noMatchNotification {
-  display: revert !important;
-  visibility: visible !important;
 }
