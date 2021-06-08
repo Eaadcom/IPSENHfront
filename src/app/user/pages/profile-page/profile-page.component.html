@@ -1,0 +1,18 @@
+<p>profile-page works!</p>
+theme: {{selectedTheme}}
+
+<button (click)="startLoop()">start/stop</button>
+
+
+<div class="profile-page">
+
+  <div class="user-form">
+
+  </div>
+
+  <div class="codesnippets">
+    <app-codesnippet-overview [codesnippets]="getUserCodesnippets()"></app-codesnippet-overview>
+  </div>
+
+
+</div>

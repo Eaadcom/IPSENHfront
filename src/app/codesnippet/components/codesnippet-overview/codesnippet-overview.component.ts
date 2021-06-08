@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Codesnippet} from '../../models/codesnippet.model';
 import {CudDialogComponent} from '../cud-dialog/cud-dialog.component';
@@ -11,14 +11,17 @@ import {NbDialogRef, NbDialogService} from '@nebular/theme';
 })
 export class CodesnippetOverviewComponent implements OnInit {
 
-  codesnippets: Codesnippet[] = [];
-  dialogRef: NbDialogRef<CudDialogComponent> | undefined;
+  @Input() codesnippets!: Codesnippet[];
+  dialogRef!: NbDialogRef<CudDialogComponent>;
 
   constructor(private route: ActivatedRoute, private dialogService: NbDialogService) {
   }
 
   ngOnInit(): void {
-    this.codesnippets = this.route.snapshot.data.Codesnippets;
+    this.setupCodesnippets();
+  }
+
+  private setupCodesnippets(): void{
     const emptyCodesnippet = this.setEmptyCodesnippet();
     this.codesnippets.unshift(emptyCodesnippet);
   }
@@ -41,10 +44,6 @@ export class CodesnippetOverviewComponent implements OnInit {
       closeOnBackdropClick: this.isCloseableDialog(editableCodesnippet),
       closeOnEsc: this.isCloseableDialog(editableCodesnippet),
     });
-    // this.dialogRef.onClose.subscribe(response => {
-    //   const newSnippet = response as Codesnippet;
-    //   this.codesnippets.push(newSnippet);
-    // });
   }
 
   private isCloseableDialog(codesnippet: Codesnippet): boolean {

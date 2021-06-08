@@ -1,6 +1,6 @@
 import {TestBed} from '@angular/core/testing';
 
-import {AuthTokenResolver} from '../../../src/app/authentication/resolvers/auth-token-resolver.service';
+import {AuthTokenResolver} from '../../../src/app/authentication/resolver/auth-token-resolver.service';
 import {AuthenticationModule} from '../../../src/app/authentication/authentication.module';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {ActivatedRoute} from '@angular/router';

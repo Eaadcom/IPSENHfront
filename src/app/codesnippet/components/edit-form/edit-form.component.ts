@@ -12,7 +12,7 @@ import {CudDialogComponent} from '../cud-dialog/cud-dialog.component';
   templateUrl: './edit-form.component.html',
   styleUrls: ['./edit-form.component.scss']
 })
-export class EditFormComponent implements OnInit{
+export class EditFormComponent implements OnInit {
 
   @Input() codesnippet = {} as Codesnippet;
   @Input() codesnippets = {} as Codesnippet[];
@@ -24,7 +24,8 @@ export class EditFormComponent implements OnInit{
   languageOptions = Array<string>();
   newCodesnippet = false;
 
-  constructor(private service: CodesnippetService, private authService: AuthenticationService) {}
+  constructor(private service: CodesnippetService, private authService: AuthenticationService) {
+  }
 
   ngOnInit(): void {
     if (typeof this.codesnippet.id !== 'number') {
@@ -77,7 +78,7 @@ export class EditFormComponent implements OnInit{
 
   private createCodesnippet(codesnippet: Codesnippet): void {
     const id = this.authService.getLocalUser()?.id;
-    if (id){
+    if (id) {
       codesnippet.user_id = id;
     }
     this.service.addCodesnippet(codesnippet).subscribe(response => {
@@ -91,14 +92,14 @@ export class EditFormComponent implements OnInit{
       this.resetSnippet();
       this.dialogRef?.close();
     }, () => {
-      this.codesnippets.push(codesnippet);
+      this.codesnippets.splice(1, 0, codesnippet);
       this.dialogRef?.close();
       this.resetSnippet();
     });
   }
 
-  private removeCodesnippetById(id: number): void{
-    this.codesnippets.forEach( (item, index) => {
+  private removeCodesnippetById(id: number): void {
+    this.codesnippets.forEach((item, index) => {
       if (item.id === id) {
         this.codesnippets.splice(index, 1);
       }

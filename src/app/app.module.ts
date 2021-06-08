@@ -12,6 +12,7 @@ import {MatchModule} from './match/match.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {NbTokenLocalStorage, NbTokenStorage} from '@nebular/auth';
 import {NbLayoutModule} from '@nebular/theme';
+import {UserModule} from './user/user.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,8 @@ import {NbLayoutModule} from '@nebular/theme';
     HttpClientModule,
     ChatModule,
     MatchModule,
+    UserModule,
+    CodesnippetModule,
     ReactiveFormsModule,
     CodesnippetModule,
     NbLayoutModule,
