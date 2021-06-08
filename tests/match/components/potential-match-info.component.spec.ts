@@ -51,16 +51,6 @@ describe('PotentialMatchInfoComponent', () => {
     expect(req.request.method).toBe('GET');
   });
 
-  xit('should return a string when queried for the match age', () => {
-
-    component.currentPotentialMatch = new User(
-      1, '', '', '', '', '', '',
-      '', new Date(), '', 1, 2, 25, '', new Date(), new Date()
-    );
-
-    expect(component.getAgeOfPotentialMatch()).toEqual(jasmine.any(String));
-  });
-
   xit('next potential match method should be called', () => {
     const spy = spyOn(component, 'nextPotentialMatch');
 
