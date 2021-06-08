@@ -12,7 +12,7 @@ import {CodesnippetService} from '../../../codesnippet/services/codesnippet.serv
 })
 export class PotentialMatchInfoComponent implements OnInit {
 
-  potentialMatches: any[] = [];
+  potentialMatches: number[] = [];
   currentPotentialMatch = {} as User;
   codesnippet = {} as Codesnippet;
   cardFlipped = false;
@@ -38,15 +38,12 @@ export class PotentialMatchInfoComponent implements OnInit {
   }
 
   getUserInfoOfPotentialMatch(): void {
-    if (this.potentialMatches.length !== 0) {
+    if (this.areTherePotentialMatches()) {
       this.loading = true;
       this.matchService.getUserInfo(this.potentialMatches[0]).subscribe((response => {
         this.currentPotentialMatch = response;
         this.getCodeSnippetsOfPotentialMatch();
       }));
-    } else {
-      this.hasMatches = false;
-      this.loading = false;
     }
   }
 
@@ -71,6 +68,16 @@ export class PotentialMatchInfoComponent implements OnInit {
 
   getFirstLetterOfPotentialMatchName(): string {
     return this.currentPotentialMatch.first_name[0].toUpperCase();
+  }
+
+  areTherePotentialMatches(): boolean {
+    if (this.potentialMatches.length !== 0){
+      return true;
+    } else {
+      this.hasMatches = false;
+      this.loading = false;
+      return false;
+    }
   }
 
   nextPotentialMatch(): void {
