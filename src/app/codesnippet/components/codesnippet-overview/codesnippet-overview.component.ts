@@ -21,16 +21,10 @@ export class CodesnippetOverviewComponent implements OnInit {
     this.setupCodesnippets();
   }
 
-  private setupCodesnippets(): void{
-    const emptyCodesnippet = this.setEmptyCodesnippet();
-    this.codesnippets.unshift(emptyCodesnippet);
-  }
-
   openEditForm(codesnippet?: Codesnippet): void {
     if (codesnippet) {
       this.openDialog(codesnippet);
-    }
-    else {
+    } else {
       this.openDialog({} as Codesnippet);
     }
   }
@@ -44,6 +38,11 @@ export class CodesnippetOverviewComponent implements OnInit {
       closeOnBackdropClick: this.isCloseableDialog(editableCodesnippet),
       closeOnEsc: this.isCloseableDialog(editableCodesnippet),
     });
+  }
+
+  private setupCodesnippets(): void {
+    const emptyCodesnippet = this.setEmptyCodesnippet();
+    this.codesnippets.unshift(emptyCodesnippet);
   }
 
   private isCloseableDialog(codesnippet: Codesnippet): boolean {

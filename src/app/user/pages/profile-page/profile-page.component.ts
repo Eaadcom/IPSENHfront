@@ -24,6 +24,14 @@ export class ProfilePageComponent implements OnInit {
     this.setUserFromRoute();
   }
 
+  getUserCodesnippets(): Codesnippet[] {
+    return this.activatedRoute.snapshot.data.codesnippets;
+  }
+
+  getAuthUser(): UserInterface {
+    return this.user;
+  }
+
   private setUserFromRoute(): void {
     const user = this.activatedRoute.snapshot.data.authUser;
     this.convertUserDateOfBirthToDateObject(user);
@@ -34,14 +42,4 @@ export class ProfilePageComponent implements OnInit {
     user.date_of_birth = parse(user.date_of_birth, 'dd-mm-yyyy', new Date());
   }
 
-  getUserCodesnippets(): Codesnippet[] {
-    return this.activatedRoute.snapshot.data.codesnippets;
-  }
-
-  getAuthUser(): UserInterface {
-    return this.user;
-  }
-
-  onUserUpdate(): void {
-  }
 }
