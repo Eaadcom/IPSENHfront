@@ -4,8 +4,8 @@ import {HttpTestingController} from '@angular/common/http/testing';
 import {PotentialMatchInfoComponent} from '../../../src/app/match/components/potential-match-info/potential-match-info.component';
 import {MatchModule} from '../../../src/app/match/match.module';
 import {environment} from '../../../src/environments/environment';
-import {User} from '../../../src/app/user/models/user';
 import {AppTestingModule} from '../../app/app-testing.module';
+import {User} from '../../../src/app/user/models/user';
 
 describe('PotentialMatchInfoComponent', () => {
   let component: PotentialMatchInfoComponent;
@@ -29,11 +29,23 @@ describe('PotentialMatchInfoComponent', () => {
     fixture.detectChanges();
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  xit('should pop the first item from the potential matches array', () => {
+  it('should return first letter of name', () => {
+
+    component.currentPotentialMatch = new User(
+      1, '', '', '', 'Ashna', '', '',
+      '', new Date(), '', 1, 2, 25, '', new Date(), new Date()
+    );
+
+    const output = component.getFirstLetterOfPotentialMatchName();
+
+    expect(output).toBe('A');
+  });
+
+  it('should pop the first item from the potential matches array', () => {
     component.potentialMatches = [1, 2];
 
     component.nextPotentialMatch();
@@ -41,7 +53,7 @@ describe('PotentialMatchInfoComponent', () => {
     expect(component.potentialMatches === [2]);
   });
 
-  xit('should send a GET request on next potential match trigger', () => {
+  it('should send a GET request on next potential match trigger', () => {
     const userId = 2;
     component.potentialMatches = [1, userId];
 
@@ -51,7 +63,7 @@ describe('PotentialMatchInfoComponent', () => {
     expect(req.request.method).toBe('GET');
   });
 
-  xit('next potential match method should be called', () => {
+  it('next potential match method should be called', () => {
     const spy = spyOn(component, 'nextPotentialMatch');
 
     component.onButtonClick(true);

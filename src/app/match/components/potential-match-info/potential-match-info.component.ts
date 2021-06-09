@@ -67,7 +67,11 @@ export class PotentialMatchInfoComponent implements OnInit {
   }
 
   getFirstLetterOfPotentialMatchName(): string {
-    return this.currentPotentialMatch.first_name[0].toUpperCase();
+    let nameFirstLetter = 'A';
+    if (this.currentPotentialMatch.first_name !== undefined){
+      nameFirstLetter = this.currentPotentialMatch.first_name[0].toUpperCase();
+    }
+    return nameFirstLetter;
   }
 
   areTherePotentialMatches(): boolean {
