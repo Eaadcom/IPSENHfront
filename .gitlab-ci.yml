@@ -37,6 +37,12 @@ test:unit:
   script:
     - npm ci
     - npm run test-headless
+  artifacts:
+    paths:
+      - coverage/
+      - reports/
+    expire_in: 30 minutes
+    when: always
 
 test:lint:
   stage: testing
