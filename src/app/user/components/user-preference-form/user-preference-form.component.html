@@ -125,7 +125,7 @@
           fullWidth
           status="primary"
           size="large"
-          [disabled]="!form.dirty || submitted || !form.valid"
+          [disabled]="submitted || !form.valid"
           [class.btn-pulse]="submitted">
     Update
   </button>
