@@ -20,6 +20,10 @@ export class IsNotAuthenticatedGuard implements CanActivate {
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.tokenStorage.get().getPayload() === null ? true : this.router.parseUrl('/match');
+    return this.hasToken() ? true : this.router.parseUrl('/match');
+  }
+
+  hasToken(): boolean {
+    return this.tokenStorage.get().getPayload() !== null;
   }
 }
