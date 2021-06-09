@@ -6,6 +6,7 @@ import {
 } from '@nebular/auth';
 import {RegisterComponent} from './pages/register/register.component';
 import {CustomNbAuthComponent} from './components/custom-nb-auth/custom-nb-auth.component';
+import {IsNotAuthenticatedGuard} from './guards/is-not-authenticated.guard';
 
 const routes: Routes = [
   {
@@ -15,14 +16,17 @@ const routes: Routes = [
       {
         path: '',
         component: NbLoginComponent,
+        canActivate: [IsNotAuthenticatedGuard],
       },
       {
         path: 'login',
         component: NbLoginComponent,
+        canActivate: [IsNotAuthenticatedGuard],
       },
       {
         path: 'register',
         component: RegisterComponent,
+        canActivate: [IsNotAuthenticatedGuard],
       },
       {
         path: 'logout',

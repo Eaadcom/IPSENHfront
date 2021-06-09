@@ -37,7 +37,10 @@ import {UserModule} from '../user/user.module';
           },
           logout: {
             method: 'post',
-            endpoint: environment.APIRoutes.auth.logout
+            endpoint: environment.APIRoutes.auth.logout,
+            redirect: {
+              success: '/chat',
+            },
           },
           token: {
             class: NbAuthJWTToken,

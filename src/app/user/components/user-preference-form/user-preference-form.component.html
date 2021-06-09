@@ -19,6 +19,8 @@
                  fieldSize="large"
                  [status]="ageRangeBottom.dirty ? (ageRangeBottom.invalid  ? 'danger' : 'success') : 'basic'"
                  [required]="getConfigValue('forms.validation.ageRangeBottom.required')"
+                 [min]="getConfigValue('forms.validation.ageRangeBottom.min')"
+                 [max]="ageRangeTop.value"
                  [attr.aria-invalid]="ageRangeBottom.invalid && ageRangeBottom.touched ? true : null">
           <ng-container *ngIf="ageRangeBottom.invalid && ageRangeBottom.touched">
             <p class="caption status-danger" *ngIf="ageRangeBottom.errors?.required">
@@ -40,6 +42,8 @@
                  fieldSize="large"
                  [status]="ageRangeTop.dirty ? (ageRangeTop.invalid  ? 'danger' : 'success') : 'basic'"
                  [required]="getConfigValue('forms.validation.ageRangeTop.required')"
+                 [min]="ageRangeBottom.value"
+                 [max]="getConfigValue('forms.validation.ageRangeTop.max')"
                  [attr.aria-invalid]="ageRangeTop.invalid && ageRangeTop.touched ? true : null">
           <ng-container *ngIf="ageRangeTop.invalid && ageRangeTop.touched">
             <p class="caption status-danger" *ngIf="ageRangeTop.errors?.required">

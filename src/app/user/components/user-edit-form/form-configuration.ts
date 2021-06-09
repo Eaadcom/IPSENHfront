@@ -23,9 +23,11 @@ const rules: any = {
   },
   ageRangeTop: {
     ...defaultRules,
+    max: 100,
   },
   ageRangeBottom: {
     ...defaultRules,
+    min: 18,
   },
   interest: {},
   dateOfBirth: {
