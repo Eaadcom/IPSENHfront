@@ -1,0 +1,46 @@
+@import "src/styles/variables";
+
+::ng-deep [dir=ltr] .nb-theme-default nb-action {
+  border-left: none;
+  transition: all .2s ease-in-out;
+  margin-bottom: 1em;
+  background-color: white;
+  border-radius: 50%;
+}
+
+::ng-deep .nb-theme-default nb-actions.size-medium nb-action {
+  height: 50px;
+  padding: 7px;
+}
+
+::ng-deep .nb-theme-default nb-actions.size-medium nb-action:last-child {
+  height: 57px;
+  padding: 11px;
+}
+
+::ng-deep [dir=ltr] .nb-theme-default nb-action:hover {
+  box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+::ng-deep nb-action path, ::ng-deep nb-action g {
+  color: $highlight-palette;
+}
+
+::ng-deep .nb-theme-default nb-actions {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  bottom: 0.2em;
+  right: 1em;
+}
+
+::ng-deep [dir=ltr] .nb-theme-default nb-action.active {
+  background-color: $highlight-palette;
+
+}
+
+::ng-deep nb-action.active path, ::ng-deep nb-action.active g {
+  color: white;
+}

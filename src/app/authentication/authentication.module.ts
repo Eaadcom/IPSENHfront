@@ -45,6 +45,15 @@ import {NbDateFnsDateModule} from '@nebular/date-fns';
         }),
       ],
       forms: {
+        login: {
+          redirectDelay: 0
+        },
+        register: {
+          redirectDelay: 0
+        },
+        logout: {
+          redirectDelay: 0
+        },
         validation: {
           firstName: {
             minLength: 3,

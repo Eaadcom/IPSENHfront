@@ -1,45 +1,68 @@
-<nb-layout>
-  <nb-layout-column>
-      <nb-flip-card id="match-flip-card">
-        <nb-card-front>
-          <nb-card id="match-info-card-front">
-            <nb-card-body id="match-info-body-front">
-              <div id="potential-match-name-list">
-                <div id="dot">
-                  <div id="dotText">
-                    {{ getFirstLetterOfPotentialMatchName() }}
-                  </div>
-                </div>
-                <div id="potential-match-name">
-                  {{ getNameOfPotentialMatch() }}
-                </div>
+<div id="flip-card-button-div">
+
+  <nb-flip-card id="match-flip-card" [showToggleButton]="false" [flipped]="cardFlipped"
+                [nbSpinner]="loading" nbSpinnerStatus="primary" nbSpinnerSize="giant">
+    <nb-card-front>
+      <nb-card class="match-info-card">
+        <nb-card-body id="match-info-body-front-grid" class="match-info-body" *ngIf="!loading">
+
+          <div id="noPotentialMatches" [ngClass]="{'whenZeroMatches' : !hasMatches}">
+            There are no more potential matches for your preferences right now, Enjoy!
+          </div>
+
+          <div class="potential-match-name-grid" *ngIf="hasMatches">
+            <div class="firstnameLetterDot" [ngClass]="{'darkTheme' : codesnippetDarkTheme}">
+              <div class="dotText">
+                {{ getFirstLetterOfPotentialMatchName() }}
               </div>
+            </div>
+            <div class="potential-match-name">
+              {{ getNameOfPotentialMatch() }}
+            </div>
+          </div>
 
-              <div  id="code-snippet">
-                  <app-content [codesnippet]="codesnippet"></app-content>
+          <div id="code-snippet" *ngIf="hasMatches">
+              <app-content [codesnippet]="codesnippet"></app-content>
+          </div>
+
+          <app-match-buttons id="match-buttons" [currentPotentialMatch]="currentPotentialMatch"
+                             *ngIf="hasMatches"
+                             (buttonClick)="onButtonClick($event)"></app-match-buttons>
+
+        </nb-card-body>
+      </nb-card>
+    </nb-card-front>
+
+    <nb-card-back>
+      <nb-card class="match-info-card">
+        <nb-card-body id="match-info-body-back-grid" class="match-info-body">
+
+          <div class="potential-match-name-grid">
+            <div class="firstnameLetterDot" [ngClass]="{'darkTheme' : codesnippetDarkTheme}">
+              <div class="dotText">
+                {{ getFirstLetterOfPotentialMatchName() }}
               </div>
+            </div>
+            <div class="potential-match-name">
+              {{ getNameOfPotentialMatch() }}
+            </div>
+          </div>
 
-<!--              <div id="potential-match-age">-->
-<!--                {{ getAgeOfPotentialMatch() }}-->
-<!--              </div>-->
+          <div id="about-me-grid">
+            <div id="potential-match-about-me">
+              {{ currentPotentialMatch.about_me }}
+            </div>
+          </div>
 
-              <app-match-buttons id="match-buttons" [currentPotentialMatch]="currentPotentialMatch" (buttonClick)="onButtonClick($event)"></app-match-buttons>
+        </nb-card-body>
+      </nb-card>
+    </nb-card-back>
+  </nb-flip-card>
 
-            </nb-card-body>
-          </nb-card>
-        </nb-card-front>
+  <div id="flip-button-div" *ngIf="hasMatches">
+    <i (click)="flipCard()" id="flip-button">
+      <img src="../../../../assets/rotation.jpg"/>
+    </i>
+  </div>
 
-        <nb-card-back>
-          <nb-card id="match-info-card-back">
-            <nb-card-body id="match-info-body-back">
-
-              <div id="potential-match-about-me">
-                {{ currentPotentialMatch.about_me }}
-              </div>
-
-            </nb-card-body>
-          </nb-card>
-        </nb-card-back>
-      </nb-flip-card>
-  </nb-layout-column>
-</nb-layout>
+</div>
