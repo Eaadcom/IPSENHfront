@@ -13,8 +13,12 @@ import {
   NbSelectModule,
   NbThemeModule,
   NbUserModule,
-  NbBadgeModule
+  NbBadgeModule,
+  NbActionsModule,
+  NbIconModule
 } from '@nebular/theme';
+import {NavigationComponent} from './components/navigation/navigation.component';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   imports: [
@@ -31,7 +35,11 @@ import {
     NbSelectModule,
     NbButtonModule,
     NbButtonGroupModule,
-    NbBadgeModule
+    NbBadgeModule,
+    NbActionsModule,
+    NbCardModule,
+    NbIconModule,
+    RouterModule
   ],
   exports: [
     BrowserAnimationsModule,
@@ -47,9 +55,15 @@ import {
     NbSelectModule,
     NbButtonModule,
     NbButtonGroupModule,
-    NbBadgeModule
+    NbBadgeModule,
+    NavigationComponent,
+    NavigationComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  declarations: [
+    NavigationComponent,
+    NavigationComponent
+  ]
 })
 export class SharedModule {
 }
