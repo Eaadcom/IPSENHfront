@@ -3,7 +3,7 @@ import {LikeMatchResponse} from '../../models/like-match-response.model';
 import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
 import {MessageResponse} from '../../models/message-response.model';
-import {NbTokenLocalStorage, NbTokenStorage} from '@nebular/auth';
+import {NbTokenStorage} from '@nebular/auth';
 import {environment} from '../../../../environments/environment';
 
 @Component({
@@ -41,7 +41,7 @@ export class LikeMatchListComponent implements OnInit, OnDestroy {
   }
 
   subscribeToChannels(): void {
-    this.likeMatches.forEach( (likeMatch: LikeMatchResponse) => {
+    this.likeMatches.forEach((likeMatch: LikeMatchResponse) => {
       const channel = this.echo.channel(`messages.${likeMatch?.id}`);
 
       channel.listen('.my-event', (data: any) => {
@@ -54,7 +54,7 @@ export class LikeMatchListComponent implements OnInit, OnDestroy {
   }
 
   unsubscribingToChannels(): void {
-    this.likeMatches.forEach( (likeMatch: LikeMatchResponse) => {
+    this.likeMatches.forEach((likeMatch: LikeMatchResponse) => {
       this.echo.leaveChannel(`messages.${likeMatch.id}`);
     });
   }
