@@ -3,7 +3,8 @@ import {LikeMatchResponse} from '../../models/like-match-response.model';
 import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
 import {MessageResponse} from '../../models/message-response.model';
-import {NbTokenLocalStorage, NbTokenStorage} from '@nebular/auth';
+import {NbTokenStorage} from '@nebular/auth';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-like-match-list',
@@ -18,13 +19,8 @@ export class LikeMatchListComponent implements OnInit, OnDestroy {
   pusher: Pusher;
 
   constructor(private authService: NbTokenStorage) {
-    this.pusher = new Pusher('2649bb334eb27f74faf8');
-    this.echo = new Echo({
-      broadcaster: 'pusher',
-      key: '2649bb334eb27f74faf8',
-      cluster: 'eu',
-      forceTLS: true
-    });
+    this.pusher = new Pusher(environment.pusher.key);
+    this.echo = new Echo(environment.pusher);
   }
 
   ngOnInit(): void {
@@ -45,7 +41,7 @@ export class LikeMatchListComponent implements OnInit, OnDestroy {
   }
 
   subscribeToChannels(): void {
-    this.likeMatches.forEach( (likeMatch: LikeMatchResponse) => {
+    this.likeMatches.forEach((likeMatch: LikeMatchResponse) => {
       const channel = this.echo.channel(`messages.${likeMatch?.id}`);
 
       channel.listen('.my-event', (data: any) => {
@@ -58,7 +54,7 @@ export class LikeMatchListComponent implements OnInit, OnDestroy {
   }
 
   unsubscribingToChannels(): void {
-    this.likeMatches.forEach( (likeMatch: LikeMatchResponse) => {
+    this.likeMatches.forEach((likeMatch: LikeMatchResponse) => {
       this.echo.leaveChannel(`messages.${likeMatch.id}`);
     });
   }

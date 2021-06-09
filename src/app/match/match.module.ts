@@ -5,6 +5,7 @@ import {MatchButtonsComponent} from './components/match-buttons/match-buttons.co
 import {MatchPageComponent} from './pages/match-page/match-page.component';
 import {NbCardModule, NbLayoutModule, NbButtonModule, NbListModule, NbSpinnerModule} from '@nebular/theme';
 import {CodesnippetModule} from '../codesnippet/codesnippet.module';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {CodesnippetModule} from '../codesnippet/codesnippet.module';
     NbButtonModule,
     NbListModule,
     CodesnippetModule,
-    NbSpinnerModule
+    NbSpinnerModule,
+    RouterModule
   ],
   providers: [
     PotentialMatchInfoComponent

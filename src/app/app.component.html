@@ -1,8 +1,11 @@
 <nb-layout>
 
   <nb-layout-column>
-
     <router-outlet></router-outlet>
+
+    <app-navigation
+      *ngIf="isAuthenticated">
+    </app-navigation>
 
   </nb-layout-column>
 

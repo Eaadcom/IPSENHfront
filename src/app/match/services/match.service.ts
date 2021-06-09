@@ -19,7 +19,7 @@ export class MatchService {
     this.codesnippetEndpoint = 'v1/codesnippet';
   }
 
-  getPotentialMatches(userId: number | undefined): Observable<Array<number>> {
+  getPotentialMatches(userId: number): Observable<Array<number>> {
     return this.api.get(`${this.userEndpoint}/potentialmatches/${userId}`);
   }
 

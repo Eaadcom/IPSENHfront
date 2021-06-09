@@ -13,6 +13,12 @@ export const environment = {
       refresh: 'auth/refresh-token',
     },
   },
+  pusher: {
+    key: 'eee9ff1ce0e681546beb',
+    broadcaster: 'pusher',
+    cluster: 'eu',
+    forceTLS: true
+  }
 };
 
 /*

@@ -11,7 +11,10 @@ import {CodesnippetModule} from './codesnippet/codesnippet.module';
 import {MatchModule} from './match/match.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {NbTokenLocalStorage, NbTokenStorage} from '@nebular/auth';
-import {NbLayoutModule} from '@nebular/theme';
+import {SharedModule} from './shared/shared.module';
+import {NbDatepickerModule, NbLayoutModule} from '@nebular/theme';
+import {NbDateFnsDateModule} from '@nebular/date-fns';
+import {UserModule} from './user/user.module';
 
 @NgModule({
   declarations: [
@@ -24,9 +27,16 @@ import {NbLayoutModule} from '@nebular/theme';
     HttpClientModule,
     ChatModule,
     MatchModule,
+    UserModule,
+    CodesnippetModule,
     ReactiveFormsModule,
     CodesnippetModule,
     NbLayoutModule,
+    SharedModule,
+    NbDateFnsDateModule.forRoot({
+      format: 'dd-MM-yyyy',
+    }),
+    NbDatepickerModule.forRoot(),
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
