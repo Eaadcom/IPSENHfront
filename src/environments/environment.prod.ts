@@ -8,5 +8,11 @@ export const environment = {
       logout: 'auth/logout',
       refresh: 'auth/refresh-token',
     },
+    pusher: {
+      key: 'ac5eeb8bca8878e1f978',
+      broadcaster: 'pusher',
+      cluster: 'eu',
+      forceTLS: true
+    }
   },
 };

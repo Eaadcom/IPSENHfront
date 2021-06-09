@@ -6,11 +6,10 @@ import {
 } from '@nebular/auth';
 import {RegisterComponent} from './pages/register/register.component';
 import {CustomNbAuthComponent} from './components/custom-nb-auth/custom-nb-auth.component';
-import {IsNotAuthenticatedGuard} from './guards/is-not-authenticated.guard';
 
 const routes: Routes = [
   {
-    path: 'auth',
+    path: '',
     component: CustomNbAuthComponent,
     children: [
       {
