@@ -9,7 +9,6 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'ipsenh-frontend';
   isAuthenticated: boolean;
   authSubscription: Subscription;
 

@@ -37,7 +37,17 @@ import {AuthenticationRoutingModule} from './authentication-routing.module';
           }
         }),
       ],
-      forms: {},
+      forms: {
+        login: {
+          redirectDelay: 0
+        },
+        register: {
+          redirectDelay: 0
+        },
+        logout: {
+          redirectDelay: 0
+        }
+      },
     }),
   ],
   exports: [
