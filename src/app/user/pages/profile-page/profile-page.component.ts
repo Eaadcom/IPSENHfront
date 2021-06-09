@@ -32,14 +32,13 @@ export class ProfilePageComponent implements OnInit {
     return this.user;
   }
 
+  protected convertUserDateOfBirthToDateObject(user: any): void {
+    user.date_of_birth = parse(user.date_of_birth, 'dd-mm-yyyy', new Date());
+  }
+
   private setUserFromRoute(): void {
     const user = this.activatedRoute.snapshot.data.authUser;
     this.convertUserDateOfBirthToDateObject(user);
     this.user = user;
   }
-
-  protected convertUserDateOfBirthToDateObject(user: any): void {
-    user.date_of_birth = parse(user.date_of_birth, 'dd-mm-yyyy', new Date());
-  }
-
 }
