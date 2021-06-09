@@ -4,12 +4,20 @@ import {environment} from '../../environments/environment';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
 import {NbAuthJWTToken, NbAuthModule, NbPasswordAuthStrategy} from '@nebular/auth';
 import {AuthenticationRoutingModule} from './authentication-routing.module';
+import {RegisterComponent} from './pages/register/register.component';
 
+import {SharedModule} from '../shared/shared.module';
+import {CustomNbAuthComponent} from './components/custom-nb-auth/custom-nb-auth.component';
+import {UserModule} from '../user/user.module';
 
 @NgModule({
+  declarations: [
+    RegisterComponent,
+    CustomNbAuthComponent
+  ],
   imports: [
     AuthenticationRoutingModule,
-    NbEvaIconsModule,
+    SharedModule,
     NbAuthModule.forRoot({
       strategies: [
         NbPasswordAuthStrategy.setup({
@@ -29,7 +37,10 @@ import {AuthenticationRoutingModule} from './authentication-routing.module';
           },
           logout: {
             method: 'post',
-            endpoint: environment.APIRoutes.auth.logout
+            endpoint: environment.APIRoutes.auth.logout,
+            redirect: {
+              success: '/chat',
+            },
           },
           token: {
             class: NbAuthJWTToken,
@@ -46,15 +57,31 @@ import {AuthenticationRoutingModule} from './authentication-routing.module';
         },
         logout: {
           redirectDelay: 0
+        },
+        validation: {
+          firstName: {
+            minLength: 3,
+            maxLength: 255,
+          },
+          lastName: {
+            minLength: 3,
+            maxLength: 255,
+          },
+          dateOfBirth: {
+            required: true,
+          },
+          aboutMe: {
+            maxLength: 1000,
+          }
         }
       },
     }),
+    UserModule,
   ],
   exports: [
     NbEvaIconsModule,
     NbAuthModule,
-  ],
-  providers: []
+  ]
 })
 export class AuthenticationModule {
 }

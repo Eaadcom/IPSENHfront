@@ -15,7 +15,7 @@
           </div>
 
           <div id="noCodesnippetProfileRouting" *ngIf="!currentUserHasCodesnippets">
-            <button nbButton hero status="success" routerLink="/codesnippet" routerLinkActive="active">Go to profile</button>
+            <button nbButton hero status="success" routerLink="/profile" routerLinkActive="active">Go to profile</button>
           </div>
 
           <div class="potential-match-name-grid" *ngIf="hasMatches && currentUserHasCodesnippets">
@@ -72,6 +72,6 @@
 
 <div id="flip-button-div" *ngIf="hasMatches && currentUserHasCodesnippets">
   <i (click)="flipCard()" id="flip-button">
-    <img src="../../../../assets/rotation.jpg"/>
+    <img alt="rotate icon" src="/assets/rotation.jpg"/>
   </i>
 </div>

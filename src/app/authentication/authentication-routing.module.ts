@@ -1,17 +1,17 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {
-  NbAuthComponent,
   NbLoginComponent,
   NbLogoutComponent,
-  NbRegisterComponent,
 } from '@nebular/auth';
+import {RegisterComponent} from './pages/register/register.component';
+import {CustomNbAuthComponent} from './components/custom-nb-auth/custom-nb-auth.component';
 import {IsNotAuthenticatedGuard} from './guards/is-not-authenticated.guard';
 
 const routes: Routes = [
   {
     path: 'auth',
-    component: NbAuthComponent,
+    component: CustomNbAuthComponent,
     children: [
       {
         path: '',
@@ -25,7 +25,7 @@ const routes: Routes = [
       },
       {
         path: 'register',
-        component: NbRegisterComponent,
+        component: RegisterComponent,
         canActivate: [IsNotAuthenticatedGuard],
       },
       {

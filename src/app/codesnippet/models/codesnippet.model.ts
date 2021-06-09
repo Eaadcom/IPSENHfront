@@ -1,6 +1,7 @@
 import {CodesnippetInterface} from '../interfaces/codesnippet.interface';
 
 export class Codesnippet implements CodesnippetInterface{
+
   constructor(
     public id: number,
     public user_id: number,
@@ -11,4 +12,5 @@ export class Codesnippet implements CodesnippetInterface{
     public updated_at: Date
   ) {
   }
+
 }

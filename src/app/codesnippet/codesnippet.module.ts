@@ -14,7 +14,8 @@ import {SharedModule} from '../shared/shared.module';
       ContentComponent,
       EditFormComponent,
       CudDialogComponent,
-      CodesnippetOverviewComponent],
+      CodesnippetOverviewComponent
+    ],
     imports: [
         CommonModule,
         FormsModule,
@@ -26,8 +27,9 @@ import {SharedModule} from '../shared/shared.module';
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     entryComponents: [CudDialogComponent],
-    exports: [
-        ContentComponent
-    ]
+  exports: [
+    ContentComponent,
+    CodesnippetOverviewComponent
+  ]
 })
 export class CodesnippetModule { }
