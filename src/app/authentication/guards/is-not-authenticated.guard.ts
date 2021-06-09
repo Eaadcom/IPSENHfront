@@ -21,6 +21,6 @@ export class IsNotAuthenticatedGuard implements CanActivate {
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    return !this.authenticationService.isAuthenticated() ? true : this.router.parseUrl('/match');
+    return !this.authenticationService.isAuthenticated();
   }
 }

@@ -1,18 +1,8 @@
-<p>profile-page works!</p>
-theme: {{selectedTheme}}
-
-<button (click)="startLoop()">start/stop</button>
-
-
-<div class="profile-page">
-
-  <div class="user-form">
-
-  </div>
-
-  <div class="codesnippets">
-    <app-codesnippet-overview [codesnippets]="getUserCodesnippets()"></app-codesnippet-overview>
-  </div>
-
-
+<div class="nb-default-padding">
+  <app-user-edit-form [user]="getAuthUser()"></app-user-edit-form>
 </div>
+
+<div class="container">
+  <app-codesnippet-overview [codesnippets]="getUserCodesnippets()"></app-codesnippet-overview>
+</div>
+

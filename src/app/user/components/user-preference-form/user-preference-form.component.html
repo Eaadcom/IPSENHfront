@@ -1,0 +1,128 @@
+<form (ngSubmit)="onSubmit()" #form="ngForm" aria-labelledby="title">
+
+  <div class="form-row">
+
+    <div class="form-column">
+
+      <div class="form-control-inline-group">
+
+        <div class="form-control-group">
+          <label class="label" for="input-age_range_bottom">Age range bottom:</label>
+          <input nbInput
+                 [(ngModel)]="user.age_range_bottom"
+                 #ageRangeBottom="ngModel"
+                 type="number"
+                 id="input-age_range_bottom"
+                 name="age_range_bottom"
+                 placeholder="Age Range top"
+                 fullWidth
+                 fieldSize="large"
+                 [status]="ageRangeBottom.dirty ? (ageRangeBottom.invalid  ? 'danger' : 'success') : 'basic'"
+                 [required]="getConfigValue('forms.validation.ageRangeBottom.required')"
+                 [attr.aria-invalid]="ageRangeBottom.invalid && ageRangeBottom.touched ? true : null">
+          <ng-container *ngIf="ageRangeBottom.invalid && ageRangeBottom.touched">
+            <p class="caption status-danger" *ngIf="ageRangeBottom.errors?.required">
+              Age range bottom is required!
+            </p>
+          </ng-container>
+        </div>
+
+        <div class="form-control-group">
+          <label class="label" for="input-age_range_top">Age range top:</label>
+          <input nbInput
+                 [(ngModel)]="user.age_range_top"
+                 #ageRangeTop="ngModel"
+                 type="number"
+                 id="input-age_range_top"
+                 name="age_range_top"
+                 placeholder="Age range top"
+                 fullWidth
+                 fieldSize="large"
+                 [status]="ageRangeTop.dirty ? (ageRangeTop.invalid  ? 'danger' : 'success') : 'basic'"
+                 [required]="getConfigValue('forms.validation.ageRangeTop.required')"
+                 [attr.aria-invalid]="ageRangeTop.invalid && ageRangeTop.touched ? true : null">
+          <ng-container *ngIf="ageRangeTop.invalid && ageRangeTop.touched">
+            <p class="caption status-danger" *ngIf="ageRangeTop.errors?.required">
+              Age range top is required!
+            </p>
+          </ng-container>
+        </div>
+
+      </div>
+
+      <div class="form-control-group">
+        <label class="label" for="input-max-distance">Max distance:</label>
+        <input nbInput
+               [(ngModel)]="user.max_distance"
+               #maxDistance="ngModel"
+               type="number"
+               id="input-max-distance"
+               name="max-distance"
+               placeholder="Max distances"
+               fullWidth
+               fieldSize="large"
+               [status]="maxDistance.dirty ? (maxDistance.invalid  ? 'danger' : 'success') : 'basic'"
+               [required]="getConfigValue('forms.validation.maxDistance.required')"
+               [attr.aria-invalid]="maxDistance.invalid && maxDistance.touched ? true : null">
+        <ng-container *ngIf="maxDistance.invalid && maxDistance.touched">
+          <p class="caption status-danger" *ngIf="maxDistance.errors?.required">
+            max_distance is required!
+          </p>
+        </ng-container>
+      </div>
+
+      <div class="form-control-group">
+        <label class="label" for="single-column-input-gender">Interests:</label>
+        <nb-select
+          id="single-column-input-gender"
+          fullWidth
+          placeholder="Gender"
+          [(selected)]="user.interest">
+          <nb-option value="male">Male(s)</nb-option>
+          <nb-option value="female">Female(s)</nb-option>
+        </nb-select>
+      </div>
+
+
+    </div>
+
+    <div class="form-column">
+      <div class="form-control-group">
+        <label class="label" for="input-first_name">About me:</label>
+        <textarea nbInput
+                  [(ngModel)]="user.about_me"
+                  #aboutMe="ngModel"
+                  id="input-first_name"
+                  name="first_name"
+                  placeholder="First name"
+                  autofocus
+                  fullWidth
+                  fieldSize="large"
+                  [status]="aboutMe.dirty ? (aboutMe.invalid  ? 'danger' : 'success') : 'basic'"
+                  [required]="getConfigValue('forms.validation.aboutMe.required')"
+                  [maxlength]="getConfigValue('forms.validation.aboutMe.maxLength')"
+                  [attr.aria-invalid]="aboutMe.invalid && aboutMe.touched ? true : null"></textarea>
+
+        <ng-container *ngIf="aboutMe.invalid && aboutMe.touched">
+          <p class="caption status-danger" *ngIf="aboutMe.errors?.required">
+            About me is required!
+          </p>
+          <p class="caption status-danger" *ngIf="aboutMe.errors?.aboutMe || aboutMe.errors?.maxlength">
+            about me can contains
+            max {{getConfigValue('forms.validation.aboutMe.maxLength')}}
+            characters
+          </p>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <button nbButton
+          fullWidth
+          status="primary"
+          size="large"
+          [disabled]="!form.dirty || submitted || !form.valid"
+          [class.btn-pulse]="submitted">
+    Update
+  </button>
+</form>

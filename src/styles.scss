@@ -1,8 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
 @import '~@nebular/auth/styles/globals';
 @import '~@nebular/theme/styles/globals';
 @import '~@nebular/theme/styles/theming';
@@ -11,9 +7,31 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @import '~@nebular/theme/styles/themes/cosmic';
 @import '~@nebular/theme/styles/themes/dark';
 
-// ...
-
 @include nb-install() {
   @include nb-theme-global();
   @include nb-auth-global(); // append the install mixin inside of the nb-install
 };
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.form-row {
+  width: 100%;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  display: inline-flex;
+
+  .form-column {
+    width: 100%
+  }
+}
+
+.form-control-inline-group {
+  width: 100%;
+  display: inline-flex;
+  gap: 1rem;
+
+  .form-control-group {
+    width: 100%;
+  }
+}

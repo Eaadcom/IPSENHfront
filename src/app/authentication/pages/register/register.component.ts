@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {NB_AUTH_OPTIONS, NbRegisterComponent} from '@nebular/auth';
+import {Component} from '@angular/core';
+import {NbRegisterComponent} from '@nebular/auth';
 
 @Component({
   selector: 'app-register',
@@ -8,9 +8,12 @@ import {NB_AUTH_OPTIONS, NbRegisterComponent} from '@nebular/auth';
 })
 export class RegisterComponent extends NbRegisterComponent {
 
-
-  _register(): void{
-    console.log(this.user);
+  onFormSubmit(): void {
     this.register();
   }
+
+  getOptions(): any {
+    return this.options;
+  }
+
 }

@@ -11,7 +11,7 @@ export class UserService {
   private readonly endpoint: string;
 
   constructor(private api: ApiService) {
-    this.endpoint = '/user';
+    this.endpoint = 'v1/user';
   }
 
   update(user: UserInterface): Observable<UserInterface> {

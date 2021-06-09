@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {NbThemeService} from '@nebular/theme';
 import {ActivatedRoute} from '@angular/router';
 import {Codesnippet} from '../../../codesnippet/models/codesnippet.model';
 import {UserInterface} from '../../interfaces/user-interface';
+import parse from 'date-fns/parse';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -11,52 +12,36 @@ import {UserInterface} from '../../interfaces/user-interface';
 })
 export class ProfilePageComponent implements OnInit {
 
-  i = 0;
-  theme = [
-    'corporate',
-    'dark',
-    'cosmic'
-  ];
-  selectedTheme = 'dark';
-  start = false;
+  user: any = {};
 
-  constructor(private activatedRoute: ActivatedRoute, private themeService: NbThemeService) {
-    console.log(this.activatedRoute.snapshot.data);
-    console.log(this.getUserCodesnippets());
-
-    this.updateTheme(this.i);
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private userService: UserService
+  ) {
   }
 
   ngOnInit(): void {
+    this.setUserFromRoute();
   }
 
-  startLoop(): void {
-    this.start = !this.start;
-    this.updateTheme(this.i);
+  private setUserFromRoute(): void {
+    const user = this.activatedRoute.snapshot.data.authUser;
+    this.convertUserDateOfBirthToDateObject(user);
+    this.user = user;
   }
 
-  updateTheme(i: any): void {
-    if (!this.start) {
-      return;
-    }
-    const self = this;
-    if (i > self.theme.length) {
-      i = 0;
-    }
-    // tslint:disable-next-line:variable-name
-    this.selectedTheme = self.theme[i];
-    setTimeout(() => {
-      self.themeService.changeTheme(self.selectedTheme);
-      i++;
-      self.updateTheme(i++);
-    }, 8000);
+  protected convertUserDateOfBirthToDateObject(user: any): void {
+    user.date_of_birth = parse(user.date_of_birth, 'dd-mm-yyyy', new Date());
   }
 
   getUserCodesnippets(): Codesnippet[] {
     return this.activatedRoute.snapshot.data.codesnippets;
   }
 
-  private getAuthUser(): UserInterface {
-    return this.activatedRoute.snapshot.data.user;
+  getAuthUser(): UserInterface {
+    return this.user;
+  }
+
+  onUserUpdate(): void {
   }
 }

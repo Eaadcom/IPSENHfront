@@ -6,17 +6,18 @@ import {NbAuthJWTToken, NbAuthModule, NbPasswordAuthStrategy} from '@nebular/aut
 import {AuthenticationRoutingModule} from './authentication-routing.module';
 import {RegisterComponent} from './pages/register/register.component';
 
-import {NbAlertModule, NbCheckboxModule, NbDatepickerModule, NbIconModule} from '@nebular/theme';
-import {FormsModule} from '@angular/forms';
 import {SharedModule} from '../shared/shared.module';
-import {NbDateFnsDateModule} from '@nebular/date-fns';
+import {CustomNbAuthComponent} from './components/custom-nb-auth/custom-nb-auth.component';
+import {UserModule} from '../user/user.module';
 
 @NgModule({
-  declarations: [RegisterComponent],
+  declarations: [
+    RegisterComponent,
+    CustomNbAuthComponent
+  ],
   imports: [
     AuthenticationRoutingModule,
-    FormsModule,
-    NbEvaIconsModule,
+    SharedModule,
     NbAuthModule.forRoot({
       strategies: [
         NbPasswordAuthStrategy.setup({
@@ -57,25 +58,27 @@ import {NbDateFnsDateModule} from '@nebular/date-fns';
         validation: {
           firstName: {
             minLength: 3,
-            maxLength: 2555
+            maxLength: 255,
           },
           lastName: {
             minLength: 3,
-            maxLength: 2555
+            maxLength: 255,
+          },
+          dateOfBirth: {
+            required: true,
+          },
+          aboutMe: {
+            maxLength: 1000,
           }
         }
       },
     }),
-    NbAlertModule,
-    SharedModule,
-    NbCheckboxModule,
-    NbIconModule,
-    NbDateFnsDateModule,
-    NbDatepickerModule,
+    UserModule,
   ],
   exports: [
     NbEvaIconsModule,
     NbAuthModule,
-  ]})
+  ]
+})
 export class AuthenticationModule {
 }
