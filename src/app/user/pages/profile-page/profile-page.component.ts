@@ -36,9 +36,16 @@ export class ProfilePageComponent implements OnInit {
     user.date_of_birth = parse(user.date_of_birth, 'dd-mm-yyyy', new Date());
   }
 
+  protected addDefaultAboutme(user: any): void {
+    if (user.about_me === '') {
+      user.about_me = 'Tell something about yourself';
+    }
+  }
+
   private setUserFromRoute(): void {
     const user = this.activatedRoute.snapshot.data.authUser;
     this.convertUserDateOfBirthToDateObject(user);
+    this.addDefaultAboutme(user);
     this.user = user;
   }
 }

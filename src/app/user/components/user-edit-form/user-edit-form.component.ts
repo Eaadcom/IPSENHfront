@@ -21,9 +21,7 @@ export class UserEditFormComponent {
 
   updateUser(): void {
     this.userService.update(this.user).subscribe(
-      response => {
-        console.log(response);
-      }
+      response => { }
     );
   }
 
