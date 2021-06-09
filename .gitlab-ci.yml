@@ -16,6 +16,9 @@ build:app:
       - dist/
     expire_in: 7 days
     when: always
+  except:
+    - master
+    - development
 
 build:app-staging:
   stage: building
