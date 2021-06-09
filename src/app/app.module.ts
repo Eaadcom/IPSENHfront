@@ -12,6 +12,7 @@ import {MatchModule} from './match/match.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {NbTokenLocalStorage, NbTokenStorage} from '@nebular/auth';
 import {NbLayoutModule} from '@nebular/theme';
+import {SharedModule} from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {NbLayoutModule} from '@nebular/theme';
     ReactiveFormsModule,
     CodesnippetModule,
     NbLayoutModule,
+    SharedModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
