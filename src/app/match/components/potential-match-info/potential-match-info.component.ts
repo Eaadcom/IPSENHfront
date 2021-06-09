@@ -15,6 +15,7 @@ export class PotentialMatchInfoComponent implements OnInit {
   potentialMatches: number[] = [];
   currentPotentialMatch = {} as User;
   codesnippet = {} as Codesnippet;
+  currentUserHasCodesnippets = true;
   cardFlipped = false;
   loading = true;
   codesnippetDarkTheme = false;
@@ -23,18 +24,21 @@ export class PotentialMatchInfoComponent implements OnInit {
   constructor(private matchService: MatchService,
               private authService: AuthenticationService,
               private codesnippetService: CodesnippetService) {
-    this.getMorePotentialMatches();
   }
 
   ngOnInit(): void {
+    this.checkIfCurrentUserHasCodesnippets();
+    this.getMorePotentialMatches();
   }
 
   getMorePotentialMatches(): void {
     const user_id = this.authService.getLocalUser()?.id;
-    this.matchService.getPotentialMatches(user_id).subscribe((response => {
-      this.potentialMatches = response;
-      this.getUserInfoOfPotentialMatch();
-    }));
+    if (user_id !== undefined) {
+      this.matchService.getPotentialMatches(user_id).subscribe((response => {
+        this.potentialMatches = response;
+        this.getUserInfoOfPotentialMatch();
+      }));
+    }
   }
 
   getUserInfoOfPotentialMatch(): void {
@@ -56,6 +60,18 @@ export class PotentialMatchInfoComponent implements OnInit {
     }));
   }
 
+  checkIfCurrentUserHasCodesnippets(): void{
+    const user_id = this.authService.getLocalUser()?.id;
+    if (user_id !== undefined) {
+      this.codesnippetService.getCodesnippetsByUserId(user_id)
+        .subscribe((response => {
+          if ( response.length === 0 ) {
+            this.currentUserHasCodesnippets = false;
+          }
+        }));
+    }
+  }
+
   getCodesnippetTheme(): void {
     this.codesnippetDarkTheme = this.codesnippet.theme === 'dark';
   }
@@ -67,7 +83,11 @@ export class PotentialMatchInfoComponent implements OnInit {
   }
 
   getFirstLetterOfPotentialMatchName(): string {
-    return this.currentPotentialMatch.first_name[0].toUpperCase();
+    let nameFirstLetter = 'A';
+    if (this.currentPotentialMatch.first_name !== undefined){
+      nameFirstLetter = this.currentPotentialMatch.first_name[0].toUpperCase();
+    }
+    return nameFirstLetter;
   }
 
   areTherePotentialMatches(): boolean {
