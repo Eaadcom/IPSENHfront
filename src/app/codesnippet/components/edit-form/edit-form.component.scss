@@ -36,6 +36,14 @@ nb-card {
   .submit *, .delete *{
     width: 8rem;
   }
+  .submit ::ng-deep button{
+    background-color: $dark-palette !important;
+    border-color: $dark-palette !important;
+  }
+  .delete ::ng-deep button {
+    background-color: $highlight-palette !important;
+    border-color: $highlight-palette !important;
+  }
 
 }
 
@@ -47,10 +55,19 @@ nb-card {
       padding: 0.6rem 1rem;
     }
   }
+  ::ng-deep nb-button-group .appearance-filled.status-primary[nbButtonToggle]   {
+      background-color: $dark-palette !important;
+      border-color: $dark-palette !important;
+  }
   margin: 1rem 0;
   padding: 0 1rem;
   width: 100%;
   display: flex;
   justify-content: space-between;
   flex-flow: row nowrap;
+}
+::ng-deep nb-option-list {
+  nb-option.selected {
+    background-color: $dark-palette !important;
+  }
 }
