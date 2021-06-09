@@ -14,7 +14,7 @@ export class CodesnippetService {
   constructor(private apiService: ApiService) { }
 
 
-  getCodesnippetsByUserId(userId: number | undefined): Observable<Codesnippet[]> {
+  getCodesnippetsByUserId(userId: number): Observable<Codesnippet[]> {
     return this.apiService.get<Codesnippet[]>(this.resourcePath + '/' + userId);
   }
 

@@ -33,10 +33,12 @@ export class PotentialMatchInfoComponent implements OnInit {
 
   getMorePotentialMatches(): void {
     const user_id = this.authService.getLocalUser()?.id;
-    this.matchService.getPotentialMatches(user_id).subscribe((response => {
-      this.potentialMatches = response;
-      this.getUserInfoOfPotentialMatch();
-    }));
+    if (user_id !== undefined) {
+      this.matchService.getPotentialMatches(user_id).subscribe((response => {
+        this.potentialMatches = response;
+        this.getUserInfoOfPotentialMatch();
+      }));
+    }
   }
 
   getUserInfoOfPotentialMatch(): void {
@@ -60,12 +62,14 @@ export class PotentialMatchInfoComponent implements OnInit {
 
   checkIfCurrentUserHasCodesnippets(): void{
     const user_id = this.authService.getLocalUser()?.id;
-    this.codesnippetService.getCodesnippetsByUserId(user_id)
-      .subscribe((response => {
-      if ( response.length === 0 ) {
-        this.currentUserHasCodesnippets = false;
-      }
-    }));
+    if (user_id !== undefined) {
+      this.codesnippetService.getCodesnippetsByUserId(user_id)
+        .subscribe((response => {
+          if ( response.length === 0 ) {
+            this.currentUserHasCodesnippets = false;
+          }
+        }));
+    }
   }
 
   getCodesnippetTheme(): void {
