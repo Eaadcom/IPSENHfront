@@ -19,7 +19,6 @@ export const environment = {
     cluster: 'eu',
     forceTLS: true
   }
-
 };
 
 /*
