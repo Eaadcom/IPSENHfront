@@ -1,4 +1,4 @@
-<div id="flip-card-button-div">
+<div id="flip-card-div">
 
   <nb-flip-card id="match-flip-card" [showToggleButton]="false" [flipped]="cardFlipped"
                 [nbSpinner]="loading" nbSpinnerStatus="primary" nbSpinnerSize="giant">
@@ -57,12 +57,13 @@
         </nb-card-body>
       </nb-card>
     </nb-card-back>
+
   </nb-flip-card>
 
-  <div id="flip-button-div" *ngIf="hasMatches">
-    <i (click)="flipCard()" id="flip-button">
-      <img src="../../../../assets/rotation.jpg"/>
-    </i>
-  </div>
+</div>
 
+<div id="flip-button-div" *ngIf="hasMatches">
+  <i (click)="flipCard()" id="flip-button">
+    <img src="../../../../assets/rotation.jpg"/>
+  </i>
 </div>
