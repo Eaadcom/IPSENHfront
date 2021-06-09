@@ -15,6 +15,7 @@ export class PotentialMatchInfoComponent implements OnInit {
   potentialMatches: number[] = [];
   currentPotentialMatch = {} as User;
   codesnippet = {} as Codesnippet;
+  currentUserHasCodesnippets = true;
   cardFlipped = false;
   loading = true;
   codesnippetDarkTheme = false;
@@ -23,10 +24,11 @@ export class PotentialMatchInfoComponent implements OnInit {
   constructor(private matchService: MatchService,
               private authService: AuthenticationService,
               private codesnippetService: CodesnippetService) {
-    this.getMorePotentialMatches();
   }
 
   ngOnInit(): void {
+    this.checkIfCurrentUserHasCodesnippets();
+    this.getMorePotentialMatches();
   }
 
   getMorePotentialMatches(): void {
@@ -53,6 +55,16 @@ export class PotentialMatchInfoComponent implements OnInit {
         this.codesnippet = response[0];
         this.getCodesnippetTheme();
         this.loading = false;
+    }));
+  }
+
+  checkIfCurrentUserHasCodesnippets(): void{
+    const user_id = this.authService.getLocalUser()?.id;
+    this.codesnippetService.getCodesnippetsByUserId(user_id)
+      .subscribe((response => {
+      if ( response.length === 0 ) {
+        this.currentUserHasCodesnippets = false;
+      }
     }));
   }
 

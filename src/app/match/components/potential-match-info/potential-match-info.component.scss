@@ -106,13 +106,27 @@ img {
   grid-row-start: 5;
 }
 
-#noPotentialMatches{
+#noPotentialMatches {
   color: $medium-palette;
   font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
   font-size: 1em;
 
   grid-column: 3/4;
   grid-row-start: 3;
+}
+
+#noCurrentUserCodesnippet {
+  color: $highlight-palette;
+  font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
+  font-size: 1em;
+
+  grid-column: 3/4;
+  grid-row-start: 3;
+}
+
+#noCodesnippetProfileRouting {
+  grid-column: 3/4;
+  grid-row-start: 4;
 }
 
 // backside of the flip card
