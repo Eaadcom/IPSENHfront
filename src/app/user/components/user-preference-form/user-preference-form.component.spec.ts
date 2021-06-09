@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MatchPageComponent } from './match-page.component';
+import { UserPreferenceFormComponent } from './user-preference-form.component';
 
-describe('MatchPageComponent', () => {
-  let component: MatchPageComponent;
-  let fixture: ComponentFixture<MatchPageComponent>;
+describe('UserPreferenceFormComponent', () => {
+  let component: UserPreferenceFormComponent;
+  let fixture: ComponentFixture<UserPreferenceFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MatchPageComponent ]
+      declarations: [ UserPreferenceFormComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MatchPageComponent);
+    fixture = TestBed.createComponent(UserPreferenceFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -6,30 +6,46 @@ stages:
   - publishing
   - deploying
 
-#cache: &global_cache
-#  key: global
-#  untracked: true
-#  paths:
-#    - node_modules/
-#    - .npm/
-#  policy: pull
-
 build:app:
   stage: building
   script:
     - npm ci
-    - ng build --prod
-#  cache:
-#    <<: *global_cache
-#    paths:
-#      - node_modules/
-#      - .npm/
-#    policy: pull-push
+    - ng build
   artifacts:
     paths:
       - dist/
     expire_in: 7 days
     when: always
+  except:
+    - master
+    - development
+
+build:app-staging:
+  stage: building
+  script:
+    - npm ci
+    - ng build --configuration staging
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 7 days
+    when: always
+  only:
+    - development
+
+build:app-production:
+  stage: building
+  script:
+    - npm ci
+    - ng build --prod
+
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 7 days
+    when: always
+  only:
+    - master
 
 test:unit:
   stage: testing
@@ -37,6 +53,12 @@ test:unit:
   script:
     - npm ci
     - npm run test-headless
+  artifacts:
+    paths:
+      - coverage/
+      - reports/
+    expire_in: 30 minutes
+    when: always
 
 test:lint:
   stage: testing

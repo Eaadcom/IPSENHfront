@@ -18,18 +18,6 @@ describe('CodesnippetOverviewComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [CodesnippetOverviewComponent],
       imports: [AppTestingModule, CodesnippetModule],
-      providers: [
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            snapshot: {
-              data: {
-                Codesnippets: []
-              }
-            }
-          }
-        },
-      ]
     })
       .compileComponents();
   });
@@ -46,6 +34,7 @@ describe('CodesnippetOverviewComponent', () => {
     fixture = TestBed.createComponent(CodesnippetOverviewComponent);
     appComponent = TestBed.createComponent(AppComponent).componentInstance;
     component = fixture.componentInstance;
+    component.codesnippets = [];
     fixture.detectChanges();
   });
 

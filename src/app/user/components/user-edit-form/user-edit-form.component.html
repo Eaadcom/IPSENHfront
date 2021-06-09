@@ -1,0 +1,24 @@
+<nb-card>
+  <nb-tabset>
+    <nb-tab tabTitle="Edit User">
+      <app-user-register-form
+        [user]="user"
+        [columns]="2"
+        [submitted]="submitted"
+        [options]="getOptions()"
+        (formSubmit)="updateUser()"
+        submitButtonText="Update">
+      </app-user-register-form>
+    </nb-tab>
+    <nb-tab tabTitle="Edit Preference">
+      <app-user-preference-form
+        [user]="user"
+        [submitted]="submitted"
+        [options]="getOptions()"
+        (formSubmit)="updateUser()">
+      </app-user-preference-form>
+    </nb-tab>
+  </nb-tabset>
+</nb-card>
+
+
