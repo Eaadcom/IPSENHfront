@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  APIEndpoint: 'http://groep-7.xyz:8001/',
+  APIEndpoint: 'http://groep-7.xyz:8001/api/',
   APIRoutes: {
     auth: {
       login: 'auth/login',
