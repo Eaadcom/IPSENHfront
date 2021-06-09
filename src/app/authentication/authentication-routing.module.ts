@@ -16,17 +16,17 @@ const routes: Routes = [
       {
         path: '',
         component: NbLoginComponent,
-        canActivate: [IsNotAuthenticatedGuard],
+        // canActivate: [IsNotAuthenticatedGuard],
       },
       {
         path: 'login',
         component: NbLoginComponent,
-        canActivate: [IsNotAuthenticatedGuard],
+        // canActivate: [IsNotAuthenticatedGuard],
       },
       {
         path: 'register',
         component: RegisterComponent,
-        canActivate: [IsNotAuthenticatedGuard],
+        // canActivate: [IsNotAuthenticatedGuard],
       },
       {
         path: 'logout',
