@@ -14,7 +14,7 @@
             You have no codesnippet set up yet! Please head over to the profile page to create one first.
           </div>
 
-          <div id="noCodesnippetProfileRouting">
+          <div id="noCodesnippetProfileRouting" *ngIf="!currentUserHasCodesnippets">
             <button nbButton hero status="success" routerLink="/codesnippet" routerLinkActive="active">Go to profile</button>
           </div>
 
