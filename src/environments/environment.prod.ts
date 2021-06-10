@@ -10,7 +10,7 @@ export const environment = {
     },
   },
   pusher: {
-    key: '844aa79a6775e402f881',
+    key: '2649bb334eb27f74faf8',
     broadcaster: 'pusher',
     cluster: 'eu',
     forceTLS: true
