@@ -6,7 +6,7 @@ div.container {
   padding-top: 3em;
 }
 
-::ng-deep .nb-theme-default nb-chat .header {
+::ng-deep nb-chat .header {
   border-top-left-radius: 0;
 }
 
@@ -33,15 +33,17 @@ nb-list {
   width: 10em;
 }
 
-nb-list-item, ::ng-deep .nb-theme-default nb-list-item:first-child {
-  border-top: none;
+nb-list-item,
+::ng-deep nb-list nb-list-item:first-child {
+  border-top: none!important;
   border-bottom: darken($medium-palette, 10%) 1px solid;
   color: #fff;
   transition: 0.3s;
   position: relative;
 }
 
-nb-list-item:hover, ::ng-deep .nb-theme-default nb-list-item:first-child:hover {
+nb-list-item:hover,
+::ng-deep nb-list nb-list-item:first-child:hover {
   background-color: lighten($medium-palette, 5%);
 }
 

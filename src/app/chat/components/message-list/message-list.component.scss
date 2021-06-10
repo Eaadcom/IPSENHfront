@@ -1,40 +1,35 @@
 @import "src/styles/variables";
 
-::ng-deep .nb-theme-default nb-chat-message .avatar {
-  display: none;
+::ng-deep nb-chat-message .avatar {
+  display: none!important;
 }
 
-::ng-deep .nb-theme-default [nbButton].appearance-filled.status-primary,
-::ng-deep .nb-theme-default .appearance-filled.status-primary[nbButtonToggle],
-::ng-deep .nb-theme-default [nbButton].appearance-filled.status-primary:focus,
-::ng-deep .nb-theme-default .appearance-filled.status-primary:focus[nbButtonToggle] {
-  background-color: $highlight-palette;
-  border-color: $highlight-palette;
+::ng-deep nb-chat nb-chat-form button {
+    background-color: $highlight-palette!important;
+    border-color: $highlight-palette!important;
 }
 
-::ng-deep .nb-theme-default [nbButton].appearance-filled.status-primary:hover,
-::ng-deep .nb-theme-default .appearance-filled.status-primary:hover[nbButtonToggle] {
-  background-color: lighten($highlight-palette, 10%);
+::ng-deep nb-chat nb-chat-form button:hover {
+  background-color: lighten($highlight-palette, 10%)!important;
 }
 
-::ng-deep .nb-theme-default [nbInput].status-basic:focus,
-::ng-deep .nb-theme-default [nbButton].appearance-filled.status-primary:hover,
-::ng-deep .nb-theme-default .appearance-filled.status-primary:hover[nbButtonToggle] {
-  border-color: lighten($highlight-palette, 10%);
+::ng-deep nb-chat nb-chat-form button:hover,
+::ng-deep nb-chat nb-chat-form input:focus {
+  border-color: lighten($highlight-palette, 10%)!important;
 }
 
-::ng-deep .nb-theme-default nb-chat-message.not-reply nb-chat-message-text .text {
-  background-color: $dark-palette;
+::ng-deep nb-chat nb-chat-message.not-reply nb-chat-message-text .text {
+  background-color: $dark-palette!important;
 }
 
-::ng-deep .nb-theme-default nb-chat-message.reply nb-chat-message-text .text {
-  color: $dark-palette;
-  background-color: lighten($dark-palette, 55%);
+::ng-deep nb-chat nb-chat-message.reply nb-chat-message-text .text {
+  color: $dark-palette!important;
+  background-color: lighten($dark-palette, 55%)!important;
 }
 
-::ng-deep [dir=ltr] .nb-theme-default nb-chat-form input.with-button,
-::ng-deep .nb-theme-default [nbInput].status-basic:focus {
-  color: #8f9bb3;
+::ng-deep nb-chat nb-chat-form input,
+::ng-deep nb-chat nb-chat-form input:focus {
+  color: #8f9bb3!important;
 }
 
 
