@@ -26,6 +26,7 @@ export class UserEditFormComponent {
 
   updateUser(): void {
     this.userService.update(this.user).subscribe((response) => {
+      this.resetMessages();
       this.showMessages.show = false;
       this.showMessages.success = true;
       this.message = ['Successfully updated user'];
@@ -39,15 +40,13 @@ export class UserEditFormComponent {
   }
 
   private handleErrors(errors: any): void {
-    this.error = [];
+    this.resetMessages();
     this.showMessages.show = false;
     this.showMessages.error = true;
 
     Object.keys(errors).forEach((k) => {
       this.error = this.error.concat(errors[k]);
     });
-
-    console.log(this.error);
   }
 
   private initializeShowMessage(): any {
@@ -56,5 +55,10 @@ export class UserEditFormComponent {
       error: false,
       success: false,
     };
+  }
+
+  private resetMessages(): void {
+    this.message = [];
+    this.error = [];
   }
 }
