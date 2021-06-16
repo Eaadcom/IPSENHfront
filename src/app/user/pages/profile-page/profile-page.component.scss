@@ -3,6 +3,9 @@
 .nb-default-padding {
   padding: 10vh 15rem 0;
 
+  @include large() {
+    padding: 10vh 5rem 0;
+  }
   @include medium() {
     padding: 1rem 4rem 0;
   }
