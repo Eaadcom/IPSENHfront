@@ -1,10 +1,10 @@
-import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
-import {getDeepFromObject, NB_AUTH_OPTIONS} from '@nebular/auth';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {getDeepFromObject} from '@nebular/auth';
 
 @Component({
   selector: 'app-user-preference-form',
   templateUrl: './user-preference-form.component.html',
-  styleUrls: ['./user-preference-form.component.scss']
+  styleUrls: []
 })
 export class UserPreferenceFormComponent {
 

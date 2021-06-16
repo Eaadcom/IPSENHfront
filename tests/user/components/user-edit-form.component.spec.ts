@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UserEditFormComponent } from './user-edit-form.component';
+import { UserEditFormComponent } from '../../../src/app/user/components/user-edit-form/user-edit-form.component';
 
 describe('UserEditFormComponent', () => {
   let component: UserEditFormComponent;

@@ -1,15 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-match-page',
   templateUrl: './match-page.component.html',
-  styleUrls: ['./match-page.component.scss']
+  styleUrls: []
 })
-export class MatchPageComponent implements OnInit {
-
-  constructor() {
-  }
-
-  ngOnInit(): void {
-  }
+export class MatchPageComponent {
 }

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Codesnippet} from '../../models/codesnippet.model';
 import {NbDialogRef} from '@nebular/theme';
 
@@ -7,15 +7,10 @@ import {NbDialogRef} from '@nebular/theme';
   templateUrl: './cud-dialog.component.html',
   styleUrls: ['./cud-dialog.component.scss']
 })
-export class CudDialogComponent implements OnInit {
+export class CudDialogComponent {
 
   @Input() codesnippet = {} as Codesnippet;
   @Input() codesnippets = {} as Codesnippet[];
 
   constructor(public dialogRef: NbDialogRef<CudDialogComponent>) { }
-
-  ngOnInit(): void {
-
-  }
-
 }

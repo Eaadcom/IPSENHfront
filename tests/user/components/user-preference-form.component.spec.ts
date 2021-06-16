@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UserPreferenceFormComponent } from './user-preference-form.component';
+import { UserPreferenceFormComponent } from '../../../src/app/user/components/user-preference-form/user-preference-form.component';
 
 describe('UserPreferenceFormComponent', () => {
   let component: UserPreferenceFormComponent;

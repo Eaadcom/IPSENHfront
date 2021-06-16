@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {NbAuthModule, NbDummyAuthStrategy, NbPasswordAuthStrategy, NbTokenLocalStorage, NbTokenStorage} from '@nebular/auth';
+import {NbAuthModule, NbDummyAuthStrategy, NbTokenLocalStorage, NbTokenStorage} from '@nebular/auth';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from '../interceptors/auth.interceptor';
 

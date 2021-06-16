@@ -5,7 +5,7 @@ import {LikeMatchResponse} from '../../models/like-match-response.model';
 @Component({
   selector: 'app-chat-page',
   templateUrl: './chat-page.component.html',
-  styleUrls: ['./chat-page.component.scss']
+  styleUrls: []
 })
 export class ChatPageComponent implements OnInit {
 
