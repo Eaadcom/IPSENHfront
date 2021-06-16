@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {
+  ActivatedRouteSnapshot,
   CanActivate,
   CanActivateChild,
-  ActivatedRouteSnapshot,
+  Router,
   RouterStateSnapshot,
-  UrlTree,
-  Router
+  UrlTree
 } from '@angular/router';
 import {Observable} from 'rxjs';
 import {NbTokenStorage} from '@nebular/auth';
@@ -34,6 +34,6 @@ export class IsAuthenticatedGuard implements CanActivate, CanActivateChild {
   }
 
   hasToken(): boolean {
-    return this.tokenStorage.get().getPayload() !== null;
+    return this.tokenStorage.get() !== null && this.tokenStorage.get().isValid();
   }
 }
