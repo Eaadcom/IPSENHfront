@@ -26,20 +26,25 @@ import {UserModule} from '../user/user.module';
           login: {
             method: 'post',
             redirect: {
-              success: '/chat',
-              failure: 'auth/login',
+              success: '/match',
+              failure: '/login',
             },
             endpoint: environment.APIRoutes.auth.login
           },
           register: {
             method: 'post',
-            endpoint: environment.APIRoutes.auth.register
+            endpoint: environment.APIRoutes.auth.register,
+            redirect: {
+              success: '/match',
+              failure: '/register',
+            },
           },
           logout: {
             method: 'post',
             endpoint: environment.APIRoutes.auth.logout,
             redirect: {
-              success: '/chat',
+              success: '/login',
+              failure: '/match',
             },
           },
           token: {
