@@ -19,19 +19,19 @@ describe('IsNotAuthenticatedGuard', () => {
     expect(guard).toBeTruthy();
   });
 
-  it('should return true when user is not authenticated', () => {
+  it('should return UrlTree with /match when user is not authenticated', () => {
     spyOn(guard, 'hasToken').and.returnValue(true);
 
     const res = guard.canActivate({} as ActivatedRouteSnapshot, fakeRouterState('test'));
-    expect(res).toBeTrue();
+    expect(res).toBeInstanceOf(UrlTree);
   });
 
-  it('should return urlTree when user is authenticated', () => {
+  it('should return true when user is authenticated', () => {
     spyOn(guard, 'hasToken').and.returnValue(false);
 
     const res = guard.canActivate({} as ActivatedRouteSnapshot, fakeRouterState('test'));
 
-    expect(res).toBeInstanceOf(UrlTree);
+    expect(res).toBeTrue();
   });
 
   const fakeRouterState = (url: string): RouterStateSnapshot => ({

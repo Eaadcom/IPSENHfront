@@ -55,27 +55,6 @@
       </div>
 
       <div class="form-control-group">
-        <label class="label" for="input-max-distance">Max distance:</label>
-        <input nbInput
-               [(ngModel)]="user.max_distance"
-               #maxDistance="ngModel"
-               type="number"
-               id="input-max-distance"
-               name="max-distance"
-               placeholder="Max distances"
-               fullWidth
-               fieldSize="large"
-               [status]="maxDistance.dirty ? (maxDistance.invalid  ? 'danger' : 'success') : 'basic'"
-               [required]="getConfigValue('forms.validation.maxDistance.required')"
-               [attr.aria-invalid]="maxDistance.invalid && maxDistance.touched ? true : null">
-        <ng-container *ngIf="maxDistance.invalid && maxDistance.touched">
-          <p class="caption status-danger" *ngIf="maxDistance.errors?.required">
-            max_distance is required!
-          </p>
-        </ng-container>
-      </div>
-
-      <div class="form-control-group">
         <label class="label" for="single-column-input-gender">Interests:</label>
         <nb-select
           id="single-column-input-gender"
@@ -84,6 +63,7 @@
           [(selected)]="user.interest">
           <nb-option value="male">Male(s)</nb-option>
           <nb-option value="female">Female(s)</nb-option>
+          <nb-option value="any">Any</nb-option>
         </nb-select>
       </div>
 

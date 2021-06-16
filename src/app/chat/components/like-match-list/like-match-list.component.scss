@@ -3,7 +3,11 @@
 div.container {
   display: flex;
   justify-content: center;
-  padding-top: 3em;
+  padding: 10vh 5rem 0;
+
+  @include medium() {
+    padding: 3vh 1rem 0;
+  }
 }
 
 ::ng-deep nb-chat .header {
@@ -16,21 +20,35 @@ nb-card {
 }
 
 app-message-list {
-  height: 40em;
-  width: 40em;
+  height: 80vh;
+  max-height: 40rem;
+  width: 40rem;
+
+  @include medium() {
+    max-height: unset;
+  }
 }
 
 nb-list, nb-card {
   border-bottom-left-radius: 0.5rem;
   border-top-left-radius: 0.5rem;
   background-color: $medium-palette;
-  height: 40em;
+  height: 80vh;
+  max-height: 40rem;
+
+  @include medium() {
+    max-height: unset;
+  }
 }
 
 nb-list {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
-  width: 10em;
+  width: 10rem;
+
+  @include small() {
+    width: 4rem;
+  }
 }
 
 nb-list-item,

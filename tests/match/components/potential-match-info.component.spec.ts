@@ -50,7 +50,7 @@ describe('PotentialMatchInfoComponent', () => {
 
     component.nextPotentialMatch();
 
-    expect(component.potentialMatches === [2]);
+    expect(component.potentialMatches).toEqual([2]);
   });
 
   it('should send a GET request on next potential match trigger', () => {

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Codesnippet} from '../../models/codesnippet.model';
 
 @Component({
@@ -6,14 +6,8 @@ import {Codesnippet} from '../../models/codesnippet.model';
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.scss'],
 })
-export class ContentComponent implements OnInit {
+export class ContentComponent {
 
   @Input() form = false;
   @Input() codesnippet!: Codesnippet;
-
-  constructor() {
-  }
-
-  ngOnInit(): void {
-  }
 }
