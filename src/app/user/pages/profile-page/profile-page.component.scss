@@ -1,5 +1,37 @@
+@import "src/styles/variables";
+
 .nb-default-padding {
-  padding: 1rem 4rem 0;
+  padding: 10vh 15rem 0;
+
+  @include medium() {
+    padding: 1rem 4rem 0;
+  }
+
+  ::ng-deep {
+    nb-tab {
+      padding: 1rem 0.5rem !important;
+    }
+    nb-tabset * {
+      color: $dark-palette;
+    }
+    .tab.active .tab-link::before {
+      background-color: $dark-palette;
+    }
+    .tab:hover {
+      background-color: darken(white, 5%);
+      .tab-link::before{
+        background-color: $medium-palette;
+      }
+    }
+    [nbButton].appearance-filled.status-primary{
+      background-color: $dark-palette !important;
+      border-color: $dark-palette !important;
+    }
+  }
+
+  @include medium() {
+    padding: 1rem;
+  }
 }
 
 .form-row {
@@ -26,3 +58,4 @@
 ::ng-deep nb-select button, ::ng-deep input{
   padding: 0.6875rem 1rem !important;
 }
+
