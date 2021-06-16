@@ -24,6 +24,6 @@ export class IsNotAuthenticatedGuard implements CanActivate {
   }
 
   hasToken(): boolean {
-    return this.tokenStorage.get().getPayload() !== null;
+    return this.tokenStorage.get().getPayload().isValid();
   }
 }
