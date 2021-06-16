@@ -6,6 +6,9 @@
   margin-bottom: 1em;
   background-color: white;
   border-radius: 50%;
+  @include medium() {
+    margin-left: 0.8em;
+  }
 }
 
 ::ng-deep .nb-theme-default nb-actions.size-medium nb-action {
@@ -34,6 +37,10 @@
   position: fixed;
   bottom: 0.2em;
   right: 1em;
+  @include medium() {
+    flex-direction: row;
+    bottom: -0.5rem;
+  }
 }
 
 ::ng-deep [dir=ltr] .nb-theme-default nb-action.active {
