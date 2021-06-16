@@ -20,6 +20,7 @@ import {
 } from '@nebular/theme';
 import {NavigationComponent} from './components/navigation/navigation.component';
 import {RouterModule} from '@angular/router';
+import {ServerFeedbackMessageComponent} from './components/server-feedback-message/server-feedback-message.component';
 
 @NgModule({
   imports: [
@@ -51,6 +52,7 @@ import {RouterModule} from '@angular/router';
     }),
   ],
   exports: [
+    ServerFeedbackMessageComponent,
     BrowserAnimationsModule,
     CommonModule,
     FormsModule,
@@ -72,12 +74,14 @@ import {RouterModule} from '@angular/router';
     NbDialogModule,
     NbThemeModule,
     NbDatepickerModule,
-    NbDateFnsDateModule
+    NbDateFnsDateModule,
+    ServerFeedbackMessageComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     NavigationComponent,
-    NavigationComponent
+    NavigationComponent,
+    ServerFeedbackMessageComponent
   ]
 })
 export class SharedModule {

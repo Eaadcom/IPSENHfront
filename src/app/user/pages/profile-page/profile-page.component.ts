@@ -33,7 +33,7 @@ export class ProfilePageComponent implements OnInit {
   }
 
   protected convertUserDateOfBirthToDateObject(user: any): void {
-    user.date_of_birth = parse(user.date_of_birth, 'dd-mm-yyyy', new Date());
+    user.date_of_birth = parse(user.date_of_birth.split(' ')[0], 'yyyy-dd-mm', new Date());
   }
 
   protected addDefaultAboutme(user: any): void {
