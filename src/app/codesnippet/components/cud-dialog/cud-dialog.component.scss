@@ -1,5 +1,12 @@
+@import "src/styles/variables";
+
 nb-card {
   width: 25rem;
   height: auto;
   border-radius: .75rem;
+  @include small() {
+    width: 96vw;
+    margin-bottom: 0;
+    transform: translate(0, -20px);
+  }
 }

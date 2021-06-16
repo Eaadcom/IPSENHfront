@@ -7,16 +7,23 @@
   background-color: $medium-palette;
   overflow-x: scroll;
   width: 100%;
+  padding-left: 11rem;
   @include scrollbars(.5em, slategray);
   box-shadow: 1px 2px 38px 18px rgba(0,0,0,0.2) inset;
   -webkit-box-shadow: 1px 2px 38px 18px rgba(0,0,0,0.2) inset;
-  -moz-box-shadow: 1px 2px 38px 18px rgba(0,0,0,0.2) inset;}
+  -moz-box-shadow: 1px 2px 38px 18px rgba(0,0,0,0.2) inset;
+
+  @include medium() {
+    overflow: hidden;
+    flex-direction: column;
+    padding-left: 0;
+  }
+}
 
 .child {
   cursor: pointer;
   margin: 2rem 4rem;
   max-height: 30rem;
-  width: 25rem;
   height: fit-content;
   display: inline-block;
   vertical-align: middle;
@@ -30,9 +37,19 @@
   transition-duration: 0.3s;
   -webkit-transition-property: box-shadow, transform;
   transition-property: box-shadow, transform;
+
+  @include small() {
+    margin: 1.5rem 1rem;
+  }
 }
 .child:hover, .child:focus, .child:active {
   box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.2);
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
+
+  @include small() {
+    width: 90vw;
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
 }
