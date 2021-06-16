@@ -5,7 +5,7 @@ import {UserService} from '../../services/user.service';
 @Component({
   selector: 'app-user-edit-form',
   templateUrl: './user-edit-form.component.html',
-  styleUrls: ['./user-edit-form.component.scss']
+  styleUrls: []
 })
 export class UserEditFormComponent {
 
@@ -20,9 +20,7 @@ export class UserEditFormComponent {
   }
 
   updateUser(): void {
-    this.userService.update(this.user).subscribe(
-      response => { }
-    );
+    this.userService.update(this.user).subscribe();
   }
 
   getOptions(): any {

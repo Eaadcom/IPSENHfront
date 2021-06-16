@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router} from '@angular/router';
+import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
-import {NbAuthService, NbTokenStorage} from '@nebular/auth';
+import {NbTokenStorage} from '@nebular/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +24,6 @@ export class IsNotAuthenticatedGuard implements CanActivate {
   }
 
   hasToken(): boolean {
-    return this.tokenStorage.get().getPayload() !== null;
+    return this.tokenStorage.get() !== null && this.tokenStorage.get().isValid();
   }
 }
