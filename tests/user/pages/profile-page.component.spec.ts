@@ -19,10 +19,7 @@ describe('ProfilePageComponent', () => {
             snapshot: {
               data: {
                 codesnippets: [],
-                authUser: new User(
-                  0, '', '', '', '', '', '',
-                  '', new Date(), '', 1, 2, 25, '', new Date(), new Date()
-                )
+                authUser: new User()
               }
             }
           }

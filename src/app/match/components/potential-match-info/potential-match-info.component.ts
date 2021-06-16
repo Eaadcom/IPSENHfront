@@ -53,7 +53,7 @@ export class PotentialMatchInfoComponent implements OnInit {
 
   getCodeSnippetsOfPotentialMatch(): void {
     this.codesnippetService.getCodesnippetsByUserId(
-      this.currentPotentialMatch.id).subscribe((response => {
+      this.currentPotentialMatch.id as number).subscribe((response => {
         this.codesnippet = response[0];
         this.getCodesnippetTheme();
         this.loading = false;
